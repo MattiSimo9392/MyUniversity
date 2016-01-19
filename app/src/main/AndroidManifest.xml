@@ -21,6 +21,8 @@
         </activity>
         <activity android:name=".SecondRegistrationActivity" >
         </activity>
+        <activity android:name=".ThirdRegistrationActivity" >
+        </activity>
     </application>
 
 </manifest>
