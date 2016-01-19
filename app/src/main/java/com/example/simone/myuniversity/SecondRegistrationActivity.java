@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -29,6 +30,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, quotes);
         listView.setAdapter(adapter);
+        listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
         //La listView con tutti gli Insegnamenti della tabella PianoDiStudi viene caricata
         //però per ora nessun Insegnamento è selezionabile e nessuna operazione sul database
