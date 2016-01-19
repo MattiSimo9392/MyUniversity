@@ -48,7 +48,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
                 if(listView.isItemChecked(position)){
                     String listString = listView.getItemAtPosition(position).toString();
                     Toast.makeText(getBaseContext(), "hai selezionato : " + listString , Toast.LENGTH_LONG).show();
-                    // QUI ANDREBBE INSERITA LA QUERY PER L'UPDATE CON SEGUITO A SI
+                    // QUI ANDREBBE INSERITA LA QUERY PER L'UPDATE CON 'SEGUITO' A 'SI'
 
                 }
                 else{
