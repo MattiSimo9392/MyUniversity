@@ -16,7 +16,7 @@ public class FirstRegistrationActivity extends Activity {
 
     EditText et_nome, et_cognome, et_matricola, et_username, et_password;
     GestioneDBUtente dbUtente;
-    //
+    ///
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
