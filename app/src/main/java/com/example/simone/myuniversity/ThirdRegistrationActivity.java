@@ -41,6 +41,4 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
         Dialog exitDialog = exit.create();
         exitDialog.show();
     }
-
-    // Matti
 }

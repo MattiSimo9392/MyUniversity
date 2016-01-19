@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.ListView;
 
 import java.util.List;
@@ -64,9 +65,15 @@ public class SecondRegistrationActivity extends AppCompatActivity {
         exitDialog.show();
     }
 
+    public void onClick_list(View view){
+
+        //implementare il metodo sul click delle checkbox
+
+        CheckBox checkBox = (CheckBox)findViewById(android.R.id.checkbox);
+    }
+
     public void onClick_continue2 (View view){
 
         startActivity(new Intent(this, MainActivity.class));
-
     }
 }
