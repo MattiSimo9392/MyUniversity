@@ -67,7 +67,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
 
     public void onClick_list(View view){
 
-        //implementare il metodo sul click delle checkbox
+        //implementare il metodo sul click delle checkbox selezionate
 
         CheckBox checkBox = (CheckBox)findViewById(android.R.id.checkbox);
     }
