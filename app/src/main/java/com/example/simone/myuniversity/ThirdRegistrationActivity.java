@@ -41,4 +41,6 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
         Dialog exitDialog = exit.create();
         exitDialog.show();
     }
+
+    // prova di sharing
 }
