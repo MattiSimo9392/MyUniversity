@@ -6,10 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -35,6 +39,33 @@ public class SecondRegistrationActivity extends AppCompatActivity {
         //La listView con tutti gli Insegnamenti della tabella PianoDiStudi viene caricata
         //però per ora nessun Insegnamento è selezionabile e nessuna operazione sul database
         //è effettuabile
+
+        //[AGGIUNTA DI MATTI NEL 19/01/2016] tentativo di incudere la lista e selezionare le colonne del piano di studi
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if(listView.isItemChecked(position)){
+                    String listString = listView.getItemAtPosition(position).toString();
+                    Toast.makeText(getBaseContext(), "hai selezionato : " + listString , Toast.LENGTH_LONG).show();
+                    // QUI ANDREBBE INSERITA LA QUERY PER L'UPDATE CON SEGUITO A SI
+
+                }
+                else{
+                    String listDeselected = listView.getItemAtPosition(position).toString();
+                    Toast.makeText(getBaseContext(), "hai deselezionato : " + listDeselected , Toast.LENGTH_LONG).show();
+                    // QUI UNA QUERY CHE RIPONE SEGUITO A NO NEL CASO DI DESELEZIONE
+
+                }
+
+            }
+        });
+
+        //[FINE AGGIUNTA MATTI 19/01/2016]
+
+
+
+
     }
 
     @Override
