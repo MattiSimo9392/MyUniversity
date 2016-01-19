@@ -98,6 +98,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
     public void onClick_continue2 (View view){
 
         startActivity(new Intent(this, MainActivity.class));
+        //commento casuale
 
     }
 }
