@@ -43,4 +43,7 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
     }
 
     // prova di sharing
+
+
+    // modifica commento Matti
 }
