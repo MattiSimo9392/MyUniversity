@@ -5,4 +5,9 @@
 .DS_Store
 /build
 /captures
+<<<<<<< HEAD
 /.idea
+=======
+*.iml
+/.idea
+>>>>>>> 27ab281fc131e92b7dcbf00da97004281b5ac900
