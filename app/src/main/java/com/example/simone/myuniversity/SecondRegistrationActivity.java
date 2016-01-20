@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.SparseBooleanArray;
@@ -27,7 +28,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second_registration);
 
         listView = (ListView)findViewById(R.id.listview);
-        DatabaseAcces databaseAcces = DatabaseAcces.getInstance(this);
+        final DatabaseAcces databaseAcces = DatabaseAcces.getInstance(this);
         databaseAcces.open();
         List<String> quotes = databaseAcces.getQuotes();
         databaseAcces.close();
@@ -49,12 +50,21 @@ public class SecondRegistrationActivity extends AppCompatActivity {
                     String listString = listView.getItemAtPosition(position).toString();
                     Toast.makeText(getBaseContext(), "hai selezionato : " + listString , Toast.LENGTH_LONG).show();
                     // QUI ANDREBBE INSERITA LA QUERY PER L'UPDATE CON 'SEGUITO' A 'SI'
+                    // tentativo di query SQL Matti
+                    DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
+                    dbAccess.open();
+                    dbAccess.setSeguiti(listString);
+                    dbAccess.close();
 
                 }
                 else{
                     String listDeselected = listView.getItemAtPosition(position).toString();
                     Toast.makeText(getBaseContext(), "hai deselezionato : " + listDeselected , Toast.LENGTH_LONG).show();
                     // QUI UNA QUERY CHE RIPONE SEGUITO A NO NEL CASO DI DESELEZIONE
+                    DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
+                    dbAccess.open();
+                    dbAccess.setSeguitiNull(listDeselected);
+                    dbAccess.close();
 
                 }
 

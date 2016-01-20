@@ -78,5 +78,20 @@ public class DBAccess {
         return list;
     }
 
+    public void setSeguiti(String insegnamento){
+        String query = "UPDATE PianoDiStudi SET Seguito = 'SI' WHERE = Insegnamento = " + insegnamento;
+        Cursor cursor = database.rawQuery(query ,null  );
+        cursor.moveToFirst();
+        cursor.close();
+    }
+
+    public void setSeguitiNull(String insegnamento){
+        String query = "UPDATE PianoDiStudi SET Seguito = 'NO' WHERE = Insegnamento = " + insegnamento;
+        Cursor cursor = database.rawQuery(query ,null  );
+        cursor.moveToFirst();
+        cursor.close();
+
+    }
+
 
 }
