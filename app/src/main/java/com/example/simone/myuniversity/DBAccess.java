@@ -68,7 +68,7 @@ public class DBAccess {
 
     public List<String> getSeguiti(){
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE Seguito = SI" , null);
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE Seguito = 'SI'" , null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             list.add(cursor.getString(0));
@@ -79,17 +79,19 @@ public class DBAccess {
     }
 
     public void setSeguiti(String insegnamento){
-        String query = "UPDATE PianoDiStudi SET Seguito = 'SI' WHERE = Insegnamento = " + insegnamento;
-        Cursor cursor = database.rawQuery(query ,null  );
-        cursor.moveToFirst();
-        cursor.close();
+        //String query = "UPDATE PianoDiStudi SET Seguito = SI WHERE Insegnamento = ? ";
+        //Cursor cursor = database.rawQuery(query ,new String[] { insegnamento }  );
+        //cursor.moveToFirst();
+        //cursor.close();
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'SI' WHERE Insegnamento = '" + insegnamento + "'");
     }
 
     public void setSeguitiNull(String insegnamento){
-        String query = "UPDATE PianoDiStudi SET Seguito = 'NO' WHERE = Insegnamento = " + insegnamento;
-        Cursor cursor = database.rawQuery(query ,null  );
-        cursor.moveToFirst();
-        cursor.close();
+       // String query = "UPDATE PianoDiStudi SET Seguito = 'NO' WHERE = Insegnamento = '" + insegnamento + "'";
+        //Cursor cursor = database.rawQuery(query ,null  );
+       // cursor.moveToFirst();
+       // cursor.close();
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE  Insegnamento = '" + insegnamento + "'");
 
     }
 

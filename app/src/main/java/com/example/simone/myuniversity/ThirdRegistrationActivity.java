@@ -17,7 +17,7 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third_registration);
-        ListView listview = (ListView) findViewById(R.id.listview);
+        ListView listview = (ListView) findViewById(R.id.listPSfinale);
 
         DBAccess databaseAccess = DBAccess.getInstance(this);
         databaseAccess.open();
