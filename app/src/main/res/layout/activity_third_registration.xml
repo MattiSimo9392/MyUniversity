@@ -5,24 +5,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.example.simone.myuniversity.ThirdRegistrationActivity">
 
     <TextView
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Confermi gli esami scelti ?"
         android:id="@+id/tv_conferma"
-        android:textSize="25dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true" />
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"/>
+
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:id="@+id/listPSfinale"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/tv_conferma"
-        android:layout_above="@+id/buttonBack">
-    </ListView>
+        android:layout_above="@+id/buttonBack"/>
 
     <Button
         android:layout_width="172dp"
