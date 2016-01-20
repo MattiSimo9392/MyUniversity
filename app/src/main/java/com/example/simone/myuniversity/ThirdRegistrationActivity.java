@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -28,7 +29,14 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
+    }
 
+    public void onClick_back3(View view){
+        startActivity(new Intent(this, SecondRegistrationActivity.class));
+        DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
+        dbAccess.open();
+        dbAccess.setSeguitiToZero();
+        dbAccess.close();
     }
 
 

@@ -95,5 +95,9 @@ public class DBAccess {
 
     }
 
+    public void setSeguitiToZero(){
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
+    }
+
 
 }
