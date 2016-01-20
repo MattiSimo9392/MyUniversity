@@ -112,12 +112,12 @@ public class SecondRegistrationActivity extends AppCompatActivity {
 
     }
 
-    public void onClick_back2(){
+    public void onClick_back2(View view){
 
-        startActivity(new Intent(this, FirstRegistrationActivity.class));
         DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
         dbAccess.open();
         dbAccess.setSeguitiToZero();
         dbAccess.close();
+        startActivity(new Intent(getApplicationContext(), FirstRegistrationActivity.class));
     }
 }
