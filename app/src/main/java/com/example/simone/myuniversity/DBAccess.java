@@ -99,5 +99,25 @@ public class DBAccess {
         database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
     }
 
+    public void setVotoEsameSuperato(String insegnamento, int voto){
+        database.execSQL("UPDATE PianoDiStudi SET Voto = '" + voto + "' WHERE Insegnamento = '" + insegnamento + "'");
+    }
+
+    public void setDataEsameSuperato(String insegnamento, String data){
+        database.execSQL("UPDATE PianoDiStudi SET Data = '" + data + "' WHERE Insegnamento = '" + insegnamento + "'");
+    }
+
+    public int getVotoEsameSuperato(String insegnamento){
+        int voto = 0; //da implementare
+        return voto;
+    }
+
+    public String getDataEsameSuperato(String insegnamento){
+        String data = ""; //da implementare
+        return data;
+    }
+
+
+
 
 }

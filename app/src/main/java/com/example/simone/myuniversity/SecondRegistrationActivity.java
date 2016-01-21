@@ -117,6 +117,10 @@ public class SecondRegistrationActivity extends AppCompatActivity {
         dbAccess.open();
         dbAccess.setSeguitiToZero();
         dbAccess.close();
+
+        //inserire il codice per eliminare dal database utenti l'utente appena registrato
+        //nell'activity precedente
+
         startActivity(new Intent(getApplicationContext(), FirstRegistrationActivity.class));
     }
 }
