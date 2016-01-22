@@ -1,25 +1,35 @@
 package com.example.simone.myuniversity;
 
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class FourthRegistrationActivity extends AppCompatActivity {
 
     ListView listView;
-    String voto_esame, data_esame;
+    public int voto_esame;
+    public String data_esame;
+
+    DatePickerDialog datePickerDialog;
+    SimpleDateFormat dateFormat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +47,8 @@ public class FourthRegistrationActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
+        dateFormat = new SimpleDateFormat("dd/mm/yyyy", Locale.ITALY);
+
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -49,6 +61,23 @@ public class FourthRegistrationActivity extends AppCompatActivity {
                 insert.setView(dialog_view);
                 final EditText voto = (EditText) view.findViewById(R.id.et_voto);
                 final EditText data = (EditText) view.findViewById(R.id.et_data);
+
+                data.setInputType(InputType.TYPE_NULL);
+                data.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v){
+                        Calendar calendar = Calendar.getInstance();
+                        datePickerDialog = new DatePickerDialog(FourthRegistrationActivity.this, new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                Calendar newDate = Calendar.getInstance();
+                                newDate.set(year, monthOfYear, dayOfMonth);
+                                data.setText(dateFormat.format(newDate.getTime()));
+                            }
+                        },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                        datePickerDialog.show();
+                    }
+                });
+
                 insert.setTitle(insegnamentoSelezionato);
                 insert.setCancelable(true);
                 insert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
@@ -62,9 +91,13 @@ public class FourthRegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //catturare il voto e la data dai rispettivi editText e salvare i valori nel DB
-                        voto_esame = voto.getText().toString();
+                        voto_esame = Integer.parseInt(voto.getText().toString());
                         data_esame = data.getText().toString();
-                        Toast.makeText(getApplicationContext(), "Voto: "+ voto_esame + "\nData: " + data_esame, Toast.LENGTH_LONG).show();
+                        if ((voto_esame < 18) || (voto_esame > 31)) {
+                            Toast.makeText(getApplicationContext(), "Voto Inserito Non Valido", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Voto: " + voto_esame + "\nData: " + data_esame, Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
                 Dialog insertDialog = insert.create();
@@ -98,5 +131,9 @@ public class FourthRegistrationActivity extends AppCompatActivity {
         });
         Dialog exitDialog = exit.create();
         exitDialog.show();
+    }
+
+    public void onClick_back4(View view){
+        startActivity(new Intent(getApplicationContext(), ThirdRegistrationActivity.class));
     }
 }
