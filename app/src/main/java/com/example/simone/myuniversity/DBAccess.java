@@ -22,7 +22,7 @@ public class DBAccess {
      // @param context
 
     private DBAccess(Context context) {
-        this.openHelper = new DatabaseOpenHelper(context);
+        this.openHelper = new DBHelper(context);
     }
 
     //Ritorna una istanza di DBAccess

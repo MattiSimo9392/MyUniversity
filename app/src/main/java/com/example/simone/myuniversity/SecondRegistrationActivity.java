@@ -28,10 +28,10 @@ public class SecondRegistrationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second_registration);
 
         listView = (ListView)findViewById(R.id.listview);
-        final DatabaseAcces databaseAcces = DatabaseAcces.getInstance(this);
-        databaseAcces.open();
-        List<String> quotes = databaseAcces.getQuotes();
-        databaseAcces.close();
+        final DBAccess databaseAccess = DBAccess.getInstance(this);
+        databaseAccess.open();
+        List<String> quotes = databaseAccess.getQuotes();
+        databaseAccess.close();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, quotes);
         listView.setAdapter(adapter);
