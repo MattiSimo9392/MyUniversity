@@ -161,4 +161,8 @@ public class FourthRegistrationActivity extends AppCompatActivity {
     public void onClick_back4(View view){
         startActivity(new Intent(getApplicationContext(), ThirdRegistrationActivity.class));
     }
+
+    public void onClick_continue4(View view){
+        startActivity(new Intent(getApplicationContext(),FifthRegistrationActivity.class));
+    }
 }
