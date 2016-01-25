@@ -80,7 +80,7 @@ public class DBAccess {
 
     public List<String> getDaSeguire(){
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = NULL ", null);
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' ", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             list.add(cursor.getString(0));
