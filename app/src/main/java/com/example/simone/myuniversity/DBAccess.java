@@ -66,9 +66,9 @@ public class DBAccess {
         return list;
     }
 
-    public List<String> getSeguiti(){
+    public List<String> getNelPiano(){
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE Seguito = 'SI'" , null);
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI'" , null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             list.add(cursor.getString(0));
@@ -78,25 +78,25 @@ public class DBAccess {
         return list;
     }
 
-    public void setSeguiti(String insegnamento){
+    public void setNelPiano(String insegnamento){
         //String query = "UPDATE PianoDiStudi SET Seguito = SI WHERE Insegnamento = ? ";
         //Cursor cursor = database.rawQuery(query ,new String[] { insegnamento }  );
         //cursor.moveToFirst();
         //cursor.close();
-        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'SI' WHERE Insegnamento = '" + insegnamento + "'");
+        database.execSQL("UPDATE PianoDiStudi SET NelPiano = 'SI' WHERE Insegnamento = '" + insegnamento + "'");
     }
 
-    public void setSeguitiNull(String insegnamento){
+    public void setNelPianoNull(String insegnamento){
        // String query = "UPDATE PianoDiStudi SET Seguito = 'NO' WHERE = Insegnamento = '" + insegnamento + "'";
         //Cursor cursor = database.rawQuery(query ,null  );
        // cursor.moveToFirst();
        // cursor.close();
-        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE  Insegnamento = '" + insegnamento + "'");
+        database.execSQL("UPDATE PianoDiStudi SET NelPiano = 'NO' WHERE  Insegnamento = '" + insegnamento + "'");
 
     }
 
-    public void setSeguitiToZero(){
-        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
+    public void setNelPianoToZero(){
+        database.execSQL("UPDATE PianoDiStudi SET NelPiano = 'NO' WHERE NelPiano = 'SI'");
     }
 
     public void setVotoEsameSuperato(String insegnamento, int voto){        //testato

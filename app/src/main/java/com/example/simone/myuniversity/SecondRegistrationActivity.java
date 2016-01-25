@@ -53,7 +53,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
                     // tentativo di query SQL Matti
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();
-                    dbAccess.setSeguiti(listString);
+                    dbAccess.setNelPiano(listString);
                     dbAccess.close();
 
                 }
@@ -63,7 +63,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
                     // QUI UNA QUERY CHE RIPONE SEGUITO A NO NEL CASO DI DESELEZIONE
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();
-                    dbAccess.setSeguitiNull(listDeselected);
+                    dbAccess.setNelPianoNull(listDeselected);
                     dbAccess.close();
 
                 }
@@ -115,7 +115,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
 
         DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
         dbAccess.open();
-        dbAccess.setSeguitiToZero();
+        dbAccess.setNelPianoToZero();
         dbAccess.close();
 
         //inserire il codice per eliminare dal database utenti l'utente appena registrato

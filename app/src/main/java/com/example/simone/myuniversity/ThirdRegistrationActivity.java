@@ -22,7 +22,7 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
 
         DBAccess databaseAccess = DBAccess.getInstance(this);
         databaseAccess.open();
-        List<String> seguiti = databaseAccess.getSeguiti();
+        List<String> seguiti = databaseAccess.getNelPiano();
         databaseAccess.close();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, seguiti);
@@ -61,7 +61,7 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
         startActivity(new Intent(this, SecondRegistrationActivity.class));
         DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
         dbAccess.open();
-        dbAccess.setSeguitiToZero();
+        dbAccess.setNelPianoToZero();
         dbAccess.close();
     }
 
