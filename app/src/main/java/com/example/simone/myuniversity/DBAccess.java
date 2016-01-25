@@ -78,6 +78,18 @@ public class DBAccess {
         return list;
     }
 
+    public List<String> getDaSeguire(){
+        List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = NULL ", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
     public void setNelPiano(String insegnamento){
         //String query = "UPDATE PianoDiStudi SET Seguito = SI WHERE Insegnamento = ? ";
         //Cursor cursor = database.rawQuery(query ,new String[] { insegnamento }  );
@@ -100,7 +112,7 @@ public class DBAccess {
     }
 
     public void setVotoEsameSuperato(String insegnamento, int voto){        //testato
-        database.execSQL("UPDATE PianoDiStudi SET Voto = '" + voto + "' WHERE Insegnamento = '" + insegnamento + "'");
+        database.execSQL("UPDATE PianoDiStudi SET Voto = " + voto + " WHERE Insegnamento = '" + insegnamento + "'");
     }
 
     public void setDataEsameSuperato(String insegnamento, String data){     //testato
