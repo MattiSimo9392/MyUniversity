@@ -2,9 +2,11 @@ package com.example.simone.myuniversity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.InputType;
@@ -31,6 +33,10 @@ public class FourthRegistrationActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormat;
 
+    //
+    Cursor cursor_voto, cursor_data;
+    //
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,26 +53,36 @@ public class FourthRegistrationActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-        dateFormat = new SimpleDateFormat("dd/mm/yyyy", Locale.ITALY);
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                String insegnamentoSelezionato = listView.getItemAtPosition(position).toString();
+                final String insegnamentoSelezionato = listView.getItemAtPosition(position).toString();
 
                 View dialog_view = (LayoutInflater.from(FourthRegistrationActivity.this)).inflate(R.layout.set_voto_data, null);
                 AlertDialog.Builder insert = new AlertDialog.Builder(FourthRegistrationActivity.this);
                 insert.setView(dialog_view);
-                final EditText voto = (EditText) view.findViewById(R.id.et_voto);
-                final EditText data = (EditText) view.findViewById(R.id.et_data);
+                final EditText voto = (EditText) dialog_view.findViewById(R.id.et_voto);
+                final EditText data = (EditText) dialog_view.findViewById(R.id.et_data);
+
+                //momentaneamente commentato xk da verificare
+                /*DBAccess dbAccess2 = DBAccess.getInstance(getApplicationContext());
+                dbAccess2.open();
+                cursor_voto = dbAccess2.getVotoEsameSuperato(insegnamentoSelezionato);
+                voto.setText(cursor_voto.getString(0));
+                cursor_data = dbAccess2.getDataEsameSuperato(insegnamentoSelezionato);
+                data.setText(cursor_data.getString(0));
+                dbAccess2.close();*/
+                //
 
                 data.setInputType(InputType.TYPE_NULL);
                 data.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v){
                         Calendar calendar = Calendar.getInstance();
-                        datePickerDialog = new DatePickerDialog(FourthRegistrationActivity.this, new DatePickerDialog.OnDateSetListener() {
+                        datePickerDialog = new DatePickerDialog(FourthRegistrationActivity.this, new OnDateSetListener() {
                             @Override
                             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                                 Calendar newDate = Calendar.getInstance();
@@ -95,8 +111,17 @@ public class FourthRegistrationActivity extends AppCompatActivity {
                         data_esame = data.getText().toString();
                         if ((voto_esame < 18) || (voto_esame > 31)) {
                             Toast.makeText(getApplicationContext(), "Voto Inserito Non Valido", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "Voto: " + voto_esame + "\nData: " + data_esame, Toast.LENGTH_LONG).show();
+                        }
+                        else if (data_esame.equals("")){
+                            Toast.makeText(getApplicationContext(), "Data Inserita Non Valida", Toast.LENGTH_LONG).show();
+                        }
+                        else {
+                            //Toast.makeText(getApplicationContext(), "Voto: " + voto_esame + "\nData: " + data_esame, Toast.LENGTH_LONG).show();
+                            DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
+                            dbAccess.open();
+                            dbAccess.setVotoEsameSuperato(insegnamentoSelezionato, voto_esame);
+                            dbAccess.setDataEsameSuperato(insegnamentoSelezionato, data_esame);
+                            dbAccess.close();
                         }
                     }
                 });

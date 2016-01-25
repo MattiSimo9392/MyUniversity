@@ -99,12 +99,12 @@ public class DBAccess {
         database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
     }
 
-    public void setVotoEsameSuperato(String insegnamento, int voto){        //da testare
+    public void setVotoEsameSuperato(String insegnamento, int voto){        //testato
         database.execSQL("UPDATE PianoDiStudi SET Voto = '" + voto + "' WHERE Insegnamento = '" + insegnamento + "'");
     }
 
-    public void setDataEsameSuperato(String insegnamento, String data){     //da testare
-        database.execSQL("UPDATE PianoDiStudi SET Data = '" + data + "' WHERE Insegnamento = '" + insegnamento + "'");
+    public void setDataEsameSuperato(String insegnamento, String data){     //testato
+        database.execSQL("UPDATE PianoDiStudi SET DataSuperamento = '" + data + "' WHERE Insegnamento = '" + insegnamento + "'");
     }
 
     public Cursor getVotoEsameSuperato(String insegnamento){    //da testare
@@ -115,7 +115,7 @@ public class DBAccess {
 
     public Cursor getDataEsameSuperato(String insegnamento){    //da testare
         Cursor data;
-        data = database.rawQuery("SELECT Data FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
+        data = database.rawQuery("SELECT DataSuperamento FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
         return data;
     }
 
