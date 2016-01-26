@@ -27,6 +27,9 @@ public class MainActivity extends Activity {
     GestioneDBUtente dbUtente;
     Cursor cursor;
 
+    SharedPreferences sharedPreferences;
+    long id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +40,9 @@ public class MainActivity extends Activity {
         et_username = (EditText) findViewById(R.id.et_usernameLog);
         et_password = (EditText) findViewById(R.id.et_passwordLog);
         dbUtente = new GestioneDBUtente(getApplicationContext());
+
+        sharedPreferences = getSharedPreferences("_IdLog", MODE_PRIVATE);
+        id = sharedPreferences.getLong("_IdLog", -1);
 
 
         //Questa parte di codice viene chiamata quando si preme il pulsante indietro e si conferma
@@ -90,17 +96,13 @@ public class MainActivity extends Activity {
 
         dbUtente.open();
 
-        cursor = dbUtente.get_AllUser();
-        if (cursor.moveToFirst()){
-            do {
-                if ((un.equals(cursor.getString(4))) && (pw.equals(cursor.getString(5)))) {
-                    startActivity(new Intent(getApplicationContext(),Menu.class));
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!",Toast.LENGTH_SHORT).show();
-                }
-            } while (cursor.moveToNext());
-        }
+        cursor = dbUtente.get_User(id);
+            if ((un.equals(cursor.getString(4))) && (pw.equals(cursor.getString(5)))) {
+                startActivity(new Intent(getApplicationContext(),Menu.class));
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!",Toast.LENGTH_SHORT).show();
+            }
         dbUtente.close();
 
         //Assicurarsi che il pulsante di registrazione si blocchi dopo la prima registrazione perchè
