@@ -119,6 +119,11 @@ public class DBAccess {
         database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
     }
 
+    // da testare
+    public void CancelCareer(){
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' AND NelPiano = 'NO' AND Voto = NULL AND DataSuperamento = NULL");
+    }
+
     public Cursor getVotoEsameSuperato(String insegnamento){    //da testare
         Cursor voto;
         voto = database.rawQuery("SELECT Voto FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
@@ -130,6 +135,8 @@ public class DBAccess {
         data = database.rawQuery("SELECT DataSuperamento FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
         return data;
     }
+
+
 
 
 
