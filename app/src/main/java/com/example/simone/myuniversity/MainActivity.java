@@ -79,6 +79,7 @@ public class MainActivity extends Activity {
         });
         Dialog exitDialog = exit.create();
         exitDialog.show();
+        //
     }
 
     public void onClick_login(View view){
