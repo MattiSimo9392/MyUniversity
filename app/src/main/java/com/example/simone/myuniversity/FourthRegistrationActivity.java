@@ -53,7 +53,7 @@ public class FourthRegistrationActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-        dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ITALY);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALY);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -1,19 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.example.simone.myuniversity.Menu">
+    tools:context="com.example.simone.myuniversity.Menu"
+    android:orientation="vertical">
 
-    <Button
-        android:text="Cancella la tua carriera !"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="right"
+        android:text="Utente: Simone De Masi"
+        android:textStyle="bold"
+        android:id="@+id/tv_utente"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Matricola: 3799325"
+        android:textStyle="bold"
+        android:id="@+id/tv_matricola"
+        android:layout_marginBottom="30dp"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modifica Piano Di Studi"
+        android:layout_gravity="center"
+        android:onClick="onClick_modPS"
+        android:id="@+id/modPS"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visualizza Carriera"
+        android:layout_gravity="center"
+        android:onClick="onClick_showCareer"
+        android:id="@+id/showCareer"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modifica Esami Che Stai Seguendo"
+        android:layout_gravity="center"
+        android:onClick="onClick_modSegui"
+        android:id="@+id/modSegui"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Prenota Esame"
+        android:layout_gravity="center"
+        android:onClick="onClick_prenExam"
+        android:id="@+id/prenExam"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Registra Esame Superato"
+        android:layout_gravity="center"
+        android:onClick="onClick_regExam"
+        android:id="@+id/regExam"/>
+
+    <Button
+        android:text="Cancella Carriera"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:onClick="onClick_CancelCareer"
         android:id="@+id/cancelCareer"/>
 
-</RelativeLayout>
+</LinearLayout>
+</ScrollView>
