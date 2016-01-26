@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -124,5 +125,50 @@ public class MainActivity extends Activity {
         //SecondRegisterActivity invece che alla FirstRegisterActivity per evitare
         //di registrare un nuovo utente nel Database Utente ad ogni prova dell'app
         startActivity(new Intent(getApplicationContext(), FirstRegistrationActivity.class));
+    }
+
+    public void onClick_recuperaPsw (View view){
+
+        View dialog_view = (LayoutInflater.from(MainActivity.this)).inflate(R.layout.recover, null);
+        AlertDialog.Builder insert = new AlertDialog.Builder(MainActivity.this);
+        insert.setView(dialog_view);
+
+        final EditText ed_UserRec = (EditText)dialog_view.findViewById(R.id.et_RecoverUser);
+        final EditText ed_MatRec = (EditText)dialog_view.findViewById(R.id.et_RecoverMatr);
+
+        insert.setTitle("Hai dimanticato la Password?");
+
+        insert.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        insert.setPositiveButton("Visualizza", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String UserRec = ed_UserRec.getText().toString();
+                String MatrRec = ed_MatRec.getText().toString();
+                dbUtente.open();
+                cursor = dbUtente.get_User(id);
+                if ((UserRec.equals(cursor.getString(4))) && (MatrRec.equals(cursor.getString(3)))) {
+                    Toast.makeText(getApplicationContext(), "PassWord : " + cursor.getString(5), Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Username e/o Matricola Errati , IMPOSSIBILE recuperare password ! " , Toast.LENGTH_LONG).show();
+                }
+                dbUtente.close();
+            }
+        });
+        Dialog dialog = insert.create();
+        dialog.show();
+/*
+        String rec_un = (EditText) findViewById(R.);
+        String rec_mat
+
+        dbUtente.open();
+        cursor = dbUtente.get_User(id);
+        if ((rec_un.equals(cursor.getString(4))) &&
+        */
+
     }
 }

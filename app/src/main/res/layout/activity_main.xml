@@ -58,4 +58,12 @@
         android:id="@+id/btn_registrati"
         android:onClick="onClick_reg"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text="Recupera Password"
+        android:layout_gravity="center"
+        android:onClick="onClick_recuperaPsw"/>
+
 </LinearLayout>
