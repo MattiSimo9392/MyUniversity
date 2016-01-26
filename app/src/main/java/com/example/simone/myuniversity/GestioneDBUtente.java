@@ -88,4 +88,9 @@ public class GestioneDBUtente {
         initialValues.put(KEY_PASSWORD, password);
         return db.insert(DATABASE_TABELLA, null, initialValues);
     }
+
+    public boolean cancellaUtente(long rigaID) {
+
+        return db.delete(DATABASE_TABELLA, KEY_RIGAID + "=" + rigaID, null) > 0;
+    }
 }

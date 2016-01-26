@@ -95,6 +95,9 @@ public class MainActivity extends Activity {
                 if ((un.equals(cursor.getString(4))) && (pw.equals(cursor.getString(5)))) {
                     startActivity(new Intent(getApplicationContext(),Menu.class));
                 }
+                else{
+                    Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!",Toast.LENGTH_SHORT).show();
+                }
             } while (cursor.moveToNext());
         }
         dbUtente.close();
@@ -117,6 +120,6 @@ public class MainActivity extends Activity {
         //provvisoriamente ho settato il metodo startActivity per indirizzarmi alla
         //SecondRegisterActivity invece che alla FirstRegisterActivity per evitare
         //di registrare un nuovo utente nel Database Utente ad ogni prova dell'app
-        startActivity(new Intent(getApplicationContext(), SecondRegistrationActivity.class));
+        startActivity(new Intent(getApplicationContext(), FirstRegistrationActivity.class));
     }
 }

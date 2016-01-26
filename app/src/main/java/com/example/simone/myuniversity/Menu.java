@@ -12,12 +12,12 @@ import android.widget.Button;
 
 public class Menu extends AppCompatActivity {
 
+    GestioneDBUtente dbUtente;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-
-        Button cancelCareer = (Button) findViewById(R.id.cancelCareer);
 
     }
 
@@ -31,12 +31,19 @@ public class Menu extends AppCompatActivity {
         */
 
         AlertDialog.Builder insert = new AlertDialog.Builder(Menu.this);
-        insert.setMessage("Sei Sicuro di voler eliminare la tua carriera ? \n l'operazione è Irreversibile !");
+        insert.setTitle("ATTENZIONE!");
+        insert.setMessage("Sei Sicuro di voler eliminare la tua carriera? \n Verranno cancellati anche le tue credenziali d'accesso e non potrai rieffettuare il Login \n L'operazione è Irreversibile!");
         insert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 DBAccess database = DBAccess.getInstance(getBaseContext());
+                database.open();
                 database.CancelCareer();
+                database.close();
+                dbUtente = new GestioneDBUtente(getApplicationContext());
+                dbUtente.open();
+                dbUtente.cancellaUtente(1);
+                dbUtente.close();
                 startActivity(new Intent(getBaseContext(), MainActivity.class));
             }
         });
