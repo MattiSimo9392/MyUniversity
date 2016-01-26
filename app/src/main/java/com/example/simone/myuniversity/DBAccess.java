@@ -15,9 +15,6 @@ public class DBAccess {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
     private static DBAccess instance;
-
-
-
      // Costruttore Privato
      // @param context
 
@@ -91,20 +88,11 @@ public class DBAccess {
     }
 
     public void setNelPiano(String insegnamento){
-        //String query = "UPDATE PianoDiStudi SET Seguito = SI WHERE Insegnamento = ? ";
-        //Cursor cursor = database.rawQuery(query ,new String[] { insegnamento }  );
-        //cursor.moveToFirst();
-        //cursor.close();
         database.execSQL("UPDATE PianoDiStudi SET NelPiano = 'SI' WHERE Insegnamento = '" + insegnamento + "'");
     }
 
     public void setNelPianoNull(String insegnamento){
-       // String query = "UPDATE PianoDiStudi SET Seguito = 'NO' WHERE = Insegnamento = '" + insegnamento + "'";
-        //Cursor cursor = database.rawQuery(query ,null  );
-       // cursor.moveToFirst();
-       // cursor.close();
         database.execSQL("UPDATE PianoDiStudi SET NelPiano = 'NO' WHERE  Insegnamento = '" + insegnamento + "'");
-
     }
 
     public void setNelPianoToZero(){
@@ -119,6 +107,18 @@ public class DBAccess {
         database.execSQL("UPDATE PianoDiStudi SET DataSuperamento = '" + data + "' WHERE Insegnamento = '" + insegnamento + "'");
     }
 
+    public void setSeguiti (String insegnamento ){
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'SI' WHERE Insegnamento = '" + insegnamento + "'" );
+    }
+
+    public void setSeguitiNull(String insegnamento){
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE  Insegnamento = '" + insegnamento + "'");
+    }
+
+    public void setSeguitiToZero(){
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
+    }
+
     public Cursor getVotoEsameSuperato(String insegnamento){    //da testare
         Cursor voto;
         voto = database.rawQuery("SELECT Voto FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
@@ -130,6 +130,7 @@ public class DBAccess {
         data = database.rawQuery("SELECT DataSuperamento FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
         return data;
     }
+
 
 
 

@@ -26,12 +26,13 @@ public class MainActivity extends Activity {
     EditText et_username, et_password;
     GestioneDBUtente dbUtente;
     Cursor cursor;
-    int c;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button registration = (Button)findViewById(R.id.btn_registrati);
 
         et_username = (EditText) findViewById(R.id.et_usernameLog);
         et_password = (EditText) findViewById(R.id.et_passwordLog);
@@ -43,6 +44,14 @@ public class MainActivity extends Activity {
         {
             finish();
         }
+
+        // impostazione preferences con la FifthRegistrationActivity
+        /*
+        SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
+        String string = mprefs.getString("Registrazione" , "");
+        if(string.equals("2")){registration.setVisibility(View.GONE);}
+        else{registration.setVisibility(View.VISIBLE);}
+        */
     }
 
     @Override
