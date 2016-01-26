@@ -106,6 +106,12 @@ public class MainActivity extends Activity {
 
     public void onClick_reg(View view){
 
+        // Da discutere la possibilità di azzerare il database ogni volta che si preme il pulsante registrazione
+        // anche perchè questo comportarebbe alla creazione di un nuovo utente e sempre utile durante il testing
+
+        DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
+        dbAccess.CancelCareer();
+
         //provvisoriamente ho settato il metodo startActivity per indirizzarmi alla
         //SecondRegisterActivity invece che alla FirstRegisterActivity per evitare
         //di registrare un nuovo utente nel Database Utente ad ogni prova dell'app
