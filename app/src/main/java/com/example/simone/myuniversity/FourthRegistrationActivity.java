@@ -159,6 +159,11 @@ public class FourthRegistrationActivity extends AppCompatActivity {
     }
 
     public void onClick_back4(View view){
+        DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
+        dbAccess.open();
+        dbAccess.setVotoToZero();
+        dbAccess.setDataToZero();
+        dbAccess.close();
         startActivity(new Intent(getApplicationContext(), ThirdRegistrationActivity.class));
     }
 

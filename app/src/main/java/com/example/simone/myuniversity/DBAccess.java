@@ -119,9 +119,20 @@ public class DBAccess {
         database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
     }
 
+    public void setVotoToZero(){
+        database.execSQL("UPDATE PianoDiStudi SET Voto = ''");
+    }
+
+    public void setDataToZero(){
+        database.execSQL("UPDATE PianoDiStudi SET DataSuperamento = ''");
+    }
+
     // da testare
     public void CancelCareer(){
-        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' AND NelPiano = 'NO' AND Voto = NULL AND DataSuperamento = NULL");
+        setNelPianoToZero();
+        setSeguitiToZero();
+        setVotoToZero();
+        setDataToZero();
     }
 
     public Cursor getVotoEsameSuperato(String insegnamento){    //da testare

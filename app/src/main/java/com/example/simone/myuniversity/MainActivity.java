@@ -110,7 +110,9 @@ public class MainActivity extends Activity {
         // anche perchè questo comportarebbe alla creazione di un nuovo utente e sempre utile durante il testing
 
         DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
+        dbAccess.open();
         dbAccess.CancelCareer();
+        dbAccess.close();
 
         //provvisoriamente ho settato il metodo startActivity per indirizzarmi alla
         //SecondRegisterActivity invece che alla FirstRegisterActivity per evitare

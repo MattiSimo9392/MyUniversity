@@ -91,7 +91,9 @@ public class FifthRegistrationActivity extends AppCompatActivity {
 
     public void onClick_back5(View view){
         DBAccess database = DBAccess.getInstance(getBaseContext());
+        database.open();
         database.setSeguitiToZero();
+        database.close();
         startActivity(new Intent(getApplicationContext(), FourthRegistrationActivity.class));
     }
 
@@ -103,7 +105,7 @@ public class FifthRegistrationActivity extends AppCompatActivity {
         editor.putString("Registrazione" , "2");
         editor.apply();
         */
-        startActivity(new Intent (getApplicationContext() , Menu.class));
+        startActivity(new Intent (getApplicationContext() , MainActivity.class));
     }
 }
 
