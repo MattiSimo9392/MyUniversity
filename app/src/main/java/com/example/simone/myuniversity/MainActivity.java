@@ -38,6 +38,7 @@ public class MainActivity extends Activity {
         et_password = (EditText) findViewById(R.id.et_passwordLog);
         dbUtente = new GestioneDBUtente(getApplicationContext());
 
+
         //Questa parte di codice viene chiamata quando si preme il pulsante indietro e si conferma
         //di voler chiudere l'app
         if (getIntent().getBooleanExtra("LOGOUT", false))

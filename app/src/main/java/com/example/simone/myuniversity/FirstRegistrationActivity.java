@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,9 @@ public class FirstRegistrationActivity extends Activity {
 
     EditText et_nome, et_cognome, et_matricola, et_username, et_password;
     GestioneDBUtente dbUtente;
+    long id;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +89,12 @@ public class FirstRegistrationActivity extends Activity {
         else {
 
             dbUtente.open();
-            dbUtente.insertUser(nome, cognome, matricola, username, password);
+            sharedPreferences = getSharedPreferences("_IdLog", MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            id = dbUtente.insertUser(nome, cognome, matricola, username, password);
+            editor.putLong("_IdLog", id);
+            editor.apply();
+
             dbUtente.close();
 
             startActivity(new Intent(getApplicationContext(), SecondRegistrationActivity.class));

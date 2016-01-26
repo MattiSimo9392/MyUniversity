@@ -5,19 +5,46 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Menu extends AppCompatActivity {
 
-    GestioneDBUtente dbUtente;
+    TextView user, matricola;
+    GestioneDBUtente databaseUtente, dbUtente;
+    Cursor cursor;
+
+    String nome, cognome, mat;
+
+    SharedPreferences sharedPreferences;
+    long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+
+        sharedPreferences = getSharedPreferences("_IdLog", MODE_PRIVATE);
+        id = sharedPreferences.getLong("_IdLog", -1);
+
+        user = (TextView)findViewById(R.id.tv_utente);
+        matricola = (TextView)findViewById(R.id.tv_matricola);
+
+        databaseUtente = new GestioneDBUtente(getApplicationContext());
+
+        databaseUtente.open();
+        cursor = databaseUtente.get_User(id);
+        nome = cursor.getString(1);
+        cognome = cursor.getString(2);
+        mat = cursor.getString(3);
+        databaseUtente.close();
+
+        user.setText("Utente: " + nome + " " + cognome);
+        matricola.setText("Matricola: "+ mat);
 
     }
 
@@ -42,7 +69,7 @@ public class Menu extends AppCompatActivity {
                 database.close();
                 dbUtente = new GestioneDBUtente(getApplicationContext());
                 dbUtente.open();
-                dbUtente.cancellaUtente(1);
+                dbUtente.cancellaUtente(id);
                 dbUtente.close();
                 startActivity(new Intent(getBaseContext(), MainActivity.class));
             }

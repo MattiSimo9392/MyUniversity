@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Utente: Simone De Masi"
+        android:text=""
         android:textStyle="bold"
         android:id="@+id/tv_utente"/>
 
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
-        android:text="Matricola: 3799325"
+        android:text=""
         android:textStyle="bold"
         android:id="@+id/tv_matricola"
         android:layout_marginBottom="30dp"/>
