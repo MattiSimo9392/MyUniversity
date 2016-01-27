@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("LOGOUT", true);
                 startActivity(intent);
             }
@@ -100,7 +100,6 @@ public class MainActivity extends Activity {
         if (cursor.getCount() != 0) {
             if ((un.equals(cursor.getString(4))) && (pw.equals(cursor.getString(5)))) {
                 startActivity(new Intent(getApplicationContext(), Menu.class));
-                finish();
             } else {
                 Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!", Toast.LENGTH_SHORT).show();
             }
