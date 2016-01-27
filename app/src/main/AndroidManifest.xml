@@ -39,6 +39,8 @@
         </activity>
         <activity android:name=".FifthRegistrationActivity" >
         </activity>
+        <activity android:name=".ModificaPianoStudi" >
+        </activity>
     </application>
 
 </manifest>

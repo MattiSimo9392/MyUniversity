@@ -14,18 +14,20 @@ import java.util.List;
 
 public class ThirdRegistrationActivity extends AppCompatActivity {
 
+    ListView listview;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third_registration);
-        ListView listview = (ListView) findViewById(R.id.listPSfinale);
+        listview = (ListView) findViewById(R.id.listPSfinale);
 
         DBAccess databaseAccess = DBAccess.getInstance(this);
         databaseAccess.open();
-        List<String> seguiti = databaseAccess.getNelPiano();
+        List<String> nelPiano = databaseAccess.getNelPiano();
         databaseAccess.close();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, seguiti);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nelPiano);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
