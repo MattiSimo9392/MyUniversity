@@ -80,14 +80,13 @@ public class MainActivity extends Activity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("LOGOUT", true);
                 startActivity(intent);
             }
         });
         Dialog exitDialog = exit.create();
         exitDialog.show();
-        //
     }
 
     public void onClick_login(View view){
@@ -98,12 +97,17 @@ public class MainActivity extends Activity {
         dbUtente.open();
 
         cursor = dbUtente.get_User(id);
+        if (cursor.getCount() != 0) {
             if ((un.equals(cursor.getString(4))) && (pw.equals(cursor.getString(5)))) {
-                startActivity(new Intent(getApplicationContext(),Menu.class));
+                startActivity(new Intent(getApplicationContext(), Menu.class));
+                finish();
+            } else {
+                Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!", Toast.LENGTH_SHORT).show();
             }
-            else{
-                Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!",Toast.LENGTH_SHORT).show();
-            }
+        }
+        else {
+            Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!", Toast.LENGTH_SHORT).show();
+        }
         dbUtente.close();
 
         //Assicurarsi che il pulsante di registrazione si blocchi dopo la prima registrazione perchè
@@ -121,9 +125,6 @@ public class MainActivity extends Activity {
         dbAccess.CancelCareer();
         dbAccess.close();
 
-        //provvisoriamente ho settato il metodo startActivity per indirizzarmi alla
-        //SecondRegisterActivity invece che alla FirstRegisterActivity per evitare
-        //di registrare un nuovo utente nel Database Utente ad ogni prova dell'app
         startActivity(new Intent(getApplicationContext(), FirstRegistrationActivity.class));
     }
 

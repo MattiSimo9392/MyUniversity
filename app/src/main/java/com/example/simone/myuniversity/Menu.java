@@ -71,7 +71,7 @@ public class Menu extends AppCompatActivity {
                 dbUtente.open();
                 dbUtente.cancellaUtente(id);
                 dbUtente.close();
-                startActivity(new Intent(getBaseContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
         insert.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -105,7 +105,7 @@ public class Menu extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("LOGOUT", true);
                 startActivity(intent);
             }
