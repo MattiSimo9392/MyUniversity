@@ -67,5 +67,6 @@ public class ThirdRegistrationActivity extends AppCompatActivity {
 
     public void onClick_continue3(View view){
         startActivity(new Intent(getApplicationContext(), FourthRegistrationActivity.class));
+        finish();
     }
 }

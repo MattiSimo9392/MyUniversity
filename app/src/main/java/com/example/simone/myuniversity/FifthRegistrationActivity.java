@@ -106,6 +106,7 @@ public class FifthRegistrationActivity extends AppCompatActivity {
         editor.apply();
         */
         startActivity(new Intent (getApplicationContext() , MainActivity.class));
+        finish();
     }
 }
 

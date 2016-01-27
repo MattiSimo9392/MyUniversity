@@ -71,7 +71,8 @@ public class Menu extends AppCompatActivity {
                 dbUtente.open();
                 dbUtente.cancellaUtente(id);
                 dbUtente.close();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                //startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
             }
         });
         insert.setNegativeButton("No", new DialogInterface.OnClickListener() {

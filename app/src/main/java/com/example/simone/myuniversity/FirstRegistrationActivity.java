@@ -98,6 +98,7 @@ public class FirstRegistrationActivity extends Activity {
             dbUtente.close();
 
             startActivity(new Intent(getApplicationContext(), SecondRegistrationActivity.class));
+            finish();
         }
     }
 }
