@@ -137,14 +137,15 @@ public class MainActivity extends Activity {
         final EditText ed_MatRec = (EditText)dialog_view.findViewById(R.id.et_RecoverMatr);
 
         insert.setTitle("Hai dimanticato la Password?");
+        insert.setMessage("Inserisci Username e Matricola per poter recuperare la Password");
 
-        insert.setNegativeButton("OK", new DialogInterface.OnClickListener() {
+        insert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
-        insert.setPositiveButton("Visualizza", new DialogInterface.OnClickListener() {
+        insert.setPositiveButton("Visualizza Password", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 String UserRec = ed_UserRec.getText().toString();
@@ -152,23 +153,14 @@ public class MainActivity extends Activity {
                 dbUtente.open();
                 cursor = dbUtente.get_User(id);
                 if ((UserRec.equals(cursor.getString(4))) && (MatrRec.equals(cursor.getString(3)))) {
-                    Toast.makeText(getApplicationContext(), "PassWord : " + cursor.getString(5), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Password: " + cursor.getString(5), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Username e/o Matricola Errati , IMPOSSIBILE recuperare password ! " , Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Username e/o Matricola Errati, Impossibile recuperare la Password!", Toast.LENGTH_LONG).show();
                 }
                 dbUtente.close();
             }
         });
         Dialog dialog = insert.create();
         dialog.show();
-/*
-        String rec_un = (EditText) findViewById(R.);
-        String rec_mat
-
-        dbUtente.open();
-        cursor = dbUtente.get_User(id);
-        if ((rec_un.equals(cursor.getString(4))) &&
-        */
-
     }
 }
