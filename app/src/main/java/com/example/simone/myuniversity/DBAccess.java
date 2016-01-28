@@ -75,6 +75,18 @@ public class DBAccess {
         return list;
     }
 
+    public List<String> getNonNelPiano(){
+        List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'NO'", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
     public List<String> getDaSeguire(){
         List<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' ", null);
