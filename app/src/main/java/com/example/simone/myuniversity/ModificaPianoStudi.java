@@ -1,5 +1,6 @@
 package com.example.simone.myuniversity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,7 +17,7 @@ public class ModificaPianoStudi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modifica_piano_studi);
-        listview = (ListView) findViewById(R.id.listPSfinale);
+        listview = (ListView) findViewById(R.id.lv_modPS);
 
         DBAccess databaseAccess = DBAccess.getInstance(this);
         databaseAccess.open();
@@ -30,13 +31,13 @@ public class ModificaPianoStudi extends AppCompatActivity {
 
     public void onClick_aggExam(View view){
 
-        //da implementare l'activity per aggiungere esami al PS
+        startActivity(new Intent(getApplicationContext(), ModificaPianoStudiAggiungi.class));
 
     }
 
     public void onClick_cancExam(View view){
 
-        //da implementare l'activity per eliminare esami dal PS
+        startActivity(new Intent(getApplicationContext(), ModificaPianoStudiElimina.class));
 
     }
 

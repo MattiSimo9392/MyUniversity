@@ -37,9 +37,17 @@
             android:name=".FourthRegistrationActivity"
             android:screenOrientation="portrait" >
         </activity>
-        <activity android:name=".FifthRegistrationActivity" >
+        <activity android:name=".FifthRegistrationActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ModificaPianoStudi" >
+        <activity android:name=".ModificaPianoStudi"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ModificaPianoStudiAggiungi"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".ModificaPianoStudiElimina"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

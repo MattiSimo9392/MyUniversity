@@ -119,6 +119,14 @@ public class DBAccess {
         database.execSQL("UPDATE PianoDiStudi SET Seguito = 'NO' WHERE Seguito = 'SI'");
     }
 
+    public void setVotoNull(String insegnamento){
+        database.execSQL("UPDATE PianoDiStudi SET Voto = '' WHERE  Insegnamento = '" + insegnamento + "'");
+    }
+
+    public void setDataNull(String insegnamento){
+        database.execSQL("UPDATE PianoDiStudi SET DataSuperamento = '' WHERE  Insegnamento = '" + insegnamento + "'");
+    }
+
     public void setVotoToZero(){
         database.execSQL("UPDATE PianoDiStudi SET Voto = ''");
     }

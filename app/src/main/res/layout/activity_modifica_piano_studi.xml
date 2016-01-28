@@ -30,7 +30,7 @@
         android:id="@+id/lv_modPS"
         android:layout_below="@+id/tv_modPS_2"
         android:layout_alignParentEnd="true"
-        android:layout_above="@id/btn_cancExam"/>
+        android:layout_above="@+id/btn_cancExam"/>
 
     <Button
         android:layout_width="120dp"
@@ -58,7 +58,5 @@
         android:id="@+id/btn_confCarr"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"/>
-
-
 
 </RelativeLayout>
