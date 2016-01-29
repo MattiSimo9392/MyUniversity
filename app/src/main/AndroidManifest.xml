@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.simone.myuniversity" >
+    package="com.example.simone.myuniversity">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,36 +19,32 @@
         </activity>
         <activity
             android:name=".Menu"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".FirstRegistrationActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".SecondRegistrationActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".ThirdRegistrationActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".FourthRegistrationActivity"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name=".FifthRegistrationActivity"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".ModificaPianoStudi"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".ModificaPianoStudiAggiungi"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".ModificaPianoStudiElimina"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".FifthRegistrationActivity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ModificaPianoStudi"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ModificaPianoStudiAggiungi"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".ModificaPianoStudiElimina"
+            android:screenOrientation="portrait"></activity>
+        <activity android:name=".VisualizzaCarriera"></activity>
     </application>
 
 </manifest>

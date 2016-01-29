@@ -167,10 +167,42 @@ public class DBAccess {
         return data;
     }
 
+    public  Cursor getCFUpassed(){
+        Cursor cursor = database.rawQuery("SELECT SUM(CFU) FROM PianoDiStudi WHERE Voto < 32 and Voto > 17" , null);
+        return cursor ;
+    }
 
+    public Cursor getCFUTotal(){
+        Cursor cursor = database.rawQuery("SELECT SUM(CFU) FROM PianoDiStudi " , null);
+        return cursor ;
+    }
 
+    public Cursor countCFUPassed(){
+        Cursor cursor = database.rawQuery("SELECT COUNT(Voto) FROM PianoDiStudi WHERE Voto < 32 and Voto > 17" , null);
+        return cursor ;
+    }
 
+    public Cursor countExamsLost(){
+        Cursor cursor = database.rawQuery("SELECT COUNT(Voto) FROM PianoDiStudi WHERE Voto = ''" , null);
+        return cursor ;
+    }
 
+    // non utilizzato eventualmente da cancellare
+    public List<String> getExamsPassed() {
+        List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17 ", null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
 
+    }
 
+    public Cursor cursorExamsPassed(){
+        Cursor cursor = database.rawQuery("SELECT Insegnamento , Voto FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17" , null);
+        return  cursor;
+    }
 }
