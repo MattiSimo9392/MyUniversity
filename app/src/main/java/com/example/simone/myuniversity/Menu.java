@@ -49,7 +49,11 @@ public class Menu extends AppCompatActivity {
     }
 
     public void onClick_modPS(View view){
-        
+        startActivity(new Intent(getApplicationContext(), ModificaPianoStudi.class));
+    }
+
+    public void onClick_showCareer(View view){
+        startActivity(new Intent(getApplicationContext(),VisualizzaCarriera.class ));
     }
 
     public void onClick_CancelCareer(View view){

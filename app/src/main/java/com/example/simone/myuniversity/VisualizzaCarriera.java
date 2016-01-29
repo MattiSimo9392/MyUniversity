@@ -45,7 +45,7 @@ public class VisualizzaCarriera extends ListActivity {
         TextView textView_ExamsPassed = (TextView)findViewById(R.id.EsamiPassati);
         TextView textView_ExamsLost = (TextView)findViewById(R.id.tv_EsamiMancanti);
 
-        listview = (ListView) findViewById(R.id.list_EsamiPassati);
+        listview = (ListView) findViewById(android.R.id.list);
 
         // Apro il database
         DBAccess database = DBAccess.getInstance(getApplicationContext());

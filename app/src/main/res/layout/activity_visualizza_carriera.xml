@@ -57,7 +57,7 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:id="@+id/list_EsamiPassati"
+        android:id="@+id/list"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/EsamiPassati">
 
