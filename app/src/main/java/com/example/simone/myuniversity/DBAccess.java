@@ -46,11 +46,6 @@ public class DBAccess {
         }
     }
 
-    /**
-     * Read all quotes from the database.
-     *
-     * @return a List of quotes
-     */
     public List<String> getQuotes() {
         List<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianodiStudi", null);
@@ -173,7 +168,7 @@ public class DBAccess {
     }
 
     public Cursor getCFUTotal(){
-        Cursor cursor = database.rawQuery("SELECT SUM(CFU) FROM PianoDiStudi " , null);
+        Cursor cursor = database.rawQuery("SELECT SUM(CFU) FROM PianoDiStudi WHERE NelPiano = 'SI' " , null);
         return cursor ;
     }
 
@@ -204,6 +199,11 @@ public class DBAccess {
     public Cursor cursorExamsPassed(){
         // il custom cursor richede una colonna id provo a rinominare quella di insegnamento
         Cursor cursor = database.rawQuery("SELECT Insegnamento as _id , Voto , DataSuperamento FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17" , null);
+        return  cursor;
+    }
+
+    public Cursor cursorMediaPesata(){
+        Cursor cursor = database.rawQuery("SELECT  (sum(Voto * CFU) ) / sum(CFU) as MediaPesata FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17 AND NelPiano = 'SI' " , null);
         return  cursor;
     }
 }

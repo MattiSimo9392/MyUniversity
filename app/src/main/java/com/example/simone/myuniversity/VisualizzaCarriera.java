@@ -24,6 +24,8 @@ public class VisualizzaCarriera extends ListActivity {
     int intExamsPassed;
     Cursor cursorExamsLost;
     int intExamsLost;
+    Cursor cursorMediaPesata;
+    float floatMediaPesata;
     Cursor cursorStudente;
     Cursor listaEsami;
     String Studente;
@@ -44,6 +46,7 @@ public class VisualizzaCarriera extends ListActivity {
         TextView textView_CFU = (TextView)findViewById(R.id.tv_CFU);
         TextView textView_ExamsPassed = (TextView)findViewById(R.id.EsamiPassati);
         TextView textView_ExamsLost = (TextView)findViewById(R.id.tv_EsamiMancanti);
+        TextView textView_MediaPesata = (TextView)findViewById(R.id.tv_MediaPesata);
 
         listview = (ListView) findViewById(android.R.id.list);
 
@@ -64,18 +67,22 @@ public class VisualizzaCarriera extends ListActivity {
         cursorExamsPassed.moveToFirst();
         cursorExamsLost = database.countExamsLost();
         cursorExamsLost.moveToFirst();
+        cursorMediaPesata = database.cursorMediaPesata();
+        cursorMediaPesata.moveToFirst();
 
         // li converto
         intCFUpassed = cursorCFUpassed.getInt(0);
         intCFUTotal = cursorCFUTotal.getInt(0);
         intExamsPassed = cursorExamsPassed.getInt(0);
         intExamsLost = cursorExamsLost.getInt(0);
+        floatMediaPesata = cursorMediaPesata.getFloat(0);
 
         //e aggiungo i testi
 
         textView_CFU.setText("CFU : " + intCFUpassed + "/" + intCFUTotal);
         textView_ExamsPassed.setText("Esami Passati : " + intExamsPassed);
         textView_ExamsLost.setText("Esami Mancanti : " + intExamsLost);
+        textView_MediaPesata.setText("Media Pesata : " + floatMediaPesata);
 
         // chiudo il database
         database.close();
