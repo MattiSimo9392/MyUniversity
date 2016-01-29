@@ -53,15 +53,17 @@ public class VisualizzaCarriera extends ListActivity {
         // mi ricavo i cursor con cui andrò a completare le text view
         listaEsami = database.cursorExamsPassed();
 
-        startManagingCursor(listaEsami);
-
-        CarrieraCursorAdapter adapter = new CarrieraCursorAdapter(getApplicationContext() , listaEsami );
+        CarrieraCursorAdapter adapter = new CarrieraCursorAdapter(getApplicationContext() , listaEsami);
         setListAdapter(adapter);
 
         cursorCFUpassed = database.getCFUpassed();
+        cursorCFUpassed.moveToFirst();
         cursorCFUTotal = database.getCFUTotal();
+        cursorCFUTotal.moveToFirst();
         cursorExamsPassed = database.countCFUPassed();
+        cursorExamsPassed.moveToFirst();
         cursorExamsLost = database.countExamsLost();
+        cursorExamsLost.moveToFirst();
 
         // li converto
         intCFUpassed = cursorCFUpassed.getInt(0);

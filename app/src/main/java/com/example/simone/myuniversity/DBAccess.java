@@ -202,7 +202,8 @@ public class DBAccess {
     }
 
     public Cursor cursorExamsPassed(){
-        Cursor cursor = database.rawQuery("SELECT Insegnamento , Voto FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17" , null);
+        // il custom cursor richede una colonna id provo a rinominare quella di insegnamento
+        Cursor cursor = database.rawQuery("SELECT Insegnamento as _id , Voto , DataSuperamento FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17" , null);
         return  cursor;
     }
 }
