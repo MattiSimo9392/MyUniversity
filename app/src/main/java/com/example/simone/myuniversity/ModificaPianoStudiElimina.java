@@ -39,7 +39,7 @@ public class ModificaPianoStudiElimina extends AppCompatActivity {
 
                 final String insegnamentoSelezionato = listview.getItemAtPosition(position).toString();
 
-                AlertDialog.Builder delete = new AlertDialog.Builder(getApplicationContext());
+                AlertDialog.Builder delete = new AlertDialog.Builder(ModificaPianoStudiElimina.this);
                 delete.setTitle(insegnamentoSelezionato);
                 delete.setMessage("Sei sicuro di voler eliminare " + insegnamentoSelezionato + " dal tuo Piano Di Studi?");
                 delete.setNegativeButton("No", new DialogInterface.OnClickListener() {
