@@ -12,17 +12,28 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="Studente : "
+        android:text="Carriera Studente"
+        android:textStyle="bold"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_title"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:text=""
         android:id="@+id/Studente"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="5dp"
+        android:layout_below="@+id/tv_title"/>
 
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="Matricola : "
+        android:textStyle="bold"
+        android:text=""
         android:layout_below="@+id/Studente"
         android:layout_alignParentStart="true"
         android:id="@+id/Matricola"
@@ -31,8 +42,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="CFU : "
+        android:textStyle="bold"
+        android:text=""
         android:id="@+id/tv_CFU"
         android:layout_below="@+id/Matricola"
         android:layout_centerHorizontal="true" />
@@ -40,8 +51,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="Esami Mancanti : "
+        android:textStyle="bold"
+        android:text=""
         android:id="@+id/tv_EsamiMancanti"
         android:layout_below="@+id/Matricola"
         android:layout_alignParentStart="true"
@@ -50,8 +61,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="Esami Passati : "
+        android:textStyle="bold"
+        android:text=""
         android:id="@+id/EsamiPassati"
         android:layout_below="@+id/tv_EsamiMancanti"
         android:layout_alignParentStart="true"
@@ -62,17 +73,24 @@
         android:layout_height="match_parent"
         android:id="@android:id/list"
         android:layout_alignParentEnd="true"
-        android:layout_below="@+id/EsamiPassati">
-
-    </ListView>
+        android:layout_below="@+id/EsamiPassati"
+        android:layout_above="@+id/btn_showCareer_end"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:text="Media Pesata : "
+        android:textStyle="bold"
+        android:text=""
         android:id="@+id/tv_MediaPesata"
         android:layout_alignTop="@+id/EsamiPassati"
         android:layout_alignStart="@+id/tv_CFU" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="fine"
+        android:onClick="onClick_showCareer_end"
+        android:id="@+id/btn_showCareer_end"
+        android:layout_alignParentBottom="true"/>
 
 </RelativeLayout>

@@ -53,7 +53,11 @@ public class Menu extends AppCompatActivity {
     }
 
     public void onClick_showCareer(View view){
-        startActivity(new Intent(getApplicationContext(),VisualizzaCarriera.class ));
+        startActivity(new Intent(getApplicationContext(), VisualizzaCarriera.class ));
+    }
+
+    public void onClick_modSegui(View view){
+        startActivity(new Intent(getApplicationContext(), ModificaEsamiCheStaiSeguendo.class ));
     }
 
     public void onClick_CancelCareer(View view){

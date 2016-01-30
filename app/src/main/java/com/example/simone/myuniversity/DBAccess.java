@@ -178,7 +178,7 @@ public class DBAccess {
     }
 
     public Cursor countExamsLost(){
-        Cursor cursor = database.rawQuery("SELECT COUNT(Voto) FROM PianoDiStudi WHERE Voto = ''" , null);
+        Cursor cursor = database.rawQuery("SELECT COUNT(Voto) FROM PianoDiStudi WHERE Voto = '' and NelPiano = 'SI'"  , null);
         return cursor ;
     }
 
