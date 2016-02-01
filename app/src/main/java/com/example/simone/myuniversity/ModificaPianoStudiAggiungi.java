@@ -62,6 +62,7 @@ public class ModificaPianoStudiAggiungi extends AppCompatActivity {
     }
 
     public void onClick_aggExam_fine(View view){
+        startActivity(new Intent(getApplicationContext(), ModificaPianoStudi.class));
         finish();
     }
 

@@ -32,12 +32,14 @@ public class ModificaPianoStudi extends AppCompatActivity {
     public void onClick_aggExam(View view){
 
         startActivity(new Intent(getApplicationContext(), ModificaPianoStudiAggiungi.class));
+        finish();
 
     }
 
     public void onClick_cancExam(View view){
 
         startActivity(new Intent(getApplicationContext(), ModificaPianoStudiElimina.class));
+        finish();
 
     }
 

@@ -58,6 +58,11 @@ public class ModificaPianoStudiElimina extends AppCompatActivity {
                         dbAccess.setDataNull(insegnamentoSelezionato);
                         dbAccess.setSeguitiNull(insegnamentoSelezionato);
                         dbAccess.close();
+
+
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), ModificaPianoStudiElimina.class));
+
                     }
                 });
                 Dialog deleteDialog = delete.create();
@@ -67,6 +72,7 @@ public class ModificaPianoStudiElimina extends AppCompatActivity {
     }
 
     public void onClick_cancExam_fine(View view){
+        startActivity(new Intent(getApplicationContext(), ModificaPianoStudi.class));
         finish();
     }
 
