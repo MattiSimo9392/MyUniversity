@@ -44,12 +44,20 @@
         <activity
             android:name=".ModificaPianoStudiElimina"
             android:screenOrientation="portrait" />
-        <activity android:name=".VisualizzaCarriera" />
-        <activity android:name=".ModificaEsamiCheStaiSeguendo" >
+        <activity
+            android:name=".VisualizzaCarriera"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ModificaEsamiCheStaiSeguendo"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ModificaEsamiCheStaiSeguendoAggiungi" >
+        <activity
+            android:name=".ModificaEsamiCheStaiSeguendoAggiungi"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".ModificaEsamiCheStaiSeguendoElimina" >
+        <activity
+            android:name=".ModificaEsamiCheStaiSeguendoElimina"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
