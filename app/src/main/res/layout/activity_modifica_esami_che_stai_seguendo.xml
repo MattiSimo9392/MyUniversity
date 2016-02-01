@@ -10,34 +10,53 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_nonseguiti"
-        android:text="Questi sono gli esami che attualmente NON stai seguendo , selezionane uno che vuoi seguire e premi fine "/>
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="Questi sono gli Esami che stai seguendo"
+        android:id="@+id/tv_modSeg_1"/>
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListViewSeguiti"
-        android:layout_alignTop="@+id/tv_daseguire"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="51dp">
-
-    </ListView>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Questi sono gli esami che stai seguendo selezionane uno che stai seguendo se non lo segui più e poi premi fine "
-        android:id="@+id/tv_daseguire"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="176dp" />
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="Cosa Vuoi Fare?"
+        android:id="@+id/tv_modSeg_2"
+        android:layout_below="@+id/tv_modSeg_1"/>
+
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/ListViewDaSeguire"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tv_nonseguiti"
-        android:layout_above="@+id/tv_daseguire">
+        android:layout_height="match_parent"
+        android:id="@+id/lv_modSeg"
+        android:layout_below="@+id/tv_modSeg_2"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/btn_cancExamSeg"/>
 
-    </ListView>
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Elimina Seguito"
+        android:onClick="onClick_cancExamSeg"
+        android:id="@+id/btn_cancExamSeg"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"/>
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Aggiungi Seguito"
+        android:onClick="onClick_aggExamSeg"
+        android:id="@+id/btn_aggExamSeg"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true" />
+
+    <Button
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="Conferma Seguiti"
+        android:onClick="onClick_confSeg"
+        android:id="@+id/btn_confSeg"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

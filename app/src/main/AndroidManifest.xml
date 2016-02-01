@@ -47,6 +47,10 @@
         <activity android:name=".VisualizzaCarriera" />
         <activity android:name=".ModificaEsamiCheStaiSeguendo" >
         </activity>
+        <activity android:name=".ModificaEsamiCheStaiSeguendoAggiungi" >
+        </activity>
+        <activity android:name=".ModificaEsamiCheStaiSeguendoElimina" >
+        </activity>
     </application>
 
 </manifest>
