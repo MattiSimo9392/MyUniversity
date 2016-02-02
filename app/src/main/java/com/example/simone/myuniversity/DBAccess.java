@@ -84,6 +84,18 @@ public class DBAccess {
 
     public List<String> getSeguiti(){
         List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' AND Seguito = 'SI'", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    public List<String> getNonSeguiti(){
+        List<String> list = new ArrayList<>();
         Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' AND Seguito = 'NO'", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){

@@ -27,7 +27,7 @@ public class ModificaEsamiCheStaiSeguendoAggiungi extends AppCompatActivity {
 
         DBAccess databaseAccess = DBAccess.getInstance(this);
         databaseAccess.open();
-        List<String> nonSeguiti = databaseAccess.getDaSeguire();
+        List<String> nonSeguiti = databaseAccess.getNonSeguiti();
         databaseAccess.close();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, nonSeguiti);
