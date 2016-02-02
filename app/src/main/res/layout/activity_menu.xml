@@ -58,7 +58,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Prenota Esame"
+        android:text="Gestione Prenotazione Esami"
         android:layout_gravity="center"
         android:onClick="onClick_prenExam"
         android:id="@+id/prenExam"/>
@@ -70,6 +70,22 @@
         android:layout_gravity="center"
         android:onClick="onClick_regExam"
         android:id="@+id/regExam"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visualizza Orari dei Corsi"
+        android:layout_gravity="center"
+        android:onClick="onClick_showOrari"
+        android:id="@+id/showOrari"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Visualizza Dettagli Esami Prenotati"
+        android:layout_gravity="center"
+        android:onClick="onClick_showExam"
+        android:id="@+id/showExam"/>
 
     <Button
         android:text="Cancella Carriera"
