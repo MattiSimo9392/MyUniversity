@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:text="Questo sono gli esami che non stai seguendo"
+        android:text="Questi sono gli esami che non stai seguendo"
         android:id="@+id/tv_modSeg_agg_1"/>
 
     <TextView
