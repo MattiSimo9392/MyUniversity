@@ -7,4 +7,37 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.simone.myuniversity.ModificaEsamiCheStaiSeguendoElimina">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="Questi sono gli esami che stai seguendo"
+        android:id="@+id/tv_modSeg_del_1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:textStyle="bold"
+        android:text="Clicca sugli esami che vuoi eliminare"
+        android:id="@+id/tv_modSeg_del_2"
+        android:layout_below="@+id/tv_modSeg_del_1"/>
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/lv_modSeg_del"
+        android:layout_below="@+id/tv_modSeg_del_2"
+        android:layout_alignParentEnd="true"
+        android:layout_above="@+id/btn_cancExamSeg_fine"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fine"
+        android:onClick="onClick_cancExamSeg_fine"
+        android:id="@+id/btn_cancExamSeg_fine"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

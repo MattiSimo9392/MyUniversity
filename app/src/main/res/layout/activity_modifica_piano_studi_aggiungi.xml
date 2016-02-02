@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:text="Questo è il tuo Piano di Studi attuale"
+        android:text="Questi esami non sono nel tuo Piano di Studi attuale"
         android:id="@+id/tv_modPS_agg_1"/>
 
     <TextView
