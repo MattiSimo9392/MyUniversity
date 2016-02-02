@@ -15,18 +15,13 @@ public class DBAccess {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
     private static DBAccess instance;
-     // Costruttore Privato
-     // @param context
 
+    //Costruttore Privato
     private DBAccess(Context context) {
         this.openHelper = new DBHelper(context);
     }
 
     //Ritorna una istanza di DBAccess
-
-     // @param context the Context
-     // @return the instance of DabaseAccess
-
     public static DBAccess getInstance(Context context) {
         if (instance == null) {
             instance = new DBAccess(context);
@@ -45,6 +40,8 @@ public class DBAccess {
             this.database.close();
         }
     }
+
+    //Tutte le Query seguenti operano sulla tabella "PianoDiStudi"
 
     //Query per ottenere la lista di tutti gli insegnamenti presenti nella tabella PianoDiStudi
     public List<String> getQuotes() {
@@ -255,5 +252,20 @@ public class DBAccess {
     public Cursor cursorMediaPesata(){
         Cursor cursor = database.rawQuery("SELECT  (sum(Voto * CFU) ) / sum(CFU) as MediaPesata FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17 AND NelPiano = 'SI' " , null);
         return  cursor;
+    }
+
+
+    //Tutte le Query seguenti operano sulla tabella "AppelliEsami"
+
+    //Query per ottenere Data, Ora e Aula del 1° Appello di un determinato insegnamento
+    public Cursor getAppello1(String insegnamento){         //da testare
+        Cursor cursor = database.rawQuery("SELECT Data_1, Ora_1, Aula_1 FROM AppelliEsami WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
+    }
+
+    //Query per ottenere Data, Ora e Aula del 2° Appello di un determinato insegnamento
+    public Cursor getAppello2(String insegnamento){         //da testare
+        Cursor cursor = database.rawQuery("SELECT Data_2, Ora_2, Aula_2 FROM AppelliEsami WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
     }
 }
