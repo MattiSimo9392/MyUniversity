@@ -60,6 +60,10 @@ public class Menu extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), ModificaEsamiCheStaiSeguendo.class ));
     }
 
+    public void onClick_prenExam(View view){
+        startActivity(new Intent(getApplicationContext(), GestionePrenotazioneEsami.class));
+    }
+
     public void onClick_CancelCareer(View view){
         // Riportiamo la preference al valore iniziale in modo che compaia il bottone
         /*

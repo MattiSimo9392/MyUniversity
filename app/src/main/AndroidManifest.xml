@@ -46,18 +46,26 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".VisualizzaCarriera"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ModificaEsamiCheStaiSeguendo"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ModificaEsamiCheStaiSeguendoAggiungi"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ModificaEsamiCheStaiSeguendoElimina"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity android:name=".GestionePrenotazioneEsami" >
+        </activity>
+        <activity android:name=".GestionePrenotazioneEsamiAggiungi" >
+        </activity>
+        <activity android:name=".GestionePrenotazioneEsamiElimina" >
+        </activity>
+        <activity android:name=".GestionePrenotazioneEsamiModifica" >
         </activity>
     </application>
 
