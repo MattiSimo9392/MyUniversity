@@ -7,4 +7,46 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.simone.myuniversity.GestionePrenotazioneEsamiAggiungi">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Questi sono gli esami prenotabili"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_prenExam_1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clicca sull'esame e seleziona l'appello"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_prenExam_2"
+        android:layout_below="@+id/tv_prenExam_1"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="che vuoi prenotare"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_prenExam_3"
+        android:layout_below="@+id/tv_prenExam_2"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv_prenExam"
+        android:layout_below="@+id/tv_prenExam_3"
+        android:layout_above="@+id/btn_prenExam_end"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fine"
+        android:onClick="onClick_prenExam_end"
+        android:id="@+id/btn_prenExam_end"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>
