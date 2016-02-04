@@ -121,6 +121,32 @@ public class DBAccess {
         return list;
     }
 
+    //Query per ottenere tutti gli insegnamenti che l'utente ha nel proprio Piano di Studi, non ha ancora superato e non ha ancora prenotato
+    public List<String> getPrenotabili(){
+        List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' AND DataSuperamento = '' ", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
+    //Query per ottenere tutti gli insegnamenti che l'utente ha nel proprio Piano di Studio, non ha ancora superato ma ha già prenotato
+    public List<String> getPrenotati(){
+        List<String> list = new ArrayList<>();
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' AND DataSuperamento NOT = '' ", null);
+        cursor.moveToFirst();
+        while(!cursor.isAfterLast()){
+            list.add(cursor.getString(0));
+            cursor.moveToNext();
+        }
+        cursor.close();
+        return list;
+    }
+
     //Query per settare a 'SI' la colonna "NelPiano" di un determinato insegnamento
     public void setNelPiano(String insegnamento){
         database.execSQL("UPDATE PianoDiStudi SET NelPiano = 'SI' WHERE Insegnamento = '" + insegnamento + "'");

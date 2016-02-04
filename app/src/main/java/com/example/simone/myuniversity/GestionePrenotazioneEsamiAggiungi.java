@@ -31,14 +31,13 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
 
         DBAccess databaseAccess = DBAccess.getInstance(this);
         databaseAccess.open();
-        List<String> esamiPrenotabili = databaseAccess.getDaSeguire();
+        List<String> esamiPrenotabili = databaseAccess.getPrenotabili();
         databaseAccess.close();
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, esamiPrenotabili);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-        // correggere tutta questa parte
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -118,7 +117,7 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                 prenotaDialog.show();
             }
         });
-        //
+
     }
 
     public void onClick_prenExam_end(View view){
