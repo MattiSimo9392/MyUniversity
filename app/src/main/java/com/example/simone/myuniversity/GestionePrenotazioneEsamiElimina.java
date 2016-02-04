@@ -121,4 +121,5 @@ public class GestionePrenotazioneEsamiElimina extends AppCompatActivity {
         Dialog exitDialog = exit.create();
         exitDialog.show();
     }
+
 }

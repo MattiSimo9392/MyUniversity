@@ -294,4 +294,5 @@ public class DBAccess {
         Cursor cursor = database.rawQuery("SELECT Data_2, Ora_2, Aula_2 FROM AppelliEsami WHERE Insegnamento = '" + insegnamento + "'", null);
         return cursor;
     }
+
 }
