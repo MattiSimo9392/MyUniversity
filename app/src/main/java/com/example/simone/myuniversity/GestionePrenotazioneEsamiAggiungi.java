@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -59,8 +60,22 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                 cursor2.moveToFirst();
                 dbAccess.close();
 
-                appello1.setText(cursor1.getString(cursor1.getColumnIndex("Data_1")) + "\t\t" + cursor1.getString(cursor1.getColumnIndex("Aula_1")) + "\t\t" + cursor1.getString(cursor1.getColumnIndex("Ora_1")));
-                appello2.setText(cursor2.getString(cursor2.getColumnIndex("Data_2")) + "\t\t" + cursor2.getString(cursor2.getColumnIndex("Aula_2")) + "\t\t" + cursor2.getString(cursor2.getColumnIndex("Ora_2")));
+                appello1.setText("Appello del " + cursor1.getString(cursor1.getColumnIndex("Data_1")) + " in Aula " + cursor1.getString(cursor1.getColumnIndex("Aula_1")) + " alle " + cursor1.getString(cursor1.getColumnIndex("Ora_1")));
+                appello2.setText("Appello del " + cursor2.getString(cursor2.getColumnIndex("Data_2")) + " in Aula " + cursor2.getString(cursor2.getColumnIndex("Aula_2")) + " alle " + cursor2.getString(cursor2.getColumnIndex("Ora_2")));
+
+                appello1.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        appello2.setChecked(false);
+                    }
+                });
+
+                appello2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        appello1.setChecked(false);
+                    }
+                });
 
                 prenota.setTitle(insegnamentoSelezionato);
                 prenota.setCancelable(true);
@@ -73,13 +88,26 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                 prenota.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+
                         //DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
                         //dbAccess.open();
-                        // inserire la query per aggiungere la data al db
+
+                        if (appello1.isChecked()) {
+
+                            Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
+                            //inserire la query per aggiungere la data al db
+                        } else if (appello2.isChecked()) {
+
+                            Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello2.getText().toString(), Toast.LENGTH_SHORT).show();
+                            //inserire la query per aggiungere la data al db
+                        } else {
+
+                            Toast.makeText(getApplicationContext(), "Non hai selezionato nessun appello! Esame non prenotato", Toast.LENGTH_SHORT).show();
+                        }
+
                         //dbAccess.close();
 
                         dialog.dismiss();
-
 
                         //finish();
                         //startActivity(new Intent(getApplicationContext(), GestionePrenotazioneEsamiAggiungi.class));
@@ -91,5 +119,36 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
             }
         });
         //
+    }
+
+    public void onClick_prenExam_end(View view){
+        finish();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        AlertDialog.Builder exit = new AlertDialog.Builder(this);
+        exit.setTitle("Sei sicuro di voler uscire da MyUniversity?");
+        exit.setCancelable(false);
+        exit.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                dialog.dismiss();
+            }
+        });
+        exit.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("LOGOUT", true);
+                startActivity(intent);
+            }
+        });
+        Dialog exitDialog = exit.create();
+        exitDialog.show();
     }
 }
