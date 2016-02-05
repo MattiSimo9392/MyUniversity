@@ -137,7 +137,7 @@ public class DBAccess {
     //Query per ottenere tutti gli insegnamenti che l'utente ha nel proprio Piano di Studio, non ha ancora superato ma ha già prenotato
     public List<String> getPrenotati(){
         List<String> list = new ArrayList<>();
-        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' AND DataSuperamento NOT = '' ", null);
+        Cursor cursor = database.rawQuery("SELECT Insegnamento FROM PianoDiStudi WHERE NelPiano = 'SI' AND Voto = '' AND DataSuperamento IS NOT '' ", null);
         cursor.moveToFirst();
         while(!cursor.isAfterLast()){
             list.add(cursor.getString(0));

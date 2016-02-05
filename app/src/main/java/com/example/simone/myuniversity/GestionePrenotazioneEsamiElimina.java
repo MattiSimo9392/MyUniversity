@@ -43,7 +43,7 @@ public class GestionePrenotazioneEsamiElimina extends AppCompatActivity {
 
                 final String insegnamentoSelezionato = listview.getItemAtPosition(position).toString();
 
-                DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
+                final DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
                 dbAccess.open();
                 cursor1 = dbAccess.getAppello1(insegnamentoSelezionato);
                 cursor1.moveToFirst();
@@ -81,8 +81,11 @@ public class GestionePrenotazioneEsamiElimina extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
 
                         //manca la cancellazione della data dal db
-                        //finish
-                        //startActivity(new Intent(getApplicationContext(), GestionePrenotazioneEsamiElimina.class));
+                        dbAccess.open();
+                        dbAccess.setDataNull(insegnamentoSelezionato);
+                        dbAccess.close();
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), GestionePrenotazioneEsamiElimina.class));
                     }
                 });
                 Dialog sPrenotaDialog = prenota_canc.create();
