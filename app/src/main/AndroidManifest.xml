@@ -67,6 +67,8 @@
         </activity>
         <activity android:name=".GestionePrenotazioneEsamiModifica" >
         </activity>
+        <activity android:name=".RegistrazioneEsami" >
+        </activity>
     </application>
 
 </manifest>
