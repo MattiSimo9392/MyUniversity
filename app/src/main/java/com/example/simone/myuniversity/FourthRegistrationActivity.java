@@ -29,13 +29,9 @@ public class FourthRegistrationActivity extends AppCompatActivity {
     ListView listView;
     public int voto_esame;
     public String data_esame;
-
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormat;
-
-    //
     Cursor cursor_voto, cursor_data;
-    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +64,16 @@ public class FourthRegistrationActivity extends AppCompatActivity {
                 final EditText voto = (EditText) dialog_view.findViewById(R.id.et_voto);
                 final EditText data = (EditText) dialog_view.findViewById(R.id.et_data);
 
-                //momentaneamente commentato xk da verificare
-                /*DBAccess dbAccess2 = DBAccess.getInstance(getApplicationContext());
+                DBAccess dbAccess2 = DBAccess.getInstance(getApplicationContext());
                 dbAccess2.open();
                 cursor_voto = dbAccess2.getVotoEsameSuperato(insegnamentoSelezionato);
-                voto.setText(cursor_voto.getString(0));
+                cursor_voto.moveToFirst();
                 cursor_data = dbAccess2.getDataEsameSuperato(insegnamentoSelezionato);
-                data.setText(cursor_data.getString(0));
-                dbAccess2.close();*/
-                //
+                cursor_data.moveToFirst();
+                dbAccess2.close();
+
+                voto.setText(cursor_voto.getString(cursor_voto.getColumnIndex("Voto")));
+                data.setText(cursor_data.getString(cursor_data.getColumnIndex("DataSuperamento")));
 
                 data.setInputType(InputType.TYPE_NULL);
                 data.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +103,7 @@ public class FourthRegistrationActivity extends AppCompatActivity {
                 insert.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //catturare il voto e la data dai rispettivi editText e salvare i valori nel DB
+
                         voto_esame = Integer.parseInt(voto.getText().toString());
                         data_esame = data.getText().toString();
                         if ((voto_esame < 18) || (voto_esame > 31)) {
@@ -116,7 +113,6 @@ public class FourthRegistrationActivity extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Data Inserita Non Valida", Toast.LENGTH_LONG).show();
                         }
                         else {
-                            //Toast.makeText(getApplicationContext(), "Voto: " + voto_esame + "\nData: " + data_esame, Toast.LENGTH_LONG).show();
                             DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
                             dbAccess.open();
                             dbAccess.setVotoEsameSuperato(insegnamentoSelezionato, voto_esame);

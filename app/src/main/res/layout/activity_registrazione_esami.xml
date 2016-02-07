@@ -28,7 +28,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="inserisci Data e Voto di Superamento"
+        android:text="inserisci Voto e Data di Superamento"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
         android:id="@+id/tv_regExam_3"
