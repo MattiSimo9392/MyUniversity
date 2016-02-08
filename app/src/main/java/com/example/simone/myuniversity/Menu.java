@@ -68,6 +68,14 @@ public class Menu extends AppCompatActivity {
         startActivity(new Intent(getApplicationContext(), RegistrazioneEsami.class));
     }
 
+    public void onClick_showOrari(View view){
+        startActivity(new Intent(getApplicationContext(), VisualizzaOrariLezioni.class));
+    }
+
+    public void onClick_showExam(View view){
+        startActivity(new Intent(getApplicationContext(), VisualizzaEsamiPrenotati.class));
+    }
+
     public void onClick_CancelCareer(View view){
         // Riportiamo la preference al valore iniziale in modo che compaia il bottone
         /*

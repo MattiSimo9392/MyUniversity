@@ -49,26 +49,34 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ModificaEsamiCheStaiSeguendo"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ModificaEsamiCheStaiSeguendoAggiungi"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ModificaEsamiCheStaiSeguendoElimina"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity android:name=".GestionePrenotazioneEsami" >
-        </activity>
-        <activity android:name=".GestionePrenotazioneEsamiAggiungi" >
-        </activity>
-        <activity android:name=".GestionePrenotazioneEsamiElimina" >
-        </activity>
-        <activity android:name=".GestionePrenotazioneEsamiModifica" >
-        </activity>
-        <activity android:name=".RegistrazioneEsami" >
-        </activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GestionePrenotazioneEsami"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GestionePrenotazioneEsamiAggiungi"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GestionePrenotazioneEsamiElimina"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GestionePrenotazioneEsamiModifica"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegistrazioneEsami"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisualizzaEsamiPrenotati"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".VisualizzaOrariLezioni"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
