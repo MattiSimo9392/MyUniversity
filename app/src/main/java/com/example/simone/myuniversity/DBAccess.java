@@ -284,14 +284,76 @@ public class DBAccess {
     //Tutte le Query seguenti operano sulla tabella "AppelliEsami"
 
     //Query per ottenere Data, Ora e Aula del 1° Appello di un determinato insegnamento
-    public Cursor getAppello1(String insegnamento){         //da testare
+    public Cursor getAppello1(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Data_1, Ora_1, Aula_1 FROM AppelliEsami WHERE Insegnamento = '" + insegnamento + "'", null);
         return cursor;
     }
 
     //Query per ottenere Data, Ora e Aula del 2° Appello di un determinato insegnamento
-    public Cursor getAppello2(String insegnamento){         //da testare
+    public Cursor getAppello2(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Data_2, Ora_2, Aula_2 FROM AppelliEsami WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
+    }
+
+    //Tutte le Query seguenti operano sulla tabella "OrariLezioni"
+
+    //Query per ottenere l'orario delle lezioni del Lunedì di un determinato insegnamento
+    public Cursor getOrarioLun(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Lun FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
+    }
+
+    ////Query per ottenere l'orario delle lezioni del Martedì di un determinato insegnamento
+    public Cursor getOrarioMar(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Mar FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle lezioni del Mercoledì di un determinato insegnamento
+    public Cursor getOrarioMer(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Mer FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle lezioni del Giovedì di un determinato insegnamento
+    public Cursor getOrarioGio(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Gio FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle lezioni del Venerdì di un determinato insegnamento
+    public Cursor getOrarioVen(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Ven FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle esercitazioni del Lunedì di un determinato insegnamento
+    public Cursor getOrarioEserLun(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Lun FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle esercitazioni del Martedì di un determinato insegnamento
+    public Cursor getOrarioEserMar(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Mar FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle esercitazioni del Mercoledì di un determinato insegnamento
+    public Cursor getOrarioEserMer(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Mer FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle esercitazioni del Giovedì di un determinato insegnamento
+    public Cursor getOrarioEserGio(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Gio FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
+        return cursor;
+    }
+
+    //Query per ottenere l'orario delle esercitazioni del Venerdì di un determinato insegnamento
+    public Cursor getOrarioEserVen(String insegnamento){           //da testare
+        Cursor cursor = database.rawQuery("SELECT Aula, Ven FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
         return cursor;
     }
 

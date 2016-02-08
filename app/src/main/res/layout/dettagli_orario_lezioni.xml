@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Lunedì: "
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:id="@+id/tv_lun_1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Martedì: "
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_mar_1"
+        android:layout_below="@+id/tv_lun_1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Mercoledì: "
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_mer_1"
+        android:layout_below="@+id/tv_mar_1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Giovedì: "
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_gio_1"
+        android:layout_below="@+id/tv_mer_1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="  Venerdì: "
+        android:textStyle="bold"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_ven_1"
+        android:layout_below="@+id/tv_gio_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toEndOf="@+id/tv_lun_1"
+        android:layout_marginTop="20dp"
+        android:id="@+id/tv_lun_2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toEndOf="@+id/tv_mar_1"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_mar_2"
+        android:layout_below="@+id/tv_lun_2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toEndOf="@+id/tv_mer_1"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_mer_2"
+        android:layout_below="@+id/tv_mar_2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toEndOf="@+id/tv_gio_1"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_gio_2"
+        android:layout_below="@+id/tv_mer_2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_toEndOf="@+id/tv_ven_1"
+        android:layout_marginTop="10dp"
+        android:id="@+id/tv_ven_2"
+        android:layout_below="@+id/tv_gio_2"/>
+
+</RelativeLayout>

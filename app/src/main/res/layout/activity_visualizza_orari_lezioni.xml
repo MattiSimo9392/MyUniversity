@@ -7,4 +7,46 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.simone.myuniversity.VisualizzaOrariLezioni">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Questi sono i corsi che stai seguendo"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_showOrari_1" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleziona il corso del quale vuoi visualizzare"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_showOrari_2"
+        android:layout_below="@+id/tv_showOrari_1"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="gli orari delle lezioni"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tv_showOrari_3"
+        android:layout_below="@+id/tv_showOrari_2"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/lv_showOrari"
+        android:layout_below="@+id/tv_showOrari_3"
+        android:layout_above="@+id/btn_showOrari_end"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Fine"
+        android:onClick="onClick_showOrari_end"
+        android:id="@+id/btn_showOrari_end"
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

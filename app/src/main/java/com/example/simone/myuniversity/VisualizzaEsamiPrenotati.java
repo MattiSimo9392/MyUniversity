@@ -84,7 +84,6 @@ public class VisualizzaEsamiPrenotati extends AppCompatActivity {
                     aula.setText(cursor2.getString(cursor2.getColumnIndex("Aula_2")));
                 }
 
-                //showPren.setMessage("Dettagli Appello Prenotato");
                 showPren.setTitle(insegnamentoSelezionato);
                 showPren.setCancelable(true);
 
