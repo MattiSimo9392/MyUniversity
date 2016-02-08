@@ -76,6 +76,25 @@ public class VisualizzaOrariLezioni extends AppCompatActivity {
                 venEx.moveToFirst();
                 databaseAccess.close();
 
+                if (lunLez.getString(lunLez.getColumnIndex("Lun")).equals("")){
+                    if (lunEx.getString(lunEx.getColumnIndex("Lun")).equals("")){
+                        lun.setText("Nessuna Lezione");
+                    }
+                    else {
+                        lun.setText(lunEx.getString(lunEx.getColumnIndex("Lun")) + " in Aula " + lunEx.getString(lunEx.getColumnIndex("Aula")) + " (esercitazione)");
+                    }
+                }
+                else{
+                    if (lunEx.getString(lunEx.getColumnIndex("Lun")).equals("")){
+                        lun.setText(lunLez.getString(lunLez.getColumnIndex("Lun")) + " in Aula " + lunLez.getString(lunLez.getColumnIndex("Aula")));
+                    }
+                    else {
+                        lun.setText(lunLez.getString(lunLez.getColumnIndex("Lun")) + " in Aula " + lunLez.getString(lunLez.getColumnIndex("Aula")) + " e " + lunEx.getString(lunEx.getColumnIndex("Lun")) + " in Aula " + lunEx.getString(lunEx.getColumnIndex("Aula")) + " (esercitazione)");
+                    }
+                }
+
+                //fare la stessa cosa del lunedì per gli altri 4 giorni e testare il tutto
+
                 showOrari.setTitle(insegnamentoSelezionato);
                 showOrari.setCancelable(true);
 
