@@ -76,89 +76,89 @@ public class VisualizzaOrariLezioni extends AppCompatActivity {
                 venEx.moveToFirst();
                 databaseAccess.close();
 
-                if (lunLez.getString(lunLez.getColumnIndex("Lun")).equals("")){
-                    if ((lunEx.getCount() == 0) || (lunEx.getString(lunEx.getColumnIndex("Lun")).equals(""))){
-                        lun.setText("Nessuna Lezione");
+                while (!lunLez.isAfterLast()) {
+                    if (lunLez.getString(lunLez.getColumnIndex("Lun")).equals("")) {
+                        if ((lunEx.getCount() == 0) || (lunEx.getString(lunEx.getColumnIndex("Lun")).equals(""))) {
+                            lun.setText(lun.getText() + "");
+                        } else {
+                            lun.setText(lun.getText() + lunEx.getString(lunEx.getColumnIndex("Lun")) + " in Aula " + lunEx.getString(lunEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
+                    } else {
+                        if ((lunEx.getCount() == 0) || (lunEx.getString(lunEx.getColumnIndex("Lun")).equals(""))) {
+                            lun.setText(lun.getText() + lunLez.getString(lunLez.getColumnIndex("Lun")) + " in Aula " + lunLez.getString(lunLez.getColumnIndex("Aula")));
+                        } else {
+                            lun.setText(lun.getText() + lunLez.getString(lunLez.getColumnIndex("Lun")) + " in Aula " + lunLez.getString(lunLez.getColumnIndex("Aula")) + " e " + lunEx.getString(lunEx.getColumnIndex("Lun")) + " in Aula " + lunEx.getString(lunEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
                     }
-                    else {
-                        lun.setText(lunEx.getString(lunEx.getColumnIndex("Lun")) + " in Aula " + lunEx.getString(lunEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
-                }
-                else{
-                    if ((lunEx.getCount() == 0) || (lunEx.getString(lunEx.getColumnIndex("Lun")).equals(""))){
-                        lun.setText(lunLez.getString(lunLez.getColumnIndex("Lun")) + " in Aula " + lunLez.getString(lunLez.getColumnIndex("Aula")));
-                    }
-                    else {
-                        lun.setText(lunLez.getString(lunLez.getColumnIndex("Lun")) + " in Aula " + lunLez.getString(lunLez.getColumnIndex("Aula")) + " e " + lunEx.getString(lunEx.getColumnIndex("Lun")) + " in Aula " + lunEx.getString(lunEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
-                }
-
-                if (marLez.getString(marLez.getColumnIndex("Mar")).equals("")){
-                    if ((marEx.getCount() == 0)|| (marEx.getString(marEx.getColumnIndex("Mar")).equals(""))){
-                        mar.setText("Nessuna Lezione");
-                    }
-                    else {
-                        mar.setText(marEx.getString(marEx.getColumnIndex("Mar")) + " in Aula " + marEx.getString(marEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
-                }
-                else{
-                    if ((marEx.getCount() == 0) || (marEx.getString(marEx.getColumnIndex("Mar")).equals(""))){
-                        mar.setText(marLez.getString(marLez.getColumnIndex("Mar")) + " in Aula " + marLez.getString(marLez.getColumnIndex("Aula")));
-                    }
-                    else {
-                        mar.setText(marLez.getString(marLez.getColumnIndex("Mar")) + " in Aula " + marLez.getString(marLez.getColumnIndex("Aula")) + " e " + marEx.getString(marEx.getColumnIndex("Mar")) + " in Aula " + marEx.getString(marEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
+                    lunLez.moveToNext();
                 }
 
-                if (merLez.getString(merLez.getColumnIndex("Mer")).equals("")){
-                    if ((merEx.getCount() == 0) || (merEx.getString(merEx.getColumnIndex("Mer")).equals(""))){
-                        mer.setText("Nessuna Lezione");
+                while (!marLez.isAfterLast()) {
+                    if (marLez.getString(marLez.getColumnIndex("Mar")).equals("")) {
+                        if ((marEx.getCount() == 0) || (marEx.getString(marEx.getColumnIndex("Mar")).equals(""))) {
+                            mar.setText(mar.getText() + "");
+                        } else {
+                            mar.setText(mar.getText() + marEx.getString(marEx.getColumnIndex("Mar")) + " in Aula " + marEx.getString(marEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
+                    } else {
+                        if ((marEx.getCount() == 0) || (marEx.getString(marEx.getColumnIndex("Mar")).equals(""))) {
+                            mar.setText(mar.getText() + marLez.getString(marLez.getColumnIndex("Mar")) + " in Aula " + marLez.getString(marLez.getColumnIndex("Aula")));
+                        } else {
+                            mar.setText(mar.getText() + marLez.getString(marLez.getColumnIndex("Mar")) + " in Aula " + marLez.getString(marLez.getColumnIndex("Aula")) + " e " + marEx.getString(marEx.getColumnIndex("Mar")) + " in Aula " + marEx.getString(marEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
                     }
-                    else {
-                        mer.setText(merEx.getString(merEx.getColumnIndex("Mer")) + " in Aula " + merEx.getString(merEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
-                }
-                else{
-                    if ((merEx.getCount() == 0) || (merEx.getString(merEx.getColumnIndex("Mer")).equals(""))){
-                        mer.setText(merLez.getString(merLez.getColumnIndex("Mer")) + " in Aula " + merLez.getString(merLez.getColumnIndex("Aula")));
-                    }
-                    else {
-                        mer.setText(merLez.getString(merLez.getColumnIndex("Mer")) + " in Aula " + merLez.getString(merLez.getColumnIndex("Aula")) + " e " + merEx.getString(merEx.getColumnIndex("Mer")) + " in Aula " + merEx.getString(merEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
-                }
-
-                if (gioLez.getString(gioLez.getColumnIndex("Gio")).equals("")){
-                    if ((gioEx.getCount() == 0) || (gioEx.getString(gioEx.getColumnIndex("Gio")).equals(""))){
-                        gio.setText("Nessuna Lezione");
-                    }
-                    else {
-                        gio.setText(gioEx.getString(gioEx.getColumnIndex("Gio")) + " in Aula " + gioEx.getString(gioEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
-                }
-                else{
-                    if ((gioEx.getCount() == 0) || (gioEx.getString(gioEx.getColumnIndex("Gio")).equals(""))){
-                        gio.setText(gioLez.getString(gioLez.getColumnIndex("Gio")) + " in Aula " + gioLez.getString(gioLez.getColumnIndex("Aula")));
-                    }
-                    else {
-                        gio.setText(gioLez.getString(gioLez.getColumnIndex("Gio")) + " in Aula " + gioLez.getString(gioLez.getColumnIndex("Aula")) + " e " + gioEx.getString(gioEx.getColumnIndex("Gio")) + " in Aula " + gioEx.getString(gioEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
+                    marLez.moveToNext();
                 }
 
-                if (venLez.getString(venLez.getColumnIndex("Ven")).equals("")){
-                    if ((venEx.getCount() == 0) || (venEx.getString(venEx.getColumnIndex("Ven")).equals(""))){
-                        ven.setText("Nessuna Lezione");
+                while (!merLez.isAfterLast()) {
+                    if (merLez.getString(merLez.getColumnIndex("Mer")).equals("")) {
+                        if ((merEx.getCount() == 0) || (merEx.getString(merEx.getColumnIndex("Mer")).equals(""))) {
+                            mer.setText(mer.getText() + "");
+                        } else {
+                            mer.setText(mer.getText() + merEx.getString(merEx.getColumnIndex("Mer")) + " in Aula " + merEx.getString(merEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
+                    } else {
+                        if ((merEx.getCount() == 0) || (merEx.getString(merEx.getColumnIndex("Mer")).equals(""))) {
+                            mer.setText(mer.getText() + merLez.getString(merLez.getColumnIndex("Mer")) + " in Aula " + merLez.getString(merLez.getColumnIndex("Aula")));
+                        } else {
+                            mer.setText(mer.getText() + merLez.getString(merLez.getColumnIndex("Mer")) + " in Aula " + merLez.getString(merLez.getColumnIndex("Aula")) + " e " + merEx.getString(merEx.getColumnIndex("Mer")) + " in Aula " + merEx.getString(merEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
                     }
-                    else {
-                        ven.setText(venEx.getString(venEx.getColumnIndex("Ven")) + " in Aula " + venEx.getString(venEx.getColumnIndex("Aula")) + " (esercitazione)");
-                    }
+                    merLez.moveToNext();
                 }
-                else{
-                    if ((venEx.getCount() == 0) || (venEx.getString(venEx.getColumnIndex("Ven")).equals(""))){
-                        ven.setText(venLez.getString(venLez.getColumnIndex("Ven")) + " in Aula " + venLez.getString(venLez.getColumnIndex("Aula")));
+
+                while (!gioLez.isAfterLast()) {
+                    if (gioLez.getString(gioLez.getColumnIndex("Gio")).equals("")) {
+                        if ((gioEx.getCount() == 0) || (gioEx.getString(gioEx.getColumnIndex("Gio")).equals(""))) {
+                            gio.setText(gio.getText() + "");
+                        } else {
+                            gio.setText(gio.getText() + gioEx.getString(gioEx.getColumnIndex("Gio")) + " in Aula " + gioEx.getString(gioEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
+                    } else {
+                        if ((gioEx.getCount() == 0) || (gioEx.getString(gioEx.getColumnIndex("Gio")).equals(""))) {
+                            gio.setText(gio.getText() + gioLez.getString(gioLez.getColumnIndex("Gio")) + " in Aula " + gioLez.getString(gioLez.getColumnIndex("Aula")));
+                        } else {
+                            gio.setText(gio.getText() + gioLez.getString(gioLez.getColumnIndex("Gio")) + " in Aula " + gioLez.getString(gioLez.getColumnIndex("Aula")) + " e " + gioEx.getString(gioEx.getColumnIndex("Gio")) + " in Aula " + gioEx.getString(gioEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
                     }
-                    else {
-                        ven.setText(venLez.getString(venLez.getColumnIndex("Ven")) + " in Aula " + venLez.getString(venLez.getColumnIndex("Aula")) + " e " + venEx.getString(venEx.getColumnIndex("Ven")) + " in Aula " + venEx.getString(venEx.getColumnIndex("Aula")) + " (esercitazione)");
+                    gioLez.moveToNext();
+                }
+
+                while(!venLez.isAfterLast()) {
+                    if (venLez.getString(venLez.getColumnIndex("Ven")).equals("")) {
+                        if ((venEx.getCount() == 0) || (venEx.getString(venEx.getColumnIndex("Ven")).equals(""))) {
+                            ven.setText(ven.getText() + "");
+                        } else {
+                            ven.setText(ven.getText() + venEx.getString(venEx.getColumnIndex("Ven")) + " in Aula " + venEx.getString(venEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
+                    } else {
+                        if ((venEx.getCount() == 0) || (venEx.getString(venEx.getColumnIndex("Ven")).equals(""))) {
+                            ven.setText(ven.getText() + venLez.getString(venLez.getColumnIndex("Ven")) + " in Aula " + venLez.getString(venLez.getColumnIndex("Aula")));
+                        } else {
+                            ven.setText(ven.getText() + venLez.getString(venLez.getColumnIndex("Ven")) + " in Aula " + venLez.getString(venLez.getColumnIndex("Aula")) + " e " + venEx.getString(venEx.getColumnIndex("Ven")) + " in Aula " + venEx.getString(venEx.getColumnIndex("Aula")) + " (esercitazione)");
+                        }
                     }
+                    venLez.moveToNext();
                 }
                 //testare il tutto
                 showOrari.setTitle(insegnamentoSelezionato);
