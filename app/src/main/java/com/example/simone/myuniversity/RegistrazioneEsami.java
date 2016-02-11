@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -30,6 +31,7 @@ public class RegistrazioneEsami extends AppCompatActivity {
     public String data_esame;
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormat;
+    Boolean datacorretta;
 
 
     @Override
@@ -63,7 +65,7 @@ public class RegistrazioneEsami extends AppCompatActivity {
 
                 data.setInputType(InputType.TYPE_NULL);
                 data.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v){
+                    public void onClick(View v) {
                         Calendar calendar = Calendar.getInstance();
                         datePickerDialog = new DatePickerDialog(RegistrazioneEsami.this, new DatePickerDialog.OnDateSetListener() {
                             @Override
@@ -71,8 +73,21 @@ public class RegistrazioneEsami extends AppCompatActivity {
                                 Calendar newDate = Calendar.getInstance();
                                 newDate.set(year, monthOfYear, dayOfMonth);
                                 data.setText(dateFormat.format(newDate.getTime()));
+
+                                //Controllo della data
+                                // Mi ricavo la data di oggi
+                                final Calendar currentDate = Calendar.getInstance();
+                                currentDate.setTime(new Date());
+                                // La confronto con quella inserita si poteva usare anche la before
+                                if (!newDate.after(currentDate)) {
+                                    //Toast.makeText(FourthRegistrationActivity.this , "Data Corretta , Esame Registrato" , Toast.LENGTH_LONG).show();
+                                    datacorretta = true;
+                                } else {
+                                    //Toast.makeText(FourthRegistrationActivity.this , "Data Errata perchè del futuro!! \n Reinseriscila corretta !!!" , Toast.LENGTH_LONG).show();
+                                    datacorretta = false;
+                                }
                             }
-                        },calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                        }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
                         datePickerDialog.show();
                     }
                 });
@@ -87,32 +102,41 @@ public class RegistrazioneEsami extends AppCompatActivity {
                     }
                 });
                 insert.setPositiveButton("Conferma", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        voto_esame = Integer.parseInt(voto.getText().toString());
-                        data_esame = data.getText().toString();
-                        if ((voto_esame < 18) || (voto_esame > 31)) {
-                            Toast.makeText(getApplicationContext(), "Voto Inserito Non Valido", Toast.LENGTH_LONG).show();
-                        }
-                        else if (data_esame.equals("")){
-                            Toast.makeText(getApplicationContext(), "Data Inserita Non Valida", Toast.LENGTH_LONG).show();
-                        }
-                        else {
-                            DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
-                            dbAccess.open();
-                            dbAccess.setVotoEsameSuperato(insegnamentoSelezionato, voto_esame);
-                            dbAccess.setDataEsameSuperato(insegnamentoSelezionato, data_esame);
-                            dbAccess.close();
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (!voto.getText().toString().equals("")) {
+                                    voto_esame = Integer.parseInt(voto.getText().toString());
+                                    data_esame = data.getText().toString();
+                                    if ((voto_esame < 18) || (voto_esame > 31)) {
+                                        Toast.makeText(getApplicationContext(), "Voto Inserito Non Valido", Toast.LENGTH_LONG).show();
+                                    } else if (data_esame.equals("")) {
+                                        Toast.makeText(getApplicationContext(), "Data Inserita Non Valida", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        if (datacorretta) {
+                                            Toast.makeText(RegistrazioneEsami.this, "Data Corretta , Esame Registrato", Toast.LENGTH_LONG).show();
+                                            DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
+                                            dbAccess.open();
+                                            dbAccess.setVotoEsameSuperato(insegnamentoSelezionato, voto_esame);
+                                            dbAccess.setDataEsameSuperato(insegnamentoSelezionato, data_esame);
+                                            dbAccess.close();
+                                        } else {
+                                            Toast.makeText(RegistrazioneEsami.this, "Data Errata perchè del futuro!! \n Reinseriscila corretta !!! \n Esame non registrato", Toast.LENGTH_LONG).show();
+                                        }
 
-                            finish();
-                            startActivity(new Intent(getApplicationContext(), RegistrazioneEsami.class));
+                                        finish();
+                                        startActivity(new Intent(getApplicationContext(), RegistrazioneEsami.class));
+                                    }
+                                } else {
+                                    Toast.makeText(RegistrazioneEsami.this , "Voto non Inserito !!!" , Toast.LENGTH_LONG).show();
+                                }
+                            }
                         }
-                    }
-                });
-                Dialog insertDialog = insert.create();
-                insertDialog.show();
-            }
-        });
+
+                );
+                    Dialog insertDialog = insert.create();
+                    insertDialog.show();
+                }
+            });
     }
 
     public void onClick_regExam_end(View view){

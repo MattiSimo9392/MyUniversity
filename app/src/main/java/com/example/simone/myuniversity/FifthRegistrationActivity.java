@@ -102,7 +102,7 @@ public class FifthRegistrationActivity extends AppCompatActivity {
 
         SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
         SharedPreferences.Editor editor = mprefs.edit();
-        editor.putString("Registrazione" , "2");
+        editor.putString("Registrazione", "2");
         editor.apply();
 
         startActivity(new Intent (getApplicationContext() , MainActivity.class));
