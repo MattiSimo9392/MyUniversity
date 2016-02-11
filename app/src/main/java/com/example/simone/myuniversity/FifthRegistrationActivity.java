@@ -98,13 +98,13 @@ public class FifthRegistrationActivity extends AppCompatActivity {
     }
 
     public void onClick_continue5(View view){
-        // viene eliminato il pulsante registrati
-        /*
+        // viene eliminato il pulsante registrati connessa con la MainActivity
+
         SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
         SharedPreferences.Editor editor = mprefs.edit();
         editor.putString("Registrazione" , "2");
         editor.apply();
-        */
+
         startActivity(new Intent (getApplicationContext() , MainActivity.class));
         finish();
     }

@@ -64,6 +64,8 @@
         android:textStyle="bold"
         android:text="Recupera Password"
         android:layout_gravity="center"
-        android:onClick="onClick_recuperaPsw"/>
+        android:id="@+id/recoverPassword"
+        android:textSize="20dp"
+        />
 
 </LinearLayout>

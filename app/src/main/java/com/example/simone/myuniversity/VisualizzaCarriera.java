@@ -31,12 +31,11 @@ public class VisualizzaCarriera extends ListActivity {
     int intExamsPassed;
     Cursor cursorExamsLost;
     int intExamsLost;
-    Cursor cursorMediaPesata;
-    float floatMediaPesata;
     Cursor cursorStudente;
     Cursor listaEsami;
     String Studente;
     String Matricola;
+    float MediaPesata;
 
     long id ;
     SharedPreferences sharedPreferences;
@@ -74,22 +73,21 @@ public class VisualizzaCarriera extends ListActivity {
         cursorExamsPassed.moveToFirst();
         cursorExamsLost = database.countExamsLost();
         cursorExamsLost.moveToFirst();
-        cursorMediaPesata = database.cursorMediaPesata();
-        cursorMediaPesata.moveToFirst();
+
 
         // li converto
         intCFUpassed = cursorCFUpassed.getInt(0);
         intCFUTotal = cursorCFUTotal.getInt(0);
         intExamsPassed = cursorExamsPassed.getInt(0);
         intExamsLost = cursorExamsLost.getInt(0);
-        floatMediaPesata = cursorMediaPesata.getFloat(0);
+        MediaPesata = database.MediaPesata();
 
         //e aggiungo i testi
 
         textView_CFU.setText("CFU: " + intCFUpassed + "/" + intCFUTotal);
         textView_ExamsPassed.setText("Esami Passati: " + intExamsPassed);
         textView_ExamsLost.setText("Esami Mancanti: " + intExamsLost);
-        textView_MediaPesata.setText("Media Pesata: " + floatMediaPesata);
+        textView_MediaPesata.setText("Media Pesata: " + MediaPesata);
 
         // chiudo il database
         database.close();

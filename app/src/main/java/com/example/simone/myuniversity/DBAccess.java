@@ -275,9 +275,16 @@ public class DBAccess {
     }
 
     //Query per ottenere la MediaPesata sugli esami superati
-    public Cursor cursorMediaPesata(){
-        Cursor cursor = database.rawQuery("SELECT  (sum(Voto * CFU) ) / sum(CFU) as MediaPesata FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17 AND NelPiano = 'SI' " , null);
-        return  cursor;
+    public float MediaPesata(){
+        float media ;
+        Cursor cursordividendo = database.rawQuery("SELECT  (sum(Voto * CFU) ) as MediaPesata FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17 AND NelPiano = 'SI' " , null);
+        cursordividendo.moveToFirst();
+        float dividendo = cursordividendo.getFloat(cursordividendo.getColumnIndex("MediaPesata"));
+        Cursor cursordivisore = database.rawQuery("SELECT  (sum(CFU) ) as MediaPesata FROM PianoDiStudi WHERE Voto < 32 AND Voto > 17 AND NelPiano = 'SI' ", null);
+        cursordivisore.moveToFirst();
+        float divisore = cursordivisore.getFloat(cursordividendo.getColumnIndex("MediaPesata"));
+        media = dividendo / divisore;
+        return  media;
     }
 
 

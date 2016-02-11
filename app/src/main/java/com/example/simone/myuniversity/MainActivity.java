@@ -45,6 +45,45 @@ public class MainActivity extends Activity {
         sharedPreferences = getSharedPreferences("_IdLog", MODE_PRIVATE);
         id = sharedPreferences.getLong("_IdLog", -1);
 
+        TextView recuperoPass = (TextView) findViewById(R.id.recoverPassword);
+        recuperoPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                View dialog_view = (LayoutInflater.from(MainActivity.this)).inflate(R.layout.recover, null);
+                AlertDialog.Builder insert = new AlertDialog.Builder(MainActivity.this);
+                insert.setView(dialog_view);
+
+                final EditText ed_UserRec = (EditText)dialog_view.findViewById(R.id.et_RecoverUser);
+                final EditText ed_MatRec = (EditText)dialog_view.findViewById(R.id.et_RecoverMatr);
+
+                insert.setTitle("Hai dimanticato la Password?");
+                insert.setMessage("Inserisci Username e Matricola per poter recuperare la Password");
+
+                insert.setNegativeButton("Annulla", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                insert.setPositiveButton("Visualizza Password", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        String UserRec = ed_UserRec.getText().toString();
+                        String MatrRec = ed_MatRec.getText().toString();
+                        dbUtente.open();
+                        cursor = dbUtente.get_User(id);
+                        if ((UserRec.equals(cursor.getString(4))) && (MatrRec.equals(cursor.getString(3)))) {
+                            Toast.makeText(getApplicationContext(), "Password: " + cursor.getString(5), Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Username e/o Matricola Errati, Impossibile recuperare la Password!", Toast.LENGTH_LONG).show();
+                        }
+                        dbUtente.close();
+                    }
+                });
+                Dialog dialog = insert.create();
+                dialog.show();
+            }
+        });
 
         //Questa parte di codice viene chiamata quando si preme il pulsante indietro e si conferma
         //di voler chiudere l'app
@@ -54,12 +93,12 @@ public class MainActivity extends Activity {
         }
 
         // impostazione preferences con la FifthRegistrationActivity
-        /*
+
         SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
         String string = mprefs.getString("Registrazione" , "");
         if(string.equals("2")){registration.setVisibility(View.GONE);}
         else{registration.setVisibility(View.VISIBLE);}
-        */
+
     }
 
     @Override

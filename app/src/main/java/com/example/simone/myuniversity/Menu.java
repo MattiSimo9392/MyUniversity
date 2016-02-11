@@ -78,12 +78,13 @@ public class Menu extends AppCompatActivity {
 
     public void onClick_CancelCareer(View view){
         // Riportiamo la preference al valore iniziale in modo che compaia il bottone
-        /*
+        // collegato alla MainActivity e alla FifthRegistrationActivity
+
         SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
         SharedPreferences.Editor editor = mprefs.edit();
         editor.putString("Registrazione" , "3");            // condizione per la ricomparsa del pulsante
         editor.apply();
-        */
+
 
         AlertDialog.Builder insert = new AlertDialog.Builder(Menu.this);
         insert.setTitle("ATTENZIONE!");
