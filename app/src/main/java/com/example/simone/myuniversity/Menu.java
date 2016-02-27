@@ -1,22 +1,37 @@
 package com.example.simone.myuniversity;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ComponentName;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.net.Uri;
+import android.provider.CalendarContract;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.Calendar;
 
 public class Menu extends AppCompatActivity {
 
     TextView user, matricola;
     GestioneDBUtente databaseUtente, dbUtente;
     Cursor cursor;
+
+    DBAccess db;
+    long eventID;
+    Uri uri;
 
     String nome, cognome, mat;
 
@@ -45,6 +60,7 @@ public class Menu extends AppCompatActivity {
 
         user.setText("Utente: " + nome + " " + cognome);
         matricola.setText("Matricola: "+ mat);
+
 
     }
 
@@ -100,6 +116,8 @@ public class Menu extends AppCompatActivity {
                 dbUtente.open();
                 dbUtente.cancellaUtente(id);
                 dbUtente.close();
+                db = DBAccess.getInstance(getBaseContext());
+                eraseCalendar(db);
                 //startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 finish();
             }
@@ -114,6 +132,145 @@ public class Menu extends AppCompatActivity {
         Dialog insertDialog = insert.create();
         insertDialog.show();
     }
+
+
+    public void onClick_SyncCalendar(View view){
+        db = DBAccess.getInstance(getBaseContext());
+        eraseCalendar(db);
+        syncCalendar();
+    }
+    //////////////////////////////////Funzione SyncCalendar/////////////////////////////////////////
+
+    public void syncCalendar() {
+            DBAccess db = DBAccess.getInstance(this);
+            db.open();
+
+            Cursor syncLun, syncMar, syncMer, syncGio, syncVen;
+            syncLun = db.getLun();
+            syncLun.moveToFirst();
+            syncMar = db.getMar();
+            syncMar.moveToFirst();
+            syncMer = db.getMer();
+            syncMer.moveToFirst();
+            syncGio = db.getGio();
+            syncGio.moveToFirst();
+            syncVen = db.getVen();
+            syncVen.moveToFirst();
+            db.close();
+
+            // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecondi
+            // moltiplicando per 60*60*1000 e aggiungo tale valore all'inizio che mi ricavo semplicemente estraendo la prima
+            // parte di data (vedi DateSplitter)
+            String recurrenceLun = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=MO;";
+            syncDay(syncLun , recurrenceLun);
+            String recurrenceMar = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TU;";
+            syncDay(syncMar , recurrenceMar);
+            String recurrenceMer = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=WE;";
+            syncDay(syncMer , recurrenceMer);
+            String recurrenceGio = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TH;";
+            syncDay(syncGio , recurrenceGio);
+            String recurrenceVen = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=FR;";
+            syncDay(syncVen , recurrenceVen);
+
+            Intent i = new Intent();
+            ComponentName cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
+            i.setComponent(cn);
+            startActivity(i);
+
+
+    }
+        ///////////////////////////////////////EraseCalendar////////////////////////////////////////////
+
+    public void eraseCalendar(DBAccess db){
+        db.open();
+        Cursor cursorEventID = db.getEventsID();
+        cursorEventID.moveToNext();
+        while (!cursorEventID.isAfterLast()) {
+            Uri eventsUri = Uri.parse("content://com.android.calendar/events");
+            Uri deleteEventUri = Uri.withAppendedPath(eventsUri, String.valueOf(cursorEventID.getLong(0)));
+            getBaseContext().getContentResolver().delete(deleteEventUri, null, null);
+            cursorEventID.moveToNext();
+        }
+        Toast.makeText(getBaseContext(), "Ho cancellato tutto !!!!", Toast.LENGTH_LONG).show();
+
+    }
+
+    /////////////////////////////////////Classe Data////////////////////////////////////////////////
+    public class Data{
+        int firsthour;
+        int secondhour;
+        int diff;
+
+        public void DateSplitter(String string) {
+            String stringfirsthour = string.substring(0, string.indexOf("-"));
+            String stringsecondhour = string.substring(string.indexOf("-") + 1, string.length());
+            firsthour = Integer.parseInt(stringfirsthour);
+            secondhour = Integer.parseInt(stringsecondhour);
+            diff = secondhour - firsthour;
+
+        }
+
+    }
+
+    /////////////////////////////////SyncDay//////////////////////////////////////////////////
+    public void syncDay (Cursor cursor , String recurrence){
+        Data dataLun = new Data();
+        // controllo se il cursore è vuoto
+        if (cursor == null){
+            Toast.makeText(getBaseContext() , "Cursore vuoto  " , Toast.LENGTH_LONG).show();
+        }else {
+            while (!cursor.isAfterLast()) {
+                dataLun.DateSplitter(cursor.getString(3));
+
+                String controllo = "Insegnamento : " + cursor.getString(2) + "\nAula : " + cursor.getString(1) + "\nOra : " + cursor.getString(3); ;
+                Toast.makeText(getBaseContext() , controllo , Toast.LENGTH_LONG).show();
+                long startEvent = (dataLun.firsthour) * 60 * 60 * 1000;
+                long endEvent = (dataLun.secondhour) * 60 * 60 * 1000;
+                long dur = dataLun.diff * 60 * 60 * 1000;
+
+                Calendar cal = Calendar.getInstance();
+                cal.set(2016 , 2 , 21 , 0 , 0 , 0);
+                startEvent = cal.getTimeInMillis() + startEvent;
+                endEvent = cal.getTimeInMillis() + endEvent;
+                ContentResolver cr = getContentResolver();
+                ContentValues values = new ContentValues();
+
+                values.put(CalendarContract.Events.CALENDAR_ID, 2);
+                values.put(CalendarContract.Events.DTSTART, startEvent);
+                values.put(CalendarContract.Events.DTEND, endEvent);
+                //values.put(CalendarContract.Events.DURATION , dur);
+                values.put(CalendarContract.Events.TITLE, "Lezione di : " + cursor.getString(2) + " in Aula : " + cursor.getString(1));
+                //values.put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles");
+                values.put(CalendarContract.Events.EVENT_TIMEZONE, "Italy/Rome"); // indenta corettamente i giorni della RRULE
+                values.put(CalendarContract.Events.DESCRIPTION, cursor.getString(2) + "\nAula : " + cursor.getString(1));
+                //Aggiungo una RRule per il controllo della cancellazione
+                values.put(CalendarContract.Events.RRULE, recurrence);
+
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+                eventID = Long.parseLong(uri.getLastPathSegment());
+                //Aggiungo il'eventID al database dei calendar events con descrizione
+                db.open();
+                String description = cursor.getString(2) +"-"+ cursor.getString(1);
+                db.WriteEventInDatabase(description , eventID);
+
+                Toast.makeText(getBaseContext(), "Lunedì Sicronizzato", Toast.LENGTH_LONG).show();
+
+                cursor.moveToNext();
+
+            }
+        }
+    }
+
 
 
 

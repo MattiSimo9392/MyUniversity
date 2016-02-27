@@ -95,5 +95,13 @@
         android:onClick="onClick_CancelCareer"
         android:id="@+id/cancelCareer"/>
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/buttonSync"
+        android:onClick="onClick_SyncCalendar"
+        android:src="@drawable/google_calendar_sync"/>
+
 </LinearLayout>
 </ScrollView>

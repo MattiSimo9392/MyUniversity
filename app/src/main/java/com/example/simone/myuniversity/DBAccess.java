@@ -174,7 +174,7 @@ public class DBAccess {
 
     //Query per settare a 'SI' la colonna "Seguito" di un determinato insegnamento
     public void setSeguiti (String insegnamento ){
-        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'SI' WHERE Insegnamento = '" + insegnamento + "'" );
+        database.execSQL("UPDATE PianoDiStudi SET Seguito = 'SI' WHERE Insegnamento = '" + insegnamento + "'");
     }
 
     //Query per settare a 'NO' la colonna "Seguito" di un determinato insegnamento
@@ -361,6 +361,49 @@ public class DBAccess {
     //Query per ottenere l'orario delle esercitazioni del Venerdì di un determinato insegnamento
     public Cursor getOrarioEserVen(String insegnamento){           //da testare
         Cursor cursor = database.rawQuery("SELECT Aula, Ven FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
+        return cursor;
+    }
+
+    public Cursor getLun(){
+        Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Lun FROM OrariLezioni as OL , PianoDiStudi AS PS WHERE OL.Codice = PS.Codice AND OL.Lun IS NOT '' AND PS.Seguito = 'SI' " , null);
+        return cursor;
+    }
+
+    public Cursor getMar(){
+        Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Mar FROM OrariLezioni as OL , PianoDiStudi AS PS WHERE OL.Codice = PS.Codice AND OL.Mar IS NOT '' AND PS.Seguito = 'SI' " , null);
+        return cursor;
+    }
+
+    public Cursor getMer(){
+        Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Mer FROM OrariLezioni as OL , PianoDiStudi AS PS WHERE OL.Codice = PS.Codice AND OL.Mer IS NOT '' AND PS.Seguito = 'SI' " , null);
+        return cursor;
+    }
+
+    public Cursor getGio(){
+        Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Gio FROM OrariLezioni as OL , PianoDiStudi as PS WHERE OL.Codice = PS.Codice AND OL.Gio IS NOT '' AND PS.Seguito = 'SI' " , null);
+        return cursor;
+    }
+
+    public Cursor getVen(){
+        Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Ven FROM OrariLezioni as OL , PianoDiStudi as PS WHERE OL.Codice = PS.Codice AND OL.Ven IS NOT '' AND PS.Seguito = 'SI' " , null);
+        return cursor;
+    }
+
+    public Cursor allTable(){
+        Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Lun , OL.Mar , OL.Mer , OL.Gio , OL.Ven FROM OrariLezioni as OL , PianoDiStudi as PS WHERE OL.Codice = PS.Codice AND PS.Seguito = 'SI' " , null);
+        return cursor;
+    }
+
+    public void WriteEventInDatabase (String descr , long eventID){
+        database.execSQL("INSERT INTO CalendarEvents VALUES (" + eventID + " , '"+ descr +"')");
+    }
+
+    public void EraseAllTableCalendar(){
+        database.execSQL("DELETE FROM CalendarEvents ");
+    }
+
+    public Cursor getEventsID (){
+        Cursor cursor = database.rawQuery("SELECT EventID FROM CalendarEvents" , null);
         return cursor;
     }
 
