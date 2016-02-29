@@ -389,6 +389,11 @@ public class DBAccess {
         return cursor;
     }
 
+    public Cursor getBookedExams(){
+        Cursor cursor = database.rawQuery( "SELECT Codice , Insegnamento , DataSuperamento FROM PianoDiStudi WHERE DataSuperamento is not '' AND Voto = ''", null);
+        return cursor;
+    }
+
     public Cursor allTable(){
         Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Lun , OL.Mar , OL.Mer , OL.Gio , OL.Ven FROM OrariLezioni as OL , PianoDiStudi as PS WHERE OL.Codice = PS.Codice AND PS.Seguito = 'SI' " , null);
         return cursor;
@@ -397,6 +402,8 @@ public class DBAccess {
     public void WriteEventInDatabase (String descr , long eventID){
         database.execSQL("INSERT INTO CalendarEvents VALUES (" + eventID + " , '"+ descr +"')");
     }
+
+
 
     public void EraseAllTableCalendar(){
         database.execSQL("DELETE FROM CalendarEvents ");

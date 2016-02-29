@@ -170,6 +170,7 @@ public class MainActivity extends Activity {
         dbAccess.close();
 
         startActivity(new Intent(getApplicationContext(), FirstRegistrationActivity.class));
+        finish();
     }
 
 }

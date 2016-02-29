@@ -46,8 +46,8 @@ public class Menu extends AppCompatActivity {
         sharedPreferences = getSharedPreferences("_IdLog", MODE_PRIVATE);
         id = sharedPreferences.getLong("_IdLog", -1);
 
-        user = (TextView)findViewById(R.id.tv_utente);
-        matricola = (TextView)findViewById(R.id.tv_matricola);
+        user = (TextView) findViewById(R.id.tv_utente);
+        matricola = (TextView) findViewById(R.id.tv_matricola);
 
         databaseUtente = new GestioneDBUtente(getApplicationContext());
 
@@ -59,46 +59,46 @@ public class Menu extends AppCompatActivity {
         databaseUtente.close();
 
         user.setText("Utente: " + nome + " " + cognome);
-        matricola.setText("Matricola: "+ mat);
+        matricola.setText("Matricola: " + mat);
 
 
     }
 
-    public void onClick_modPS(View view){
+    public void onClick_modPS(View view) {
         startActivity(new Intent(getApplicationContext(), ModificaPianoStudi.class));
     }
 
-    public void onClick_showCareer(View view){
-        startActivity(new Intent(getApplicationContext(), VisualizzaCarriera.class ));
+    public void onClick_showCareer(View view) {
+        startActivity(new Intent(getApplicationContext(), VisualizzaCarriera.class));
     }
 
-    public void onClick_modSegui(View view){
-        startActivity(new Intent(getApplicationContext(), ModificaEsamiCheStaiSeguendo.class ));
+    public void onClick_modSegui(View view) {
+        startActivity(new Intent(getApplicationContext(), ModificaEsamiCheStaiSeguendo.class));
     }
 
-    public void onClick_prenExam(View view){
+    public void onClick_prenExam(View view) {
         startActivity(new Intent(getApplicationContext(), GestionePrenotazioneEsami.class));
     }
 
-    public void onClick_regExam(View view){
+    public void onClick_regExam(View view) {
         startActivity(new Intent(getApplicationContext(), RegistrazioneEsami.class));
     }
 
-    public void onClick_showOrari(View view){
+    public void onClick_showOrari(View view) {
         startActivity(new Intent(getApplicationContext(), VisualizzaOrariLezioni.class));
     }
 
-    public void onClick_showExam(View view){
+    public void onClick_showExam(View view) {
         startActivity(new Intent(getApplicationContext(), VisualizzaEsamiPrenotati.class));
     }
 
-    public void onClick_CancelCareer(View view){
+    public void onClick_CancelCareer(View view) {
         // Riportiamo la preference al valore iniziale in modo che compaia il bottone
         // collegato alla MainActivity e alla FifthRegistrationActivity
 
-        SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
+        SharedPreferences mprefs = getSharedPreferences("Registrazione", MODE_PRIVATE);
         SharedPreferences.Editor editor = mprefs.edit();
-        editor.putString("Registrazione" , "3");            // condizione per la ricomparsa del pulsante
+        editor.putString("Registrazione", "3");            // condizione per la ricomparsa del pulsante
         editor.apply();
 
 
@@ -134,7 +134,7 @@ public class Menu extends AppCompatActivity {
     }
 
 
-    public void onClick_SyncCalendar(View view){
+    public void onClick_SyncCalendar(View view) {
         db = DBAccess.getInstance(getBaseContext());
         eraseCalendar(db);
         syncCalendar();
@@ -142,46 +142,50 @@ public class Menu extends AppCompatActivity {
     //////////////////////////////////Funzione SyncCalendar/////////////////////////////////////////
 
     public void syncCalendar() {
-            DBAccess db = DBAccess.getInstance(this);
-            db.open();
+        DBAccess db = DBAccess.getInstance(this);
+        db.open();
 
-            Cursor syncLun, syncMar, syncMer, syncGio, syncVen;
-            syncLun = db.getLun();
-            syncLun.moveToFirst();
-            syncMar = db.getMar();
-            syncMar.moveToFirst();
-            syncMer = db.getMer();
-            syncMer.moveToFirst();
-            syncGio = db.getGio();
-            syncGio.moveToFirst();
-            syncVen = db.getVen();
-            syncVen.moveToFirst();
-            db.close();
+        Cursor syncLun, syncMar, syncMer, syncGio, syncVen , syncExam;
+        syncLun = db.getLun();
+        syncLun.moveToFirst();
+        syncMar = db.getMar();
+        syncMar.moveToFirst();
+        syncMer = db.getMer();
+        syncMer.moveToFirst();
+        syncGio = db.getGio();
+        syncGio.moveToFirst();
+        syncVen = db.getVen();
+        syncVen.moveToFirst();
+        syncExam = db.getBookedExams();
+        syncExam.moveToFirst();
+        db.close();
 
-            // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecondi
-            // moltiplicando per 60*60*1000 e aggiungo tale valore all'inizio che mi ricavo semplicemente estraendo la prima
-            // parte di data (vedi DateSplitter)
-            String recurrenceLun = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=MO;";
-            syncDay(syncLun , recurrenceLun);
-            String recurrenceMar = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TU;";
-            syncDay(syncMar , recurrenceMar);
-            String recurrenceMer = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=WE;";
-            syncDay(syncMer , recurrenceMer);
-            String recurrenceGio = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TH;";
-            syncDay(syncGio , recurrenceGio);
-            String recurrenceVen = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=FR;";
-            syncDay(syncVen , recurrenceVen);
+        // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecondi
+        // moltiplicando per 60*60*1000 e aggiungo tale valore all'inizio che mi ricavo semplicemente estraendo la prima
+        // parte di data (vedi DateSplitter)
+        String recurrenceLun = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=MO;";
+        syncDay(syncLun, recurrenceLun);
+        String recurrenceMar = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TU;";
+        syncDay(syncMar, recurrenceMar);
+        String recurrenceMer = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=WE;";
+        syncDay(syncMer, recurrenceMer);
+        String recurrenceGio = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TH;";
+        syncDay(syncGio, recurrenceGio);
+        String recurrenceVen = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=FR;";
+        syncDay(syncVen, recurrenceVen);
 
-            Intent i = new Intent();
-            ComponentName cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
-            i.setComponent(cn);
-            startActivity(i);
+        syncExams(syncExam);
+
+        Intent i = new Intent();
+        ComponentName cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
+        i.setComponent(cn);
+        startActivity(i);
 
 
     }
-        ///////////////////////////////////////EraseCalendar////////////////////////////////////////////
+    ///////////////////////////////////////EraseCalendar////////////////////////////////////////////
 
-    public void eraseCalendar(DBAccess db){
+    public void eraseCalendar(DBAccess db) {
         db.open();
         Cursor cursorEventID = db.getEventsID();
         cursorEventID.moveToNext();
@@ -196,10 +200,11 @@ public class Menu extends AppCompatActivity {
     }
 
     /////////////////////////////////////Classe Data////////////////////////////////////////////////
-    public class Data{
+    public class Data {
         int firsthour;
         int secondhour;
         int diff;
+        int year , month , day;
 
         public void DateSplitter(String string) {
             String stringfirsthour = string.substring(0, string.indexOf("-"));
@@ -210,26 +215,36 @@ public class Menu extends AppCompatActivity {
 
         }
 
+        public void DateSplitterV2(String string){
+            String yearstr = string.substring(0 , 4);
+            String monthstr = string.substring(5 , 7);
+            String daystr = string.substring(8 , string.length());
+            year = Integer.parseInt(yearstr);
+            month = Integer.parseInt(monthstr);
+            day = Integer.parseInt(daystr);
+        }
+
     }
 
-    /////////////////////////////////SyncDay//////////////////////////////////////////////////
-    public void syncDay (Cursor cursor , String recurrence){
+    ///////////////////////////////////////SyncDay//////////////////////////////////////////////////
+    public void syncDay(Cursor cursor, String recurrence) {
         Data dataLun = new Data();
         // controllo se il cursore è vuoto
-        if (cursor == null){
-            Toast.makeText(getBaseContext() , "Cursore vuoto  " , Toast.LENGTH_LONG).show();
-        }else {
+        if (cursor == null) {
+            Toast.makeText(getBaseContext(), "Cursore vuoto  ", Toast.LENGTH_LONG).show();
+        } else {
             while (!cursor.isAfterLast()) {
                 dataLun.DateSplitter(cursor.getString(3));
 
-                String controllo = "Insegnamento : " + cursor.getString(2) + "\nAula : " + cursor.getString(1) + "\nOra : " + cursor.getString(3); ;
-                Toast.makeText(getBaseContext() , controllo , Toast.LENGTH_LONG).show();
+                String controllo = "Insegnamento : " + cursor.getString(2) + "\nAula : " + cursor.getString(1) + "\nOra : " + cursor.getString(3);
+
+                Toast.makeText(getBaseContext(), controllo, Toast.LENGTH_LONG).show();
                 long startEvent = (dataLun.firsthour) * 60 * 60 * 1000;
                 long endEvent = (dataLun.secondhour) * 60 * 60 * 1000;
                 long dur = dataLun.diff * 60 * 60 * 1000;
 
                 Calendar cal = Calendar.getInstance();
-                cal.set(2016 , 2 , 21 , 0 , 0 , 0);
+                cal.set(2016, 2, 21, 0, 0, 0);
                 startEvent = cal.getTimeInMillis() + startEvent;
                 endEvent = cal.getTimeInMillis() + endEvent;
                 ContentResolver cr = getContentResolver();
@@ -260,14 +275,62 @@ public class Menu extends AppCompatActivity {
                 eventID = Long.parseLong(uri.getLastPathSegment());
                 //Aggiungo il'eventID al database dei calendar events con descrizione
                 db.open();
-                String description = cursor.getString(2) +"-"+ cursor.getString(1);
-                db.WriteEventInDatabase(description , eventID);
+                String description = cursor.getString(2) + "-" + cursor.getString(1);
+                db.WriteEventInDatabase(description, eventID);
 
                 Toast.makeText(getBaseContext(), "Lunedì Sicronizzato", Toast.LENGTH_LONG).show();
 
                 cursor.moveToNext();
 
             }
+        }
+    }
+
+    ///////////////////////////////////////////SyncExams//////////////////////////////////////
+    public void syncExams(Cursor cursor) {
+        Data exams = new Data();
+        while (!cursor.isAfterLast()) {
+            //exams.DateSplitter(cursor.getString(2));
+            //long startEvent = (exams.firsthour) * 60 * 60 * 1000;
+            //long endEvent = (exams.secondhour) * 60 * 60 * 1000;
+
+            Calendar cal = Calendar.getInstance();
+            exams.DateSplitterV2(cursor.getString(2));
+            cal.set(exams.year, exams.month-1, exams.day, 0, 0, 0); //// facciamo durare l'evento un giorno intero , la notifica
+            long startEvent = cal.getTimeInMillis();
+            long endEvent = cal.getTimeInMillis() + 23*60*60*1000;
+            ContentResolver cr = getContentResolver();
+            ContentValues values = new ContentValues();
+
+            values.put(CalendarContract.Events.CALENDAR_ID, 2);
+            values.put(CalendarContract.Events.DTSTART, startEvent);
+            values.put(CalendarContract.Events.DTEND, endEvent);
+            //values.put(CalendarContract.Events.DURATION , dur);
+            values.put(CalendarContract.Events.TITLE, "Esame WAAAAAAAAAAAAAAA!!!!");
+            //values.put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles");
+            values.put(CalendarContract.Events.EVENT_TIMEZONE, "Italy/Rome"); // indenta corettamente i giorni della RRULE
+            values.put(CalendarContract.Events.DESCRIPTION, "Esame di : " + cursor.getString(1));
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_CALENDAR) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            uri = cr.insert(CalendarContract.Events.CONTENT_URI, values);
+            eventID = Long.parseLong(uri.getLastPathSegment());
+            //Aggiungo il'eventID al database dei calendar events con descrizione
+            db.open();
+            String description = "Esame di : " + cursor.getString(1);
+            db.WriteEventInDatabase(description, eventID);
+
+            Toast.makeText(getBaseContext(), "Esami Prenotati sincronizzati Sicronizzato", Toast.LENGTH_LONG).show();
+
+            cursor.moveToNext();
         }
     }
 
