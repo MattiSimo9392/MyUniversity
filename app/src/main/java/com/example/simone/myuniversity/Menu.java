@@ -172,7 +172,7 @@ public class Menu extends AppCompatActivity {
 
         syncExams(syncExam);
 
-        // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecondi
+        // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecond
         // moltiplicando per 60*60*1000 e aggiungo tale valore all'inizio che mi ricavo semplicemente estraendo la prima
         // parte di data (vedi DateSplitter)
         String recurrenceLun = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=MO;";
