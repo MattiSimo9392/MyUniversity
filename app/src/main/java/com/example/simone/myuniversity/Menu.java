@@ -33,7 +33,7 @@ public class Menu extends AppCompatActivity {
     long eventID;
     Uri uri;
 
-    String nome, cognome, mat, datarecurrence;
+    String nome, cognome, mat;
 
     SharedPreferences sharedPreferences;
     long id;
@@ -166,9 +166,9 @@ public class Menu extends AppCompatActivity {
         String finEsami = inizFinEsami.getString(1);
         Data fine = new Data();
         fine.DateSplitterV2(finEsami);
-        datarecurrence = fine.yearstr + fine.monthstr + fine.daystr;
+        String datarecurrence = fine.yearstr + fine.monthstr + fine.daystr;
 
-        Toast.makeText(getBaseContext() , "Fine Lezioni : " + fine.year + "-" + fine.monthstr + "-" + fine.daystr,Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext() , "Fine Lezioni : " + fine.yearstr + "-" + fine.monthstr + "-" + fine.daystr,Toast.LENGTH_LONG).show();
 
         syncExams(syncExam);
 
