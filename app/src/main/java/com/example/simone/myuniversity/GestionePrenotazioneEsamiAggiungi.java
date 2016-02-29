@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,12 +16,15 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
 
     ListView listview;
     Cursor cursor1, cursor2;
+    Menu.Data dataPA , dataSA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +63,31 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                 cursor2.moveToFirst();
                 dbAccess.close();
 
-                appello1.setText("Appello del " + cursor1.getString(cursor1.getColumnIndex("Data_1")) + " in Aula " + cursor1.getString(cursor1.getColumnIndex("Aula_1")) + " alle " + cursor1.getString(cursor1.getColumnIndex("Ora_1")));
-                appello2.setText("Appello del " + cursor2.getString(cursor2.getColumnIndex("Data_2")) + " in Aula " + cursor2.getString(cursor2.getColumnIndex("Aula_2")) + " alle " + cursor2.getString(cursor2.getColumnIndex("Ora_2")));
+                ///////////////////////////////Tentativo di aggiunta un controllo data sugli appelli ////////////////////
+                dataPA = new Menu().new Data();
+                dataPA.DateSplitterV2(cursor1.getString(cursor1.getColumnIndex("Data_1")));
+                Calendar data1 = Calendar.getInstance();
+                data1.set(dataPA.year, dataPA.month - 1, dataPA.day);
+                dataSA = new Menu().new Data();
+                dataSA.DateSplitterV2(cursor2.getString(cursor2.getColumnIndex("Data_2")));
+                Calendar data2 = Calendar.getInstance();
+                data2.set(dataSA.year, dataSA.month - 1, dataSA.day);
+
+                final Calendar currentDate = Calendar.getInstance();
+                currentDate.setTime(new Date());
+
+                if (data1.after(currentDate)) {                 // primo appello è > datacorrente
+                    appello1.setText("Appello del " + cursor1.getString(cursor1.getColumnIndex("Data_1")) + " in Aula " + cursor1.getString(cursor1.getColumnIndex("Aula_1")) + " alle " + cursor1.getString(cursor1.getColumnIndex("Ora_1")));
+                    appello2.setText("Appello del " + cursor2.getString(cursor2.getColumnIndex("Data_2")) + " in Aula " + cursor2.getString(cursor2.getColumnIndex("Aula_2")) + " alle " + cursor2.getString(cursor2.getColumnIndex("Ora_2")));
+                }else if (!data1.after(currentDate) && data2.after(currentDate) ){   // primo appello < datacorrente mentre secondo appello > corrente
+                    appello1.setVisibility(View.INVISIBLE);
+                    appello2.setText("Appello del " + cursor2.getString(cursor2.getColumnIndex("Data_2")) + " in Aula " + cursor2.getString(cursor2.getColumnIndex("Aula_2")) + " alle " + cursor2.getString(cursor2.getColumnIndex("Ora_2")));
+                }else if(!data2.after(currentDate)){            // secondo appello < datacorrente
+                    appello1.setVisibility(View.INVISIBLE);
+                    appello2.setVisibility(View.INVISIBLE);
+                }
+
+                ///// Fine tentativo (Ancora da testare)
 
                 appello1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -95,12 +122,12 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
                             //inserire la query per aggiungere la data al db
-                            dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor1.getString(cursor1.getColumnIndex("Data_1")) );
+                            dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor1.getString(cursor1.getColumnIndex("Data_1")));
                         } else if (appello2.isChecked()) {
 
                             Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello2.getText().toString(), Toast.LENGTH_SHORT).show();
                             //inserire la query per aggiungere la data al db
-                            dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor2.getString(cursor2.getColumnIndex("Data_2")) );
+                            dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor2.getString(cursor2.getColumnIndex("Data_2")));
                         } else {
 
                             Toast.makeText(getApplicationContext(), "Non hai selezionato nessun appello! Esame non prenotato", Toast.LENGTH_SHORT).show();

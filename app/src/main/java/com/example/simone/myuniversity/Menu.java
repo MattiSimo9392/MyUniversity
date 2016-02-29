@@ -200,11 +200,12 @@ public class Menu extends AppCompatActivity {
     }
 
     /////////////////////////////////////Classe Data////////////////////////////////////////////////
-    public class Data {
+    public  class Data {
         int firsthour;
         int secondhour;
         int diff;
         int year , month , day;
+
 
         public void DateSplitter(String string) {
             String stringfirsthour = string.substring(0, string.indexOf("-"));
