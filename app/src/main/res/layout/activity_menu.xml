@@ -101,7 +101,7 @@
         android:layout_gravity="center"
         android:id="@+id/buttonSync"
         android:onClick="onClick_SyncCalendar"
-        android:src="@drawable/google_calendar_sync"/>
+        android:src="@drawable/google_sync_v2"/>
 
 </LinearLayout>
 </ScrollView>
