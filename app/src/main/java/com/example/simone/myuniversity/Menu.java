@@ -27,13 +27,13 @@ public class Menu extends AppCompatActivity {
 
     TextView user, matricola;
     GestioneDBUtente databaseUtente, dbUtente;
-    Cursor cursor;
+    Cursor cursor , inizFinEsami;
 
     DBAccess db;
     long eventID;
     Uri uri;
 
-    String nome, cognome, mat;
+    String nome, cognome, mat, datarecurrence;
 
     SharedPreferences sharedPreferences;
     long id;
@@ -158,23 +158,34 @@ public class Menu extends AppCompatActivity {
         syncVen.moveToFirst();
         syncExam = db.getBookedExams();
         syncExam.moveToFirst();
+
+        // mi ricavo la data di fine per inerirla nella recurrence
+        inizFinEsami = db.getInizFinEsami();
+        inizFinEsami.moveToFirst();
         db.close();
+        String finEsami = inizFinEsami.getString(1);
+        Data fine = new Data();
+        fine.DateSplitterV2(finEsami);
+        datarecurrence = fine.yearstr + fine.monthstr + fine.daystr;
+
+        Toast.makeText(getBaseContext() , "Fine Lezioni : " + fine.year + "-" + fine.monthstr + "-" + fine.daystr,Toast.LENGTH_LONG).show();
+
+        syncExams(syncExam);
 
         // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecondi
         // moltiplicando per 60*60*1000 e aggiungo tale valore all'inizio che mi ricavo semplicemente estraendo la prima
         // parte di data (vedi DateSplitter)
-        String recurrenceLun = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=MO;";
-        syncDay(syncLun, recurrenceLun);
-        String recurrenceMar = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TU;";
-        syncDay(syncMar, recurrenceMar);
-        String recurrenceMer = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=WE;";
-        syncDay(syncMer, recurrenceMer);
-        String recurrenceGio = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=TH;";
-        syncDay(syncGio, recurrenceGio);
-        String recurrenceVen = "FREQ=WEEKLY;UNTIL=20161007T000000Z;BYDAY=FR;";
-        syncDay(syncVen, recurrenceVen);
+        String recurrenceLun = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=MO;";
+        syncDay(syncLun, recurrenceLun , db);
+        String recurrenceMar = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=TU;";
+        syncDay(syncMar, recurrenceMar , db);
+        String recurrenceMer = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=WE;";
+        syncDay(syncMer, recurrenceMer , db);
+        String recurrenceGio = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=TH;";
+        syncDay(syncGio, recurrenceGio , db);
+        String recurrenceVen = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=FR;";
+        syncDay(syncVen, recurrenceVen , db);
 
-        syncExams(syncExam);
 
         Intent i = new Intent();
         ComponentName cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
@@ -195,7 +206,7 @@ public class Menu extends AppCompatActivity {
             getBaseContext().getContentResolver().delete(deleteEventUri, null, null);
             cursorEventID.moveToNext();
         }
-        Toast.makeText(getBaseContext(), "Ho cancellato tutto !!!!", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext(), "Ho cancellato tutto !!!!", Toast.LENGTH_LONG).show();
 
     }
 
@@ -205,6 +216,9 @@ public class Menu extends AppCompatActivity {
         int secondhour;
         int diff;
         int year , month , day;
+        String yearstr;
+        String monthstr;
+        String daystr;
 
 
         public void DateSplitter(String string) {
@@ -217,9 +231,9 @@ public class Menu extends AppCompatActivity {
         }
 
         public void DateSplitterV2(String string){
-            String yearstr = string.substring(0 , 4);
-            String monthstr = string.substring(5 , 7);
-            String daystr = string.substring(8 , string.length());
+            yearstr = string.substring(0 , 4);
+            monthstr = string.substring(5 , 7);
+            daystr = string.substring(8 , string.length());
             year = Integer.parseInt(yearstr);
             month = Integer.parseInt(monthstr);
             day = Integer.parseInt(daystr);
@@ -228,8 +242,9 @@ public class Menu extends AppCompatActivity {
     }
 
     ///////////////////////////////////////SyncDay//////////////////////////////////////////////////
-    public void syncDay(Cursor cursor, String recurrence) {
+    public void syncDay(Cursor cursor, String recurrence , DBAccess db ) {
         Data dataLun = new Data();
+
         // controllo se il cursore è vuoto
         if (cursor == null) {
             Toast.makeText(getBaseContext(), "Cursore vuoto  ", Toast.LENGTH_LONG).show();
@@ -239,13 +254,25 @@ public class Menu extends AppCompatActivity {
 
                 String controllo = "Insegnamento : " + cursor.getString(2) + "\nAula : " + cursor.getString(1) + "\nOra : " + cursor.getString(3);
 
-                Toast.makeText(getBaseContext(), controllo, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), controllo, Toast.LENGTH_LONG).show();
                 long startEvent = (dataLun.firsthour) * 60 * 60 * 1000;
                 long endEvent = (dataLun.secondhour) * 60 * 60 * 1000;
                 long dur = dataLun.diff * 60 * 60 * 1000;
 
                 Calendar cal = Calendar.getInstance();
-                cal.set(2016, 2, 21, 0, 0, 0);
+                db.open();
+                // mi ricavo con un Cursor l'inizio e la fine degli esami e poi li imposto come inizio e come fine alla regola di recurrence
+
+                String inizioEsami = inizFinEsami.getString(0);
+
+                db.close();
+
+                Data inizio = new Data();
+                inizio.DateSplitterV2(inizioEsami);
+                cal.set(inizio.year, inizio.month - 1, inizio.day - 1 , 0 , 0 , 0);
+                // Visto che la recurrence string ricorre all'utilizzo del mese come 09 e non con 9 per esempio
+                // Mi faccio passare da Data il mase sottoforma di stringa
+
                 startEvent = cal.getTimeInMillis() + startEvent;
                 endEvent = cal.getTimeInMillis() + endEvent;
                 ContentResolver cr = getContentResolver();
@@ -278,8 +305,9 @@ public class Menu extends AppCompatActivity {
                 db.open();
                 String description = cursor.getString(2) + "-" + cursor.getString(1);
                 db.WriteEventInDatabase(description, eventID);
+                db.close();
 
-                Toast.makeText(getBaseContext(), "Lunedì Sicronizzato", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), "Lunedì Sicronizzato", Toast.LENGTH_LONG).show();
 
                 cursor.moveToNext();
 
@@ -297,9 +325,9 @@ public class Menu extends AppCompatActivity {
 
             Calendar cal = Calendar.getInstance();
             exams.DateSplitterV2(cursor.getString(2));
-            cal.set(exams.year, exams.month-1, exams.day, 0, 0, 0); //// facciamo durare l'evento un giorno intero , la notifica
+            cal.set(exams.year, exams.month-1, exams.day); //// facciamo durare l'evento un giorno intero , la notifica
             long startEvent = cal.getTimeInMillis();
-            long endEvent = cal.getTimeInMillis() + 23*60*60*1000;
+            long endEvent = cal.getTimeInMillis() + 24*60*60*1000;
             ContentResolver cr = getContentResolver();
             ContentValues values = new ContentValues();
 
@@ -328,8 +356,9 @@ public class Menu extends AppCompatActivity {
             db.open();
             String description = "Esame di : " + cursor.getString(1);
             db.WriteEventInDatabase(description, eventID);
+            db.close();
 
-            Toast.makeText(getBaseContext(), "Esami Prenotati sincronizzati Sicronizzato", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), "Esami Prenotati sincronizzati Sicronizzato", Toast.LENGTH_LONG).show();
 
             cursor.moveToNext();
         }

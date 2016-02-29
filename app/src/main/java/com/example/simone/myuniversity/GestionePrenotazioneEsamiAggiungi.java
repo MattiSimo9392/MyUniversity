@@ -87,7 +87,7 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                     appello2.setVisibility(View.INVISIBLE);
                 }
 
-                ///// Fine tentativo (Ancora da testare)
+                ///// Fine tentativo (Testato e funzionante , ma da ritestare qualche volta in più che non guasta )
 
                 appello1.setOnClickListener(new View.OnClickListener() {
                     @Override

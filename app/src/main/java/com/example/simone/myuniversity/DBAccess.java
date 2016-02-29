@@ -414,4 +414,9 @@ public class DBAccess {
         return cursor;
     }
 
+    public Cursor getInizFinEsami (){
+        Cursor cursor = database.rawQuery("SELECT InizioLezioni , FineLezioni FROM OrariLezioni" , null);
+        return cursor;
+    }
+
 }
