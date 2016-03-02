@@ -168,22 +168,22 @@ public class Menu extends AppCompatActivity {
         fine.DateSplitterV2(finEsami);
         String datarecurrence = fine.yearstr + fine.monthstr + fine.daystr;
 
-        Toast.makeText(getBaseContext() , "Fine Lezioni : " + fine.yearstr + "-" + fine.monthstr + "-" + fine.daystr,Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext() , "Fine Lezioni : " + fine.yearstr + fine.monthstr  + fine.daystr,Toast.LENGTH_LONG).show();
 
         syncExams(syncExam);
 
-        // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecond
+        // Mi calcolo attraverso un dateSplitter la durata delle lezioni e la trasformo il millisecondi
         // moltiplicando per 60*60*1000 e aggiungo tale valore all'inizio che mi ricavo semplicemente estraendo la prima
         // parte di data (vedi DateSplitter)
-        String recurrenceLun = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=MO;";
+        String recurrenceLun = "FREQ=WEEKLY;UNTIL="+datarecurrence+";BYDAY=MO;";
         syncDay(syncLun, recurrenceLun , db);
-        String recurrenceMar = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=TU;";
+        String recurrenceMar = "FREQ=WEEKLY;UNTIL="+datarecurrence+";BYDAY=TU;";
         syncDay(syncMar, recurrenceMar , db);
-        String recurrenceMer = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=WE;";
+        String recurrenceMer = "FREQ=WEEKLY;UNTIL="+datarecurrence+";BYDAY=WE;";
         syncDay(syncMer, recurrenceMer , db);
-        String recurrenceGio = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=TH;";
+        String recurrenceGio = "FREQ=WEEKLY;UNTIL="+datarecurrence+";BYDAY=TH;";
         syncDay(syncGio, recurrenceGio , db);
-        String recurrenceVen = "FREQ=WEEKLY;UNTIL="+datarecurrence+"T000000Z;BYDAY=FR;";
+        String recurrenceVen = "FREQ=WEEKLY;UNTIL="+datarecurrence+";BYDAY=FR;";
         syncDay(syncVen, recurrenceVen , db);
 
 
@@ -219,6 +219,7 @@ public class Menu extends AppCompatActivity {
         String yearstr;
         String monthstr;
         String daystr;
+        int hourofexam;
 
 
         public void DateSplitter(String string) {
@@ -237,6 +238,11 @@ public class Menu extends AppCompatActivity {
             year = Integer.parseInt(yearstr);
             month = Integer.parseInt(monthstr);
             day = Integer.parseInt(daystr);
+            hourofexam = 0;
+        }
+        public void DateSplitterV3(String string){
+            String hourofexamstr = string.substring(0 , 2);
+            hourofexam = Integer.parseInt(hourofexamstr);
         }
 
     }
@@ -270,8 +276,6 @@ public class Menu extends AppCompatActivity {
                 Data inizio = new Data();
                 inizio.DateSplitterV2(inizioEsami);
                 cal.set(inizio.year, inizio.month - 1, inizio.day - 1 , 0 , 0 , 0);
-                // Visto che la recurrence string ricorre all'utilizzo del mese come 09 e non con 9 per esempio
-                // Mi faccio passare da Data il mase sottoforma di stringa
 
                 startEvent = cal.getTimeInMillis() + startEvent;
                 endEvent = cal.getTimeInMillis() + endEvent;
@@ -325,9 +329,30 @@ public class Menu extends AppCompatActivity {
 
             Calendar cal = Calendar.getInstance();
             exams.DateSplitterV2(cursor.getString(2));
-            cal.set(exams.year, exams.month-1, exams.day); //// facciamo durare l'evento un giorno intero , la notifica
+            /////////////////////////////////////////////////////////////////////////////////////
+
+            db.open();
+            Cursor controlloDate = db.getExamsDate();
+            controlloDate.moveToFirst();
+            while (!controlloDate.isAfterLast()){
+                if (cursor.getInt(0)==(controlloDate.getInt(0))){
+                    if(cursor.getString(2).equals(controlloDate.getString(3))){
+                        exams.DateSplitterV3(controlloDate.getString(controlloDate.getColumnIndex("Ora_1")));
+                        controlloDate.moveToNext();
+                    }else if(cursor.getString(2).equals(controlloDate.getString(5))){
+                        exams.DateSplitterV3(controlloDate.getString(controlloDate.getColumnIndex("Ora_2")));
+                        controlloDate.moveToNext();
+                    }
+                }else{
+                    controlloDate.moveToNext();
+                }
+            }
+            db.close();
+
+            ///////////////////////////////////////////////////////////////////////////////////
+            cal.set(exams.year, exams.month-1, exams.day , exams.hourofexam , 0 , 0);
             long startEvent = cal.getTimeInMillis();
-            long endEvent = cal.getTimeInMillis() + 24*60*60*1000;
+            long endEvent = cal.getTimeInMillis() + 3*60*60*1000; // lo facciam durare 3 ore l'evento vista una media della durata degli esami
             ContentResolver cr = getContentResolver();
             ContentValues values = new ContentValues();
 

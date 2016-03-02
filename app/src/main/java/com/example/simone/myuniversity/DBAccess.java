@@ -419,4 +419,11 @@ public class DBAccess {
         return cursor;
     }
 
+    public Cursor getExamsDate(){
+        Cursor cursor = database.rawQuery("SELECT AE.Codice , AE.Insegnamento , DataSuperamento , Data_1 , Ora_1 , Data_2 , Ora_2  FROM PianoDiStudi as PDS inner join AppelliEsami as AE ON AE.Codice = PDS.Codice AND DataSuperamento is not '' AND Voto = ''" , null);
+        return cursor;
+        // Colonne :
+        // Codice | Insegnamento | DataSuperamento | Data_1 | Ora_1 | Data_2 | Ora_2
+    }
+
 }
