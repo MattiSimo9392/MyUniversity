@@ -206,6 +206,7 @@ public class Menu extends AppCompatActivity {
             getBaseContext().getContentResolver().delete(deleteEventUri, null, null);
             cursorEventID.moveToNext();
         }
+        db.close();
         //Toast.makeText(getBaseContext(), "Ho cancellato tutto !!!!", Toast.LENGTH_LONG).show();
 
     }
