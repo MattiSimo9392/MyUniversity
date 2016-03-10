@@ -27,6 +27,7 @@ public class VisualizzaEsamiPrenotati extends AppCompatActivity {
     ListView listview;
     Cursor cursor1, cursor2, cursorPren;
     String datapren, data1, data2;
+    TextView listaVuota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,12 @@ public class VisualizzaEsamiPrenotati extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, esamiPrenotati);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        listview.setEmptyView(findViewById(R.id.tv_showExam_4));
+
+        listaVuota = (TextView)findViewById(R.id.tv_showExam_4);
+
+        listaVuota.setText("Nessun Esame Prenotato");
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

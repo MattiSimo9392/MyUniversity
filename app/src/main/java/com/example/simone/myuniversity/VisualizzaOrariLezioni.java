@@ -20,6 +20,7 @@ public class VisualizzaOrariLezioni extends AppCompatActivity {
 
     ListView listview;
     Cursor lunLez, lunEx, marLez, marEx, merLez, merEx, gioLez, gioEx, venLez, venEx;
+    TextView listaVuota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +37,12 @@ public class VisualizzaOrariLezioni extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, esamiSeguiti);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        listview.setEmptyView(findViewById(R.id.tv_showOrari_4));
+
+        listaVuota = (TextView)findViewById(R.id.tv_showOrari_4);
+
+        listaVuota.setText("Nessun Insegnamento Seguito");
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

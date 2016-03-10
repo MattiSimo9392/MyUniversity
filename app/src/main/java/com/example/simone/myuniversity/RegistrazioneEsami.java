@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +33,7 @@ public class RegistrazioneEsami extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormat;
     Boolean datacorretta;
+    TextView listaVuota;
 
 
     @Override
@@ -48,6 +50,12 @@ public class RegistrazioneEsami extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nonSuperati);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        listview.setEmptyView(findViewById(R.id.tv_regExam_4));
+
+        listaVuota = (TextView)findViewById(R.id.tv_regExam_4);
+
+        listaVuota.setText("Nessun Esame Registabile");
 
         dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALY);
 

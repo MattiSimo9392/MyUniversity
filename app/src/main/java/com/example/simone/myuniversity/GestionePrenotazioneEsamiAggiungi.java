@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
@@ -25,6 +26,7 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
     ListView listview;
     Cursor cursor1, cursor2;
     Menu.Data dataPA , dataSA;
+    TextView listaVuota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,12 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, esamiPrenotabili);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        listview.setEmptyView(findViewById(R.id.tv_prenExam_4));
+
+        listaVuota = (TextView)findViewById(R.id.tv_prenExam_4);
+
+        listaVuota.setText("Nessun Esame Prenotabile");
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
