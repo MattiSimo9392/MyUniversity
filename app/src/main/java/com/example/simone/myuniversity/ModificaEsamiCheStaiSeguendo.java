@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
 public class ModificaEsamiCheStaiSeguendo extends AppCompatActivity {
 
     ListView listview;
+    TextView listaVuota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,12 @@ public class ModificaEsamiCheStaiSeguendo extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, Seguiti);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        listview.setEmptyView(findViewById(R.id.tv_modSeg_4));
+
+        listaVuota = (TextView)findViewById(R.id.tv_modSeg_4);
+
+        listaVuota.setText("Nessun Insegnamento Seguito");
     }
 
     public void onClick_aggExamSeg(View view){

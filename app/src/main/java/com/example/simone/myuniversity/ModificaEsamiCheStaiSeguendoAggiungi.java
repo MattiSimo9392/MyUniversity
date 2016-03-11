@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -17,6 +18,7 @@ import java.util.List;
 public class ModificaEsamiCheStaiSeguendoAggiungi extends AppCompatActivity {
 
     ListView listview;
+    TextView listaVuota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,12 @@ public class ModificaEsamiCheStaiSeguendoAggiungi extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, nonSeguiti);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+
+        listview.setEmptyView(findViewById(R.id.tv_modSeg_agg_4));
+
+        listaVuota = (TextView)findViewById(R.id.tv_modSeg_agg_4);
+
+        listaVuota.setText("Nessun Insegnamento Seguibile");
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
