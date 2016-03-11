@@ -9,12 +9,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.List;
 
 public class ModificaPianoStudi extends AppCompatActivity {
 
     ListView listview;
+    TextView listaVuota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,12 @@ public class ModificaPianoStudi extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, nelPiano);
         listview.setAdapter(adapter);
         listview.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        listview.setEmptyView(findViewById(R.id.tv_modPS_4));
+
+        listaVuota = (TextView)findViewById(R.id.tv_modPS_4);
+
+        listaVuota.setText("Piano di Studi Vuoto");
     }
 
     public void onClick_aggExam(View view){
