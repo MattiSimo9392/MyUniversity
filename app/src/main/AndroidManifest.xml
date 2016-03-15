@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.simone.myuniversity" >
 
-    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
     <uses-permission android:name="android.permission.READ_CALENDAR" />
 
     <application
@@ -80,6 +80,8 @@
         <activity
             android:name=".VisualizzaOrariLezioni"
             android:screenOrientation="portrait" />
+        <activity android:name=".NotificationActivity" >
+        </activity>
     </application>
 
 </manifest>
