@@ -17,6 +17,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,12 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
     Cursor cursor1, cursor2;
     Menu.Data dataPA , dataSA;
     TextView listaVuota;
+
+    //
+    String evento;
+    SimpleDateFormat dateFormat;
+    Date data_evento;
+    //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,10 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
         databaseAccess.open();
         List<String> esamiPrenotabili = databaseAccess.getPrenotabili();
         databaseAccess.close();
+
+        //
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd:kk:mm:ss");
+        //
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, esamiPrenotabili);
         listview.setAdapter(adapter);
@@ -131,6 +143,21 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
                             //inserire la query per aggiungere la data al db
                             dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor1.getString(cursor1.getColumnIndex("Data_1")));
+
+                            //inizio codice per le notifiche
+                            evento = cursor1.getString(cursor1.getColumnIndex("Data_1")) + ":" + cursor1.getString(cursor1.getColumnIndex("Ora_1")) + ":00";
+                            //Toast.makeText(getApplicationContext(), evento, Toast.LENGTH_LONG).show();
+                            try {
+                                data_evento = dateFormat.parse(evento);
+                                System.out.println(data_evento);
+                            }
+                            catch (ParseException e){
+                                e.printStackTrace();
+                            }
+                            GestioneNotifiche gestioneNotifiche = new GestioneNotifiche();
+                            gestioneNotifiche.scheduleNotification(gestioneNotifiche.getNotification(appello1.getText().toString(), insegnamentoSelezionato, getApplicationContext()), gestioneNotifiche.getDelay(data_evento),getApplicationContext());
+                            //fine codice per le notifiche
+
                         } else if (appello2.isChecked()) {
 
                             Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello2.getText().toString(), Toast.LENGTH_SHORT).show();

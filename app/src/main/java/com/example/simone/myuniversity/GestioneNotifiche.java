@@ -18,7 +18,7 @@ public class GestioneNotifiche {
     Calendar dataDaNotificare;
     Calendar dataAttuale;
 
-    private Notification getNotification (String content, String title, Context context) {
+    public Notification getNotification (String content, String title, Context context) {
         Notification.Builder builder  = new Notification.Builder(context);
         builder.setContentTitle(title);
         builder.setContentText(content);
@@ -26,22 +26,22 @@ public class GestioneNotifiche {
         builder.setVibrate(new long[] { 100, 250, 100, 500});
         return builder.build();
         }
-    private void scheduleNotification (Notification notification, long delay, Context context) {
+    public void scheduleNotification (Notification notification, long delay, Context context) {
         Intent notificationIntent = new Intent(context, NotificationActivity.class);
         notificationIntent.putExtra(NotificationActivity.NOTIFICATION_ID, 1);
         notificationIntent.putExtra(NotificationActivity.NOTIFICATION, notification);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         long futureInMillis = SystemClock.elapsedRealtime() + delay;
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.ELAPSED_REALTIME, futureInMillis, pendingIntent);
     }
 
-    private long getDelay (Date date){
+    public long getDelay (Date date){
         dataDaNotificare = Calendar.getInstance();
         dataDaNotificare.setTime(date);
         dataAttuale = Calendar.getInstance();
-        long delay = dataDaNotificare.getTimeInMillis() - dataAttuale.getTimeInMillis();
+        long delay = dataDaNotificare.getTimeInMillis() - dataAttuale.getTimeInMillis() - 3600000;
         return delay;
     }
 }
