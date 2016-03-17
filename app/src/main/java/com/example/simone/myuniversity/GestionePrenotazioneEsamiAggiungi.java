@@ -140,7 +140,7 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
 
                         if (appello1.isChecked()) {
 
-                            Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
                             //inserire la query per aggiungere la data al db
                             dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor1.getString(cursor1.getColumnIndex("Data_1")));
 

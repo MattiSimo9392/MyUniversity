@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.SystemClock;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -15,8 +16,9 @@ import java.util.Date;
  */
 public class GestioneNotifiche {
 
-    Calendar dataDaNotificare;
-    Calendar dataAttuale;
+    private Calendar dataDaNotificare;
+    private Calendar dataAttuale;
+
 
     public Notification getNotification (String content, String title, Context context) {
         Notification.Builder builder  = new Notification.Builder(context);
@@ -41,7 +43,7 @@ public class GestioneNotifiche {
         dataDaNotificare = Calendar.getInstance();
         dataDaNotificare.setTime(date);
         dataAttuale = Calendar.getInstance();
-        long delay = dataDaNotificare.getTimeInMillis() - dataAttuale.getTimeInMillis() - 3600000;
+        long delay = dataDaNotificare.getTimeInMillis() - dataAttuale.getTimeInMillis() - 7200000;
         return delay;
     }
 }
