@@ -212,7 +212,7 @@ public class Menu extends AppCompatActivity {
     }
 
     /////////////////////////////////////Classe Data////////////////////////////////////////////////
-    public  class Data {
+    public class Data {
         int firsthour;
         int secondhour;
         int diff;
@@ -221,6 +221,7 @@ public class Menu extends AppCompatActivity {
         String monthstr;
         String daystr;
         int hourofexam;
+        int minuteofexam;
 
 
         public void DateSplitter(String string) {
@@ -240,10 +241,13 @@ public class Menu extends AppCompatActivity {
             month = Integer.parseInt(monthstr);
             day = Integer.parseInt(daystr);
             hourofexam = 0;
+            minuteofexam = 0;
         }
         public void DateSplitterV3(String string){
             String hourofexamstr = string.substring(0 , 2);
             hourofexam = Integer.parseInt(hourofexamstr);
+            String minuteofexamstr = string.substring(3 , string.length());
+            minuteofexam = Integer.parseInt(minuteofexamstr);
         }
 
     }
