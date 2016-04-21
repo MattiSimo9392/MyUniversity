@@ -16,6 +16,7 @@ import android.provider.CalendarContract;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -42,6 +43,10 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
+        //// Avvio del servizio di notifica ////
+        startService(new Intent(this, MyService.class));
+        Log.d("Notification Service" , "Richiesta di avvio del service");
+        ///////////////////////////////////////
 
         sharedPreferences = getSharedPreferences("_IdLog", MODE_PRIVATE);
         id = sharedPreferences.getLong("_IdLog", -1);
