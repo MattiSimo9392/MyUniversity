@@ -48,8 +48,7 @@ public class MyService extends Service {
         Calendar now = Calendar.getInstance();
         now.clear(Calendar.SECOND);
         now.clear(Calendar.MILLISECOND);
-        Calendar decided = Calendar.getInstance();
-        System.out.println(now.getTime());
+
         // per settare la data decided mi metto nei get prenotati e setto
         DBAccess db = DBAccess.getInstance(getApplicationContext());
         db.open();
@@ -71,22 +70,25 @@ public class MyService extends Service {
                 datanotifica.DateSplitterV3(esamipernotifica.getString(6));
                 atleast1examtonotify = true;
             }else{atleast1examtonotify = false;}
-            // non mi pongo il problema delle 24 ore in quanto non è possibile che un esame sia prenotato alle 23:00
+            // non mi pongo il problema delle 24 ore in quanto non è possibile che un esame sia prenotato alle 00:00
             // se almeno c'è un esame da notificare si manda la notifica
             // controllo messo nel caso in cui non si setti la classe con tutti i parametri a zero settando un notifica per
             // il 0/0/0 alle 00:00
             if(atleast1examtonotify){
-                decided.set(datanotifica.year, datanotifica.month, datanotifica.day, datanotifica.hourofexam + 2, datanotifica.minuteofexam, 0);
+                Calendar decided = Calendar.getInstance();
+                decided.set(datanotifica.year, datanotifica.month - 1, datanotifica.day, datanotifica.hourofexam - 2, datanotifica.minuteofexam, 0);
                 decided.clear(Calendar.SECOND);
                 decided.clear(Calendar.MILLISECOND);
-                System.out.println(decided.getTime());
+                System.out.println("DataNotifica: " + decided.getTime());
+                System.out.println("DataCorrente: " + now.getTime());
+
 
                 if (now.equals(decided)) {
                     Log.d("Controllo", "Mandata la notifica");
                     Notification notifica = new Notification.Builder(this)
                             .setAutoCancel(false)
-                            .setContentTitle("Notifica")
-                            .setContentText("BroadServiceV2")
+                            .setContentTitle("Esame Oggi!!!")
+                            .setContentText("Oggi hai l'esame di: " + esamipernotifica.getString(1) + "  alle : "+ datanotifica.hourofexam + ":" + datanotifica.minuteofexam )
                             .setVibrate(new long[]{1000, 1000})
                             .setSmallIcon(R.drawable.ic_launcher)
                             .build();
