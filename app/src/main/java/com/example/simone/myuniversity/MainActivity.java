@@ -72,9 +72,9 @@ public class MainActivity extends Activity {
                         dbUtente.open();
                         cursor = dbUtente.get_User(id);
                         if ((UserRec.equals(cursor.getString(4))) && (MatrRec.equals(cursor.getString(3)))) {
-                            Toast.makeText(getApplicationContext(), "Password: " + cursor.getString(5), Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Password: " + cursor.getString(5), Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(getApplicationContext(), "Username e/o Matricola Errati, Impossibile recuperare la Password!", Toast.LENGTH_LONG).show();
+                            //Toast.makeText(getApplicationContext(), "Username e/o Matricola Errati, Impossibile recuperare la Password!", Toast.LENGTH_LONG).show();
                         }
                         dbUtente.close();
                     }
@@ -146,11 +146,11 @@ public class MainActivity extends Activity {
             if ((un.equals(cursor.getString(4))) && (pw.equals(cursor.getString(5)))) {
                 startActivity(new Intent(getApplicationContext(), Menu.class));
             } else {
-                Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!", Toast.LENGTH_SHORT).show();
             }
         }
         else {
-            Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Username e/o Password inseriti non Corretti! Riprova!", Toast.LENGTH_SHORT).show();
         }
         dbUtente.close();
 

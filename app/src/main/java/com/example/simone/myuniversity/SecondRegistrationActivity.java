@@ -48,7 +48,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(listView.isItemChecked(position)){
                     String listString = listView.getItemAtPosition(position).toString();
-                    Toast.makeText(getBaseContext(), "Hai selezionato : " + listString , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Hai selezionato : " + listString , Toast.LENGTH_SHORT).show();
                     // QUI ANDREBBE INSERITA LA QUERY PER L'UPDATE CON 'SEGUITO' A 'SI'
                     // tentativo di query SQL Matti
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
@@ -59,7 +59,7 @@ public class SecondRegistrationActivity extends AppCompatActivity {
                 }
                 else{
                     String listDeselected = listView.getItemAtPosition(position).toString();
-                    Toast.makeText(getBaseContext(), "Hai deselezionato : " + listDeselected , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Hai deselezionato : " + listDeselected , Toast.LENGTH_SHORT).show();
                     // QUI UNA QUERY CHE RIPONE SEGUITO A NO NEL CASO DI DESELEZIONE
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();

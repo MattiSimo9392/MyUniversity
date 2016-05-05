@@ -40,7 +40,7 @@ public class ModificaPianoStudiAggiungi extends AppCompatActivity {
 
                 if(listview.isItemChecked(position)){
                     String listString = listview.getItemAtPosition(position).toString();
-                    Toast.makeText(getApplicationContext(), "Hai selezionato: " + listString, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "Hai selezionato: " + listString, Toast.LENGTH_SHORT).show();
 
                     DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
                     dbAccess.open();
@@ -50,7 +50,7 @@ public class ModificaPianoStudiAggiungi extends AppCompatActivity {
                 }
                 else{
                     String listDeselected = listview.getItemAtPosition(position).toString();
-                    Toast.makeText(getBaseContext(), "Hai deselezionato: " + listDeselected , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Hai deselezionato: " + listDeselected , Toast.LENGTH_SHORT).show();
 
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();

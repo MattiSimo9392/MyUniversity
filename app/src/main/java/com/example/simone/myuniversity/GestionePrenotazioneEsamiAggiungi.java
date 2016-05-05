@@ -130,18 +130,18 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
 
                         if (appello1.isChecked()) {
 
-                            Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
                             //inserire la query per aggiungere la data al db
                             dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor1.getString(cursor1.getColumnIndex("Data_1")));
 
                         } else if (appello2.isChecked()) {
 
-                            Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello2.getText().toString(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello2.getText().toString(), Toast.LENGTH_SHORT).show();
                             //inserire la query per aggiungere la data al db
                             dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor2.getString(cursor2.getColumnIndex("Data_2")));
                         } else {
 
-                            Toast.makeText(getApplicationContext(), "Non hai selezionato nessun appello! Esame non prenotato", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getApplicationContext(), "Non hai selezionato nessun appello! Esame non prenotato", Toast.LENGTH_SHORT).show();
                         }
 
                         dbAccess.close();

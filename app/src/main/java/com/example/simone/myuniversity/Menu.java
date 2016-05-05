@@ -173,7 +173,7 @@ public class Menu extends AppCompatActivity {
         fine.DateSplitterV2(finEsami);
         String datarecurrence = fine.yearstr + fine.monthstr + fine.daystr;
 
-        Toast.makeText(getBaseContext() , "Fine Lezioni : " + fine.yearstr + fine.monthstr  + fine.daystr,Toast.LENGTH_LONG).show();
+        //Toast.makeText(getBaseContext() , "Fine Lezioni : " + fine.yearstr + fine.monthstr  + fine.daystr,Toast.LENGTH_LONG).show();
 
         syncExams(syncExam);
 
@@ -263,7 +263,7 @@ public class Menu extends AppCompatActivity {
 
         // controllo se il cursore è vuoto
         if (cursor == null) {
-            Toast.makeText(getBaseContext(), "Cursore vuoto  ", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getBaseContext(), "Cursore vuoto  ", Toast.LENGTH_LONG).show();
         } else {
             while (!cursor.isAfterLast()) {
                 dataLun.DateSplitter(cursor.getString(3));

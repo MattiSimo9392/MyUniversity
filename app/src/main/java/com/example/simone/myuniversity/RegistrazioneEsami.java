@@ -116,26 +116,26 @@ public class RegistrazioneEsami extends AppCompatActivity {
                                     voto_esame = Integer.parseInt(voto.getText().toString());
                                     data_esame = data.getText().toString();
                                     if ((voto_esame < 18) || (voto_esame > 31)) {
-                                        Toast.makeText(getApplicationContext(), "Voto Inserito Non Valido", Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(getApplicationContext(), "Voto Inserito Non Valido", Toast.LENGTH_LONG).show();
                                     } else if (data_esame.equals("")) {
-                                        Toast.makeText(getApplicationContext(), "Data Inserita Non Valida", Toast.LENGTH_LONG).show();
+                                        //Toast.makeText(getApplicationContext(), "Data Inserita Non Valida", Toast.LENGTH_LONG).show();
                                     } else {
                                         if (datacorretta) {
-                                            Toast.makeText(RegistrazioneEsami.this, "Data Corretta , Esame Registrato", Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(RegistrazioneEsami.this, "Data Corretta , Esame Registrato", Toast.LENGTH_LONG).show();
                                             DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
                                             dbAccess.open();
                                             dbAccess.setVotoEsameSuperato(insegnamentoSelezionato, voto_esame);
                                             dbAccess.setDataEsameSuperato(insegnamentoSelezionato, data_esame);
                                             dbAccess.close();
                                         } else {
-                                            Toast.makeText(RegistrazioneEsami.this, "Data Errata perchè del futuro!! \n Reinseriscila corretta !!! \n Esame non registrato", Toast.LENGTH_LONG).show();
+                                            //Toast.makeText(RegistrazioneEsami.this, "Data Errata perchè del futuro!! \n Reinseriscila corretta !!! \n Esame non registrato", Toast.LENGTH_LONG).show();
                                         }
 
                                         finish();
                                         startActivity(new Intent(getApplicationContext(), RegistrazioneEsami.class));
                                     }
                                 } else {
-                                    Toast.makeText(RegistrazioneEsami.this , "Voto non Inserito !!!" , Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(RegistrazioneEsami.this , "Voto non Inserito !!!" , Toast.LENGTH_LONG).show();
                                 }
                             }
                         }

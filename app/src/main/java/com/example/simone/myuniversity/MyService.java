@@ -88,9 +88,9 @@ public class MyService extends Service {
                     Notification notifica = new Notification.Builder(this)
                             .setAutoCancel(false)
                             .setContentTitle("Esame Oggi!!!")
-                            .setContentText("Oggi hai l'esame di: " + esamipernotifica.getString(1) + "  alle : "+ datanotifica.hourofexam + ":" + datanotifica.minuteofexam )
+                            .setContentText("Oggi hai l'esame di: " + esamipernotifica.getString(1) + "  alle : "+ datanotifica.hourofexam + ":" + datanotifica.minuteofexam + "0" )
                             .setVibrate(new long[]{1000, 1000})
-                            .setSmallIcon(R.drawable.ic_launcher)
+                            .setSmallIcon(R.drawable.exam_icon_v2)
                             .build();
 
                     NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
