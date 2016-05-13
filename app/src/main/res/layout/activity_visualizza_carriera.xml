@@ -88,7 +88,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="fine"
+        android:text="Fine"
         android:onClick="onClick_showCareer_end"
         android:id="@+id/btn_showCareer_end"
         android:layout_alignParentBottom="true"/>

@@ -101,7 +101,13 @@
         android:layout_gravity="center"
         android:id="@+id/buttonSync"
         android:onClick="onClick_SyncCalendar"
-        android:src="@drawable/google_sync_v2"/>
+        android:src="@drawable/google_sync_v2" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Sincronizza con il calendario Google"/>
+
 
 </LinearLayout>
 </ScrollView>

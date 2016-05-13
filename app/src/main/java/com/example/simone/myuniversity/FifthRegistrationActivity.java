@@ -41,7 +41,7 @@ public class FifthRegistrationActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(listView.isItemChecked(position)){
                     String listString = listView.getItemAtPosition(position).toString();
-                    Toast.makeText(getBaseContext(), "Hai selezionato : " + listString, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Hai selezionato : " + listString, Toast.LENGTH_SHORT).show();
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();
                     dbAccess.setSeguiti(listString);
@@ -50,7 +50,7 @@ public class FifthRegistrationActivity extends AppCompatActivity {
                 }
                 else{
                     String listDeselected = listView.getItemAtPosition(position).toString();
-                    Toast.makeText(getBaseContext(), "Hai deselezionato : " + listDeselected , Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Hai deselezionato : " + listDeselected , Toast.LENGTH_SHORT).show();
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();
                     dbAccess.setSeguitiNull(listDeselected);
