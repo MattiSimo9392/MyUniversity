@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//Activity che consente all'utente di operare sulla sezione Esami Seguiti
 public class ModificaEsamiCheStaiSeguendo extends AppCompatActivity {
 
     ListView listview;

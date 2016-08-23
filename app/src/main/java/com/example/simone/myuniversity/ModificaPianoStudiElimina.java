@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//Activity per l'eliminazione di un corso dal Piano Di Studi
 public class ModificaPianoStudiElimina extends AppCompatActivity {
 
     ListView listview;

@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//Activity per visualizzare gli Orari delle Lezioni dei corsi seguiti
 public class VisualizzaOrariLezioni extends AppCompatActivity {
 
     ListView listview;
@@ -54,12 +55,15 @@ public class VisualizzaOrariLezioni extends AppCompatActivity {
                 AlertDialog.Builder showOrari = new AlertDialog.Builder(VisualizzaOrariLezioni.this);
                 showOrari.setView(dialog_view);
 
+                //Creazione delle TextView e link al rispettivo layout
                 final TextView lun = (TextView)dialog_view.findViewById(R.id.tv_lun_2);
                 final TextView mar = (TextView)dialog_view.findViewById(R.id.tv_mar_2);
                 final TextView mer = (TextView)dialog_view.findViewById(R.id.tv_mer_2);
                 final TextView gio = (TextView)dialog_view.findViewById(R.id.tv_gio_2);
                 final TextView ven = (TextView)dialog_view.findViewById(R.id.tv_ven_2);
 
+                // estrazione degli orari dal database giorno per giorno (con distinzione tra lezioni
+                // ed esercitazioni)
                 databaseAccess.open();
                 lunLez = databaseAccess.getOrarioLun(insegnamentoSelezionato);
                 lunLez.moveToFirst();
@@ -83,6 +87,7 @@ public class VisualizzaOrariLezioni extends AppCompatActivity {
                 venEx.moveToFirst();
                 databaseAccess.close();
 
+                //Associazione degli orari divisa giorno per giorno alle singole TextView
                 while (!lunLez.isAfterLast()) {
                     if (lunLez.getString(lunLez.getColumnIndex("Lun")).equals("")) {
                         if ((lunEx.getCount() == 0) || (lunEx.getString(lunEx.getColumnIndex("Lun")).equals(""))) {
@@ -167,7 +172,8 @@ public class VisualizzaOrariLezioni extends AppCompatActivity {
                     }
                     venLez.moveToNext();
                 }
-                //testare il tutto
+
+                //Visualizzazione del dialog con tutti gli orari
                 showOrari.setTitle(insegnamentoSelezionato);
                 showOrari.setCancelable(true);
 

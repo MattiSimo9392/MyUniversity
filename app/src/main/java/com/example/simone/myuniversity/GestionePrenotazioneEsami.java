@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+//Activity che consente all'utente di operare sulla sezione di Prenotazione Esami
 public class GestionePrenotazioneEsami extends AppCompatActivity {
 
     @Override

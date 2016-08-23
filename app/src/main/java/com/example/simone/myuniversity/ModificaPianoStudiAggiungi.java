@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+//Activity per l'aggiunta di un nuovo corso al proprio piano di studi
 public class ModificaPianoStudiAggiungi extends AppCompatActivity {
 
     ListView listview;

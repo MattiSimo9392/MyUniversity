@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+//Activity per eliminare la prenotazione ad un esame
 public class GestionePrenotazioneEsamiElimina extends AppCompatActivity {
 
     ListView listview;
@@ -88,7 +89,6 @@ public class GestionePrenotazioneEsamiElimina extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        //manca la cancellazione della data dal db
                         dbAccess.open();
                         dbAccess.setDataNull(insegnamentoSelezionato);
                         dbAccess.close();

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+//Activity per eliminare un corso dalla lista degli Esami Seguiti
 public class ModificaEsamiCheStaiSeguendoElimina extends AppCompatActivity {
 
     ListView listview;

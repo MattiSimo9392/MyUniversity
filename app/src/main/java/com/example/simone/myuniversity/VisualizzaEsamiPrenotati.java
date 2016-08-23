@@ -22,6 +22,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.List;
 
+//Activity per visualizzare gli Esami Prenotati dall'utente
 public class VisualizzaEsamiPrenotati extends AppCompatActivity {
 
     ListView listview;

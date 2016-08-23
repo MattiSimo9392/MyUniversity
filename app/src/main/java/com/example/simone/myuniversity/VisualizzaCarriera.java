@@ -18,6 +18,7 @@ import org.w3c.dom.Text;
 
 import java.util.List;
 
+//Activity che mostra la carriera universitaria dell'utente
 public class VisualizzaCarriera extends ListActivity {
 
     TextView textView_Utente, textView_Matricola, textView_CFU, textView_ExamsPassed, textView_ExamsLost, textView_MediaPesata;

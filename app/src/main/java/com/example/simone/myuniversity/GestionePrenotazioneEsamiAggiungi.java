@@ -23,6 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+//Activity per aggiungere la prenotazione ad un esame
 public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
 
     ListView listview;
@@ -73,7 +74,7 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                 cursor2.moveToFirst();
                 dbAccess.close();
 
-                ///////////////////////////////Tentativo di aggiunta un controllo data sugli appelli ////////////////////
+                ///////////////////////////////Aggiunto un controllo di data sugli appelli ////////////////////
                 dataPA = new Menu().new Data();
                 dataPA.DateSplitterV2(cursor1.getString(cursor1.getColumnIndex("Data_1")));
                 Calendar data1 = Calendar.getInstance();
@@ -96,8 +97,6 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                     appello1.setVisibility(View.INVISIBLE);
                     appello2.setVisibility(View.INVISIBLE);
                 }
-
-                ///// Fine tentativo (Testato e funzionante , ma da ritestare qualche volta in più che non guasta )
 
                 appello1.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -131,13 +130,11 @@ public class GestionePrenotazioneEsamiAggiungi extends AppCompatActivity {
                         if (appello1.isChecked()) {
 
                             //Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello1.getText().toString(), Toast.LENGTH_SHORT).show();
-                            //inserire la query per aggiungere la data al db
                             dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor1.getString(cursor1.getColumnIndex("Data_1")));
 
                         } else if (appello2.isChecked()) {
 
                             //Toast.makeText(getApplicationContext(), "Hai prenotato: " + appello2.getText().toString(), Toast.LENGTH_SHORT).show();
-                            //inserire la query per aggiungere la data al db
                             dbAccess.setDataEsameSuperato(insegnamentoSelezionato, cursor2.getString(cursor2.getColumnIndex("Data_2")));
                         } else {
 

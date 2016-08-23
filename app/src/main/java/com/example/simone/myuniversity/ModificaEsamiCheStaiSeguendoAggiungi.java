@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+//Activity per aggiungere un nuovo Esame Seguito
 public class ModificaEsamiCheStaiSeguendoAggiungi extends AppCompatActivity {
 
     ListView listview;
