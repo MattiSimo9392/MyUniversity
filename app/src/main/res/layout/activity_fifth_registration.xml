@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:text="Questi sono gli esami che non hai ancora Superato"
+        android:text="Questi sono gli esami che NON hai ancora Superato"
         android:id="@+id/tv_5_1"
         android:layout_marginBottom="20dp"/>
 

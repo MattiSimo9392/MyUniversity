@@ -370,7 +370,7 @@ public class Menu extends AppCompatActivity {
             values.put(CalendarContract.Events.DTSTART, startEvent);
             values.put(CalendarContract.Events.DTEND, endEvent);
             //values.put(CalendarContract.Events.DURATION , dur);
-            values.put(CalendarContract.Events.TITLE, "Esame WAAAAAAAAAAAAAAA!!!!");
+            values.put(CalendarContract.Events.TITLE, "Esame!");
             //values.put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles");
             values.put(CalendarContract.Events.EVENT_TIMEZONE, "Italy/Rome"); // indenta corettamente i giorni della RRULE
             values.put(CalendarContract.Events.DESCRIPTION, "Esame di : " + cursor.getString(1));
