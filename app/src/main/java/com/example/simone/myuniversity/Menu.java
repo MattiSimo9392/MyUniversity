@@ -47,6 +47,7 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.activity_menu);
         //// Avvio del servizio di notifica ////
         startService(new Intent(this, MyService.class));
+
         Log.d("Notification Service" , "Richiesta di avvio del service");
         ///////////////////////////////////////
 

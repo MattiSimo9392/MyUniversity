@@ -54,18 +54,18 @@ public class MyService extends Service {
         db.open();
         esamipernotifica = db.getExamsDate();
         esamipernotifica.moveToFirst();
-        Boolean atleast1examtonotify;
+        Boolean atleast1examtonotify;       // booleano che passa a true se deve notificare almeno 1 esame
         while (!esamipernotifica.isAfterLast()){
             // Codice | Insegnamento | DataSuperamento | Data_1 | Ora_1 | Data_2 | Ora_2
             //Estraggo gli esami che devo sostenere e confronto le date
             Menu.Data datanotifica = new Menu().new Data();
             // Se la prima data è quella giusta allora mi prendo la prima ora e da li imposto la notifica
-            if (esamipernotifica.getString(2).equals(esamipernotifica.getString(3))) {
+            if (esamipernotifica.getString(2).equals(esamipernotifica.getString(3))) {  //confronto Data Superamento con Data_1
                 // tiro fuori la data
                 datanotifica.DateSplitterV2(esamipernotifica.getString(3));
                 datanotifica.DateSplitterV3(esamipernotifica.getString(4));
                 atleast1examtonotify = true;
-            } else if (esamipernotifica.getString(2).equals(esamipernotifica.getString(5))) {
+            } else if (esamipernotifica.getString(2).equals(esamipernotifica.getString(5))) {   //confronto Data Superamento con Data_2
                 datanotifica.DateSplitterV2(esamipernotifica.getString(5));
                 datanotifica.DateSplitterV3(esamipernotifica.getString(6));
                 atleast1examtonotify = true;
@@ -76,6 +76,7 @@ public class MyService extends Service {
             // il 0/0/0 alle 00:00
             if(atleast1examtonotify){
                 Calendar decided = Calendar.getInstance();
+                // month -1 perche gennaio è lo 0
                 decided.set(datanotifica.year, datanotifica.month - 1, datanotifica.day, datanotifica.hourofexam - 2, datanotifica.minuteofexam, 0);
                 decided.clear(Calendar.SECOND);
                 decided.clear(Calendar.MILLISECOND);
@@ -97,10 +98,10 @@ public class MyService extends Service {
                     nm.notify(0, notifica);
                 }
             }
-            esamipernotifica.moveToNext();
+            esamipernotifica.moveToNext();      //se ci fossero più esami da notificare passa al sucessivo
         }
         return 0;
-        //
+
     }
     @Nullable
     @Override
