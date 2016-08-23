@@ -18,6 +18,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+// Activity per la compilazione del proprio piano di studi
+
 public class SecondRegistrationActivity extends AppCompatActivity {
 
     ListView listView;
@@ -37,20 +39,12 @@ public class SecondRegistrationActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
 
-        //La listView con tutti gli Insegnamenti della tabella PianoDiStudi viene caricata
-        //però per ora nessun Insegnamento è selezionabile e nessuna operazione sul database
-        //è effettuabile
-
-        //[AGGIUNTA DI MATTI NEL 19/01/2016] tentativo di incudere la lista e selezionare le colonne del piano di studi
-
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(listView.isItemChecked(position)){
                     String listString = listView.getItemAtPosition(position).toString();
                     //Toast.makeText(getBaseContext(), "Hai selezionato : " + listString , Toast.LENGTH_SHORT).show();
-                    // QUI ANDREBBE INSERITA LA QUERY PER L'UPDATE CON 'SEGUITO' A 'SI'
-                    // tentativo di query SQL Matti
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();
                     dbAccess.setNelPiano(listString);
@@ -60,7 +54,6 @@ public class SecondRegistrationActivity extends AppCompatActivity {
                 else{
                     String listDeselected = listView.getItemAtPosition(position).toString();
                     //Toast.makeText(getBaseContext(), "Hai deselezionato : " + listDeselected , Toast.LENGTH_SHORT).show();
-                    // QUI UNA QUERY CHE RIPONE SEGUITO A NO NEL CASO DI DESELEZIONE
                     DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
                     dbAccess.open();
                     dbAccess.setNelPianoNull(listDeselected);
@@ -70,8 +63,6 @@ public class SecondRegistrationActivity extends AppCompatActivity {
 
             }
         });
-
-        //[FINE AGGIUNTA MATTI 19/01/2016]
 
 
 
@@ -116,11 +107,8 @@ public class SecondRegistrationActivity extends AppCompatActivity {
 
         DBAccess dbAccess = DBAccess.getInstance(getBaseContext());
         dbAccess.open();
-        dbAccess.setNelPianoToZero();
+        dbAccess.setNelPianoToZero();       //Premendo indietro viene riazzerato tutto
         dbAccess.close();
-
-        //inserire il codice per eliminare dal database utenti l'utente appena registrato
-        //nell'activity precedente
 
         startActivity(new Intent(getApplicationContext(), FirstRegistrationActivity.class));
     }

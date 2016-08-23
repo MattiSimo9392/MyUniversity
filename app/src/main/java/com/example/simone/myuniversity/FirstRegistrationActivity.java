@@ -13,6 +13,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+// Activity per l'inserimento dei dati di registrazione
+
 public class FirstRegistrationActivity extends Activity {
 
     EditText et_nome, et_cognome, et_matricola, et_username, et_password;
@@ -62,6 +64,8 @@ public class FirstRegistrationActivity extends Activity {
         exitDialog.show();
     }
 
+    // Viene effettuato il controllo sul corretto inserimento dei dati di registrazione
+
     public void onClick_continue(View view) {
 
         String nome = et_nome.getText().toString();
@@ -69,6 +73,8 @@ public class FirstRegistrationActivity extends Activity {
         String matricola = et_matricola.getText().toString();
         String username = et_username.getText().toString();
         String password = et_password.getText().toString();
+
+        // Il controllo non ha successo
 
         if ((nome.equals("")) || (cognome.equals("")) || (matricola.equals("")) || (username.equals("")) || (password.equals(""))){
 
@@ -85,6 +91,8 @@ public class FirstRegistrationActivity extends Activity {
             Dialog dialog = ad.create();
             dialog.show();
         }
+
+        // Il controllo ha successo
 
         else {
 

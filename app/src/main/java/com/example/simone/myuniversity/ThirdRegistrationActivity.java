@@ -12,6 +12,8 @@ import android.widget.ListView;
 
 import java.util.List;
 
+// Activity per la conferma del proprio piano di studi
+
 public class ThirdRegistrationActivity extends AppCompatActivity {
 
     ListView listview;

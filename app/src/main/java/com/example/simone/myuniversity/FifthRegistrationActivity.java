@@ -15,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+// Activity per la gestione dei corsi seguiti
+
 public class FifthRegistrationActivity extends AppCompatActivity {
 
     ListView listView;
@@ -34,7 +36,6 @@ public class FifthRegistrationActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_multiple_choice, seguiti);
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-        // Aggiunta check and uncheck della lista
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -98,7 +99,7 @@ public class FifthRegistrationActivity extends AppCompatActivity {
     }
 
     public void onClick_continue5(View view){
-        // viene eliminato il pulsante registrati connessa con la MainActivity
+        // viene eliminato il pulsante Registrati connessa con la MainActivity
 
         SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
         SharedPreferences.Editor editor = mprefs.edit();

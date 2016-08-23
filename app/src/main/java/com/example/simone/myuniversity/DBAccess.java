@@ -11,6 +11,8 @@ import java.util.List;
 /**
  * Created by Tia on 19/01/2016.
  */
+
+// Gestione del database MyUniversity con tutte le query necessarie al funzionamento dell'app
 public class DBAccess {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
@@ -216,14 +218,14 @@ public class DBAccess {
     }
 
     //Query per ottenere il Voto di un determiato insegnamento
-    public Cursor getVotoEsameSuperato(String insegnamento){    //da testare
+    public Cursor getVotoEsameSuperato(String insegnamento){
         Cursor voto;
         voto = database.rawQuery("SELECT Voto FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
         return voto;
     }
 
     //Query per ottenere la DataSuepramento di un determinato insegnamento
-    public Cursor getDataEsameSuperato(String insegnamento){    //da testare
+    public Cursor getDataEsameSuperato(String insegnamento){
         Cursor data;
         data = database.rawQuery("SELECT DataSuperamento FROM PianoDiStudi WHERE Insegnamento = '" + insegnamento + "'", null);
         return data;
@@ -305,65 +307,66 @@ public class DBAccess {
     //Tutte le Query seguenti operano sulla tabella "OrariLezioni"
 
     //Query per ottenere l'orario delle lezioni del Lunedì di un determinato insegnamento
-    public Cursor getOrarioLun(String insegnamento){           //da testare
+    public Cursor getOrarioLun(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Lun FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
         return cursor;
     }
 
     ////Query per ottenere l'orario delle lezioni del Martedì di un determinato insegnamento
-    public Cursor getOrarioMar(String insegnamento){           //da testare
+    public Cursor getOrarioMar(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Mar FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle lezioni del Mercoledì di un determinato insegnamento
-    public Cursor getOrarioMer(String insegnamento){           //da testare
+    public Cursor getOrarioMer(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Mer FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle lezioni del Giovedì di un determinato insegnamento
-    public Cursor getOrarioGio(String insegnamento){           //da testare
+    public Cursor getOrarioGio(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Gio FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle lezioni del Venerdì di un determinato insegnamento
-    public Cursor getOrarioVen(String insegnamento){           //da testare
+    public Cursor getOrarioVen(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Ven FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + "'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle esercitazioni del Lunedì di un determinato insegnamento
-    public Cursor getOrarioEserLun(String insegnamento){           //da testare
+    public Cursor getOrarioEserLun(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Lun FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle esercitazioni del Martedì di un determinato insegnamento
-    public Cursor getOrarioEserMar(String insegnamento){           //da testare
+    public Cursor getOrarioEserMar(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Mar FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle esercitazioni del Mercoledì di un determinato insegnamento
-    public Cursor getOrarioEserMer(String insegnamento){           //da testare
+    public Cursor getOrarioEserMer(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Mer FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle esercitazioni del Giovedì di un determinato insegnamento
-    public Cursor getOrarioEserGio(String insegnamento){           //da testare
+    public Cursor getOrarioEserGio(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Gio FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
         return cursor;
     }
 
     //Query per ottenere l'orario delle esercitazioni del Venerdì di un determinato insegnamento
-    public Cursor getOrarioEserVen(String insegnamento){           //da testare
+    public Cursor getOrarioEserVen(String insegnamento){
         Cursor cursor = database.rawQuery("SELECT Aula, Ven FROM OrariLezioni WHERE Insegnamento = '" + insegnamento + " - esercitazioni'", null);
         return cursor;
     }
 
+    //Query per ottenere tutto l'orario dei rispettivi giorni della settimana
     public Cursor getLun(){
         Cursor cursor = database.rawQuery("SELECT OL.Codice , OL.Aula , OL.Insegnamento , OL.Lun FROM OrariLezioni as OL , PianoDiStudi AS PS WHERE OL.Codice = PS.Codice AND OL.Lun IS NOT '' AND PS.Seguito = 'SI' " , null);
         return cursor;
@@ -389,6 +392,7 @@ public class DBAccess {
         return cursor;
     }
 
+    //Query per ottenere gli esami prenotati
     public Cursor getBookedExams(){
         Cursor cursor = database.rawQuery( "SELECT Codice , Insegnamento , DataSuperamento FROM PianoDiStudi WHERE DataSuperamento is not '' AND Voto = ''", null);
         return cursor;
@@ -399,11 +403,10 @@ public class DBAccess {
         return cursor;
     }
 
+    //Query utilizzate per l'aggiornamento del calendario
     public void WriteEventInDatabase (String descr , long eventID){
         database.execSQL("INSERT INTO CalendarEvents VALUES (" + eventID + " , '"+ descr +"')");
     }
-
-
 
     public void EraseAllTableCalendar(){
         database.execSQL("DELETE FROM CalendarEvents ");

@@ -44,6 +44,8 @@ public class MainActivity extends Activity {
         sharedPreferences = getSharedPreferences("_IdLog", MODE_PRIVATE);
         id = sharedPreferences.getLong("_IdLog", -1);
 
+        //Implementazione Dialog per il recupero password
+
         TextView recuperoPass = (TextView) findViewById(R.id.recoverPassword);
         recuperoPass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +87,9 @@ public class MainActivity extends Activity {
             }
         });
 
+        // Recupero Valore all'interno delle preferenze per l'eventuale eliminazione del pulsante
+        // di registrazione
+
         SharedPreferences mprefs = getSharedPreferences("Registrazione" , MODE_PRIVATE);
         String string = mprefs.getString("Registrazione" , "");
         if(string.equals("2")){registration.setVisibility(View.GONE);}
@@ -92,12 +97,12 @@ public class MainActivity extends Activity {
 
         //Questa parte di codice viene chiamata quando si preme il pulsante indietro e si conferma
         //di voler chiudere l'app
+
         if (getIntent().getBooleanExtra("LOGOUT", false))
         {
             finish();
         }
 
-        // impostazione preferences con la FifthRegistrationActivity
 
     }
 
@@ -154,15 +159,10 @@ public class MainActivity extends Activity {
         }
         dbUtente.close();
 
-        //Assicurarsi che il pulsante di registrazione si blocchi dopo la prima registrazione perchè
-        //l'Activity in cui vado dopo il login è generica per qualsiasi utente loggato
 
     }
 
     public void onClick_reg(View view){
-
-        // Da discutere la possibilità di azzerare il database ogni volta che si preme il pulsante registrazione
-        // anche perchè questo comportarebbe alla creazione di un nuovo utente e sempre utile durante il testing
 
         DBAccess dbAccess = DBAccess.getInstance(getApplicationContext());
         dbAccess.open();

@@ -14,6 +14,9 @@ import java.util.Locale;
 /**
  * Created by Tia on 29/01/2016.
  */
+
+//Adapter per la lista visualizzata nella carriera dell'utente
+
 public class CarrieraCursorAdapter extends CursorAdapter{
 
     public CarrieraCursorAdapter(Context context , Cursor cursor ){

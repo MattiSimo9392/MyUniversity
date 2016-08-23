@@ -11,6 +11,8 @@ import android.util.Log;
 /**
  * Created by Simone on 17/01/2016.
  */
+
+// Database che gestisce i dati dell' utente
 public class GestioneDBUtente {
 
     static final String KEY_RIGAID = "_id";
@@ -75,9 +77,9 @@ public class GestioneDBUtente {
         return myCursor;
     }
 
-    public Cursor get_AllUser(){
+    /*public Cursor get_AllUser(){
         return db.query(DATABASE_TABELLA, new String[] {KEY_RIGAID, KEY_NOME, KEY_COGNOME, KEY_MATRICOLA, KEY_USERNAME, KEY_PASSWORD}, null, null, null, null, null);
-    }
+    }*/
 
     public long insertUser(String nome, String cognome, String matricola, String username, String password) {
         ContentValues initialValues = new ContentValues();

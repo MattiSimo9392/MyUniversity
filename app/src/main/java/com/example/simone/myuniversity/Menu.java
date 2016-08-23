@@ -24,6 +24,8 @@ import android.widget.Toast;
 
 import java.util.Calendar;
 
+//Activity del menù principale
+
 public class Menu extends AppCompatActivity {
 
     TextView user, matricola;
@@ -68,6 +70,8 @@ public class Menu extends AppCompatActivity {
 
 
     }
+
+    // Implementazione di tutte le opzioni del menù
 
     public void onClick_modPS(View view) {
         startActivity(new Intent(getApplicationContext(), ModificaPianoStudi.class));
@@ -138,7 +142,6 @@ public class Menu extends AppCompatActivity {
         insertDialog.show();
     }
 
-
     public void onClick_SyncCalendar(View view) {
         db = DBAccess.getInstance(getBaseContext());
         eraseCalendar(db);
@@ -192,10 +195,13 @@ public class Menu extends AppCompatActivity {
         syncDay(syncVen, recurrenceVen , db);
 
 
-        Intent i = new Intent();
+        //Questa parte lasciata volutamente commentata serviva per l'apertura automatica del Google
+        //Calendar dopo la sincronizzazione
+
+        /*Intent i = new Intent();
         ComponentName cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
         i.setComponent(cn);
-        startActivity(i);
+        startActivity(i);*/
 
 
     }
@@ -362,7 +368,7 @@ public class Menu extends AppCompatActivity {
             ///////////////////////////////////////////////////////////////////////////////////
             cal.set(exams.year, exams.month-1, exams.day , exams.hourofexam , 0 , 0);
             long startEvent = cal.getTimeInMillis();
-            long endEvent = cal.getTimeInMillis() + 3*60*60*1000; // lo facciam durare 3 ore l'evento vista una media della durata degli esami
+            long endEvent = cal.getTimeInMillis() + 3*60*60*1000; // lo facciamo durare 3 ore l'evento vista una media della durata degli esami
             ContentResolver cr = getContentResolver();
             ContentValues values = new ContentValues();
 

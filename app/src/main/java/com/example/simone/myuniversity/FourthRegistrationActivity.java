@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+// Activity per la registrazione degli esami già superati precedentemente all'installazione dell'app
+
 public class FourthRegistrationActivity extends AppCompatActivity {
 
     ListView listView;
@@ -54,7 +56,7 @@ public class FourthRegistrationActivity extends AppCompatActivity {
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
-        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALY);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.ITALY);  //oggetto per la gestione formato data
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,10 +94,11 @@ public class FourthRegistrationActivity extends AppCompatActivity {
                                 data.setText(dateFormat.format(newDate.getTime()));
 
                                 //Controllo della data
-                                // Mi ricavo la data di oggi
+
+                                //Mi ricavo la data di oggi
                                 final Calendar currentDate = Calendar.getInstance();
                                 currentDate.setTime(new Date());
-                                // La confronto con quella inserita si poteva usare anche la before
+                                //La confronto con quella inserita
                                 if (!newDate.after(currentDate)){
                                     //Toast.makeText(FourthRegistrationActivity.this , "Data Corretta , Esame Registrato" , Toast.LENGTH_LONG).show();
                                     datacorretta = true;
