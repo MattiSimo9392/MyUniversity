@@ -103,13 +103,9 @@ public class Menu extends AppCompatActivity {
     }
 
     public void onClick_CancelCareer(View view) {
-        // Riportiamo la preference al valore iniziale in modo che compaia il bottone
-        // collegato alla MainActivity e alla FifthRegistrationActivity
 
-        SharedPreferences mprefs = getSharedPreferences("Registrazione", MODE_PRIVATE);
-        SharedPreferences.Editor editor = mprefs.edit();
-        editor.putString("Registrazione", "3");            // condizione per la ricomparsa del pulsante
-        editor.apply();
+
+
 
 
         AlertDialog.Builder insert = new AlertDialog.Builder(Menu.this);
@@ -118,6 +114,15 @@ public class Menu extends AppCompatActivity {
         insert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                // Riportiamo la preference al valore iniziale in modo che compaia il bottone
+                // collegato alla MainActivity e alla FifthRegistrationActivity
+
+                SharedPreferences mprefs = getSharedPreferences("Registrazione", MODE_PRIVATE);
+                SharedPreferences.Editor editor = mprefs.edit();
+                editor.putString("Registrazione", "3");            // condizione per la ricomparsa del pulsante
+                editor.apply();
+
                 DBAccess database = DBAccess.getInstance(getBaseContext());
                 database.open();
                 database.CancelCareer();
@@ -168,7 +173,7 @@ public class Menu extends AppCompatActivity {
         syncExam = db.getBookedExams();
         syncExam.moveToFirst();
 
-        // mi ricavo la data di fine per inerirla nella recurrence
+        // mi ricavo la data di fine per inserirla nella recurrence
         inizFinEsami = db.getInizFinEsami();
         inizFinEsami.moveToFirst();
         db.close();
@@ -198,6 +203,7 @@ public class Menu extends AppCompatActivity {
 
         //Questa parte lasciata volutamente commentata serviva per l'apertura automatica del Google
         //Calendar dopo la sincronizzazione
+        //utilizzata principalmente in periodo di testing
 
         /*Intent i = new Intent();
         ComponentName cn = new ComponentName("com.google.android.calendar", "com.android.calendar.LaunchActivity");
