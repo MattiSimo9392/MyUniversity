@@ -105,9 +105,6 @@ public class Menu extends AppCompatActivity {
     public void onClick_CancelCareer(View view) {
 
 
-
-
-
         AlertDialog.Builder insert = new AlertDialog.Builder(Menu.this);
         insert.setTitle("ATTENZIONE!");
         insert.setMessage("Sei Sicuro di voler eliminare la tua carriera? \n Verranno cancellati anche le tue credenziali d'accesso e non potrai rieffettuare il Login \n L'operazione è Irreversibile!");
